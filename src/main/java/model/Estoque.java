@@ -9,4 +9,8 @@ public class Estoque {
     public Estoque(){
         estoque = new HashMap<String, Produto>();
     }
+
+    public Map<String, Produto> getEstoque() {
+        return estoque;
+    }
 }

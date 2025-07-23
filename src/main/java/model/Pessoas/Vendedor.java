@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class Vendedor extends Funcionario {
     int numVendas;
-    Map<Pedido, String> historicoPedidos;
+    Map<String, Pedido> historicoPedidos;
 
     public Vendedor(String nome, String CPF, String email, String senha){
         super(nome,CPF, email, senha);

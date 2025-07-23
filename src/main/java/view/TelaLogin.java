@@ -13,7 +13,8 @@ public class TelaLogin extends JFrame{
         btnOk.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            JOptionPane.showMessageDialog(btnOk, "Seja bem vindo(a) " +  insertName.getText());
+            //JOptionPane.showMessageDialog(btnOk, "Seja bem vindo(a) " +  insertName.getText());
+                System.out.println("ola");
             }
         });
 

@@ -1,33 +1,39 @@
 package view;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class TelaLogin extends JFrame{
-    private JPanel panelMain;
-    private JTextField insertName;
-    private JButton btnOk;
+public class TelaLogin extends JDialog {
+    private JLabel titulo;
+    private JLabel email;
+    private JPanel telaLogin;
+    private JTextField emailTxt;
+    private JPasswordField passwordField1;
+    private JLabel senha;
+    private JButton sairBtn;
+    private JButton logarBtn;
 
-    public TelaLogin() {
-        btnOk.addActionListener(new ActionListener() {
+    public TelaLogin(){
+
+
+        sairBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            //JOptionPane.showMessageDialog(btnOk, "Seja bem vindo(a) " +  insertName.getText());
-                System.out.println("ola");
+                dispose();
             }
         });
-
-
     }
 
     public static void main(String[] args) {
         TelaLogin telaLogin = new TelaLogin();
-        telaLogin.setContentPane(telaLogin.panelMain);
-        telaLogin.setTitle("Página de Login");
-        telaLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        telaLogin.pack();
-        telaLogin.setLocationRelativeTo(null); // opcional: centraliza a janela
+        telaLogin.setTitle("LOGIN");
+        telaLogin.setContentPane(telaLogin.telaLogin);
+        telaLogin.setMinimumSize(new Dimension(300,350));
+        telaLogin.setModal(true);
+        telaLogin.setLocationRelativeTo(null);
         telaLogin.setVisible(true);
     }
+
 }

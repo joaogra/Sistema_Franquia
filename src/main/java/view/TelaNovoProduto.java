@@ -1,5 +1,6 @@
 package view;
 
+import model.Pessoas.Funcionario;
 import model.Produto;
 
 import javax.swing.*;
@@ -33,16 +34,15 @@ public class TelaNovoProduto extends JDialog {
                 int qtd = Integer.parseInt(qtdTxt.getText());
 
                 Produto produto = new Produto(preco, qtd, codigo, nome);
+                JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
+                clean();
                 System.out.println(produto.getNome() + produto.getCod());
             }
         });
         cancelarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                nomeTxt.setText("");
-                codigoTxt.setText("");
-                precoTxt.setText("");
-                qtdTxt.setText("");
+                clean();
             }
         });
     }
@@ -56,4 +56,12 @@ public class TelaNovoProduto extends JDialog {
         telaProduto.setLocationRelativeTo(null);
         telaProduto.setVisible(true);
     }
+
+    public void clean(){
+        nomeTxt.setText("");
+        codigoTxt.setText("");
+        precoTxt.setText("");
+        qtdTxt.setText("");
+    }
+
 }

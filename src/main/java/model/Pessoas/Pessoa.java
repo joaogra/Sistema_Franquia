@@ -2,6 +2,8 @@ package model.Pessoas;
 import br.com.caelum.stella.validation.CPFValidator;
 import br.com.caelum.stella.validation.InvalidStateException;
 
+import javax.swing.*;
+
 public class Pessoa {
 
     private String nome;
@@ -36,7 +38,10 @@ public class Pessoa {
             return true;
         } catch (InvalidStateException e ){
             System.out.println("CPF Inválido!");
-            return false;
+            String novoCPF = JOptionPane.showInputDialog("Insira um CPF valido");
+            this.setCPF(novoCPF);
+            return true;
+
         }
     }
 

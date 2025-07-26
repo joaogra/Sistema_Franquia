@@ -1,4 +1,4 @@
-package view;
+package view.telasVendedor;
 
 import model.Pessoas.Funcionario;
 import model.Pessoas.Vendedor;

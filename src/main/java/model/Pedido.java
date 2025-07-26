@@ -21,6 +21,7 @@ public class Pedido {
         this.horario = horario;
         this.formaPagamento = formaPagamento;
         this.taxa = 0;
+        this.valVenda = 0;
     }
 
     public String getCod(){return cod;}
@@ -31,6 +32,8 @@ public class Pedido {
 
     public String getFormaPagamento(){return formaPagamento;}
 
+    public float getValVenda(){return valVenda;}
+
     public float getTaxa(){return taxa;}
 
     public void setCod(String cod){this.cod = cod;}
@@ -40,4 +43,11 @@ public class Pedido {
     public void setHorario(Date horario){this.horario = horario;}
 
     public void setTaxa(float taxa){this.taxa = taxa;}
+
+    public float calculaValor(){
+        for(Produto produto: produtos){
+            //valVenda+=
+        }
+    return 1;
+    }
 }

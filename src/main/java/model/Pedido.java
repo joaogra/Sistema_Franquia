@@ -9,19 +9,19 @@ public class Pedido {
 
     private String cod;
     private List<Produto> produtos;
-    private float valVenda;
+    private Double valVenda;
     private Cliente cliente;
     private Date horario;
     private  String formaPagamento;
     private float taxa;
 
-    public Pedido(String cod, Cliente cliente, Date horario, String formaPagamento, float taxa){
+    public Pedido(String cod, Cliente cliente, Date horario, String formaPagamento, float taxa, List<Produto> produtos, Double valVenda) {
         this.cod = cod;
         this.cliente = cliente;
         this.horario = horario;
         this.formaPagamento = formaPagamento;
         this.taxa = 0;
-        this.valVenda = 0;
+        this.valVenda = valVenda;
     }
 
     public String getCod(){return cod;}
@@ -32,7 +32,7 @@ public class Pedido {
 
     public String getFormaPagamento(){return formaPagamento;}
 
-    public float getValVenda(){return valVenda;}
+    public Double getValVenda(){return valVenda;}
 
     public float getTaxa(){return taxa;}
 

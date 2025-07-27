@@ -17,5 +17,9 @@ public class Vendedor extends Funcionario {
 
     }
 
+    public int getNumVendas() { return numVendas;}
+
+    public Map <String, Pedido> getHistoricoPedidos() {return historicoPedidos;}
+
 
 }

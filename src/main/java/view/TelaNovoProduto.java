@@ -61,6 +61,13 @@ public class TelaNovoProduto extends JDialog {
         });
     }
 
+    public void clean(){
+        nomeTxt.setText("");
+        codigoTxt.setText("");
+        precoTxt.setText("");
+        qtdTxt.setText("");
+    }
+
     public static void main(String[] args) {
         TelaNovoProduto telaProduto = new TelaNovoProduto();
         telaProduto.setTitle("Novo Produto");
@@ -71,11 +78,6 @@ public class TelaNovoProduto extends JDialog {
         telaProduto.setVisible(true);
     }
 
-    public void clean(){
-        nomeTxt.setText("");
-        codigoTxt.setText("");
-        precoTxt.setText("");
-        qtdTxt.setText("");
-    }
+
 
 }

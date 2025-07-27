@@ -36,4 +36,7 @@ public class Franquia {
 
     public void setLucro(float lucro) {this.lucro = lucro;}
 
+    public void setEstoque(Estoque estoque) {
+        this.estoque = estoque;
+    }
 }

@@ -33,6 +33,9 @@ public class TelaMenuGerente extends JFrame{
         vendedorBtn.addActionListener(event ->{
            new TelaListaVendedores(this,gerente).setVisible(true);
         });
+        visualizaPedidosBtn.addActionListener(event ->{
+           new TelaListaPedidos(this,gerente).setVisible(true);
+        });
         visualizaEstoqueBtn.addActionListener(event ->{
             new TelaVisualizaEstoque(this,gerente).setVisible(true);
         });

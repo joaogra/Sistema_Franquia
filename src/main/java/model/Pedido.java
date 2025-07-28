@@ -20,7 +20,7 @@ public class Pedido {
         this.cliente = cliente;
         this.horario = horario;
         this.formaPagamento = formaPagamento;
-        this.taxa = 0;
+        this.taxa = taxa;
         this.valVenda = valVenda;
     }
 

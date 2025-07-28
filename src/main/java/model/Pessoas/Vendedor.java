@@ -21,4 +21,13 @@ public class Vendedor extends Funcionario {
 
     //SETTERS
     public void setNumVendas(int numVendas) { this.numVendas = numVendas;}
+
+    //
+    public boolean adicionaPedido(Pedido pedido) {
+        if(!historicoPedidos.containsKey(pedido.getCod())) {
+            historicoPedidos.put(pedido.getCod(), pedido);
+            return true;
+        }
+        return false;
+    }
 }

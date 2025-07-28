@@ -24,9 +24,7 @@ public class TelaVisualizaEstoque extends JDialog{
         setLocationRelativeTo(parent);
         this.produtoController = new ProdutoController(gerente);
 
-        DefaultTableModel tabela = new DefaultTableModel();
         atualizarTabela();
-
 
         cadastrarProdutoBtn.addActionListener(event ->{
             new TelaCadastrarProduto(this,gerente).setVisible(true);

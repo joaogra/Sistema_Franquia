@@ -27,7 +27,6 @@ public class TelaListaVendedores extends JDialog{
         vendedorController = new VendedorController(gerente);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        DefaultTableModel tabela = new DefaultTableModel();
         atualizarTabela();
 
         cadastrarVendedorButton.addActionListener(e -> {

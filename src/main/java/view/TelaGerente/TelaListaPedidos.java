@@ -1,0 +1,50 @@
+package view.TelaGerente;
+
+import controller.gerente.PedidoController;
+import controller.gerente.VendedorController;
+import model.Pessoas.Gerente;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.util.List;
+
+public class TelaListaPedidos extends JDialog {
+    private JPanel painelListaPedidos;
+    private JTable tabelaPedidos;
+    private JButton solicitaAlteracaoBtn;
+    private JButton fecharBtn;
+    private PedidoController pedidoController;
+    public TelaListaPedidos(JFrame parent, Gerente gerente) {
+        super(parent, "Lista de pedidos", true);
+        setContentPane(painelListaPedidos);
+        setSize(1280,720);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.pedidoController = new PedidoController(gerente);
+
+        solicitaAlteracaoBtn.addActionListener(e -> {
+
+        });
+        fecharBtn.addActionListener(e -> {
+            this.dispose();
+        });
+    }
+
+    private void atualizarTabelaPedidos() {
+        String[] colunas = {"Codigo","Cliente","Horário","Forma de Pagamento","Valor"};
+        DefaultTableModel tabela = new DefaultTableModel(colunas, 0){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        List<Object[]> pedidos = pedidoController.listaPedidosParaTabela();
+        for(Object[] linha : pedidos){
+            tabela.addRow(linha);
+        }
+
+        tabelaPedidos.setModel(tabela);
+        tabelaPedidos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    }
+}

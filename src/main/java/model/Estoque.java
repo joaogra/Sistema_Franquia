@@ -19,11 +19,19 @@ public class Estoque {
         return new ArrayList<Produto>(estoque.values());
     }
 
-    public void adicionaProduto(Produto produto){
-        estoque.put(produto.getCod(), produto);
+    public boolean adicionaProduto(Produto produto){
+        if(!estoque.containsKey(produto.getCod())) {
+            estoque.put(produto.getCod(), produto);
+            return true;
+        }
+        return false;
     }
-    public void removerProduto(String codigo){
-        estoque.remove(codigo);
+    public boolean removerProduto(String codigo){
+        if(estoque.containsKey(codigo) ){
+            estoque.remove(codigo);
+            return true;
+        }
+        return false;
     }
     public Produto buscaProduto(String codigo){
         Produto produto = estoque.get(codigo);

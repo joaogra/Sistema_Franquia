@@ -21,11 +21,11 @@ public abstract class TelaProduto extends JDialog {
     private JButton fecharButton;
     private JButton limparBtn;
     private Gerente gerente;
-    public TelaProduto(JDialog parent, Gerente gerente) {
-        super(parent,true);
+    public TelaProduto(JDialog parent,String titulo, Gerente gerente) {
+        super(parent,titulo,true);
         this.gerente = gerente;
         setContentPane(painelNovoProduto);
-        setSize(500,400);
+        setSize(800,600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -38,7 +38,7 @@ public abstract class TelaProduto extends JDialog {
             clean();
         });
         fecharButton.addActionListener(event ->{
-            dispose();
+            this.dispose();
         });
 
     }

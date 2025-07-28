@@ -1,37 +1,45 @@
 package view.TelaGerente;
 
-import com.google.gson.Gson;
+import controller.gerente.ProdutoController;
 import model.Pessoas.Gerente;
 import model.Produto;
 
 import javax.swing.*;
 
 public class TelaCadastrarProduto extends TelaProduto {
-    public TelaCadastrarProduto(JDialog parent,  Gerente gerente) {
-        super(parent,gerente);
+    private ProdutoController produtoController;
+    public TelaCadastrarProduto(JDialog parent, Gerente gerente) {
+        super(parent,"Cadastrar Produto",gerente);
         getTitulo().setText("Cadastrar Produto");
-
+        this.produtoController = new ProdutoController(gerente);
     }
     @Override
     public void confirmar() {
-            String nome = getNomeTxt().getText();
-            String codigo = getCodigoTxt().getText();
-            float preco = Float.parseFloat(getPrecoTxt().getText());
-            int quantidade = Integer.parseInt(getQuantidadeTxt().getText());
+            String nome = getNomeTxt().getText().trim();
+            String codigo = getCodigoTxt().getText().trim();
+            String precoStr = getPrecoTxt().getText().trim();
+            String qtdStr = getQuantidadeTxt().getText().trim();
+
+            if (nome.isEmpty() || codigo.isEmpty() || precoStr.isEmpty() || qtdStr.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+                return;
+            }
+
+            float preco = Float.parseFloat(precoStr);
+            int quantidade = Integer.parseInt(qtdStr);
+
+            if(preco <= 0 || quantidade < 0) {
+                JOptionPane.showMessageDialog(null,"Preço e Quantidade devem ser números positivos!");
+                return;
+            }
 
             Produto produto = new Produto(preco,quantidade,codigo,nome);
-            getGerente().getFranquia().getEstoque().adicionaProduto(produto);
-            /*Gson gson = new Gson();
-            String json = gson.toJson(produto);
-            try{
-                    FileWriter writer = new FileWriter("data/produtos" , true);
-                    writer.write(json + System.lineSeparator());
-                    writer.close();
+            if(produtoController.adicionarProduto(produto)) {
+                JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!");
+                clean();
             }
-            catch (IOException ex) {
-                    throw new RuntimeException(ex);
-            }*/
-            JOptionPane.showMessageDialog(this,"Cadastro realizado com sucesso");
-            clean();
+            else {
+                JOptionPane.showMessageDialog(this, "Não é possivel cadastrar o produtos com códigos repetidos!");
+            }
     }
 }

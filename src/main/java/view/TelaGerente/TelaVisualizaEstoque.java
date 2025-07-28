@@ -1,5 +1,6 @@
 package view.TelaGerente;
 
+import controller.gerente.ProdutoController;
 import model.Pessoas.Gerente;
 import model.Produto;
 
@@ -15,18 +16,21 @@ public class TelaVisualizaEstoque extends JDialog{
     private JButton cadastrarProdutoBtn;
     private JButton removeBtn;
     private JButton editaProdutoBtn;
-
+    private ProdutoController produtoController;
     public TelaVisualizaEstoque(JFrame parent, Gerente gerente) {
         super(parent,"Estoque da Franquia", true);
         setContentPane(painelEstoque);
-        setSize(500,400);
+        setSize(800,600);
         setLocationRelativeTo(parent);
+        this.produtoController = new ProdutoController(gerente);
+
         DefaultTableModel tabela = new DefaultTableModel();
-        atualizarTabela(gerente,tabela);
+        atualizarTabela();
+
 
         cadastrarProdutoBtn.addActionListener(event ->{
             new TelaCadastrarProduto(this,gerente).setVisible(true);
-            atualizarTabela(gerente,tabela);
+            atualizarTabela();
         });
 
         removeBtn.addActionListener(event ->{
@@ -34,9 +38,13 @@ public class TelaVisualizaEstoque extends JDialog{
             if (linhaEscolhida != -1) {
                 String codigo = (String) tabelaEstoque.getValueAt(linhaEscolhida, 0);
                 String nome = (String) tabelaEstoque.getValueAt(linhaEscolhida, 1);
-                gerente.getFranquia().getEstoque().removerProduto(codigo);//remove do estoque
-                atualizarTabela(gerente,tabela);
-                JOptionPane.showMessageDialog(null,"O produto " + nome + " foi removido com sucesso!");
+                if(produtoController.removerProduto(codigo)){//remove do estoque
+                    atualizarTabela();
+                    JOptionPane.showMessageDialog(null,"O produto " + nome + " foi removido com sucesso!");
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"Não foi possível remover o produto!");
+                }
             }
             else{
                 JOptionPane.showMessageDialog(null,"Selecione um produto para remover!");
@@ -44,37 +52,37 @@ public class TelaVisualizaEstoque extends JDialog{
         });
         editaProdutoBtn.addActionListener(event ->{
             int linhaEscolhida = tabelaEstoque.getSelectedRow();
-            String cod = tabelaEstoque.getValueAt(linhaEscolhida,0).toString();
-            Produto produto = gerente.getFranquia().getEstoque().buscaProduto(cod);
-            new TelaEditarProduto(this,gerente,produto).setVisible(true);
-            atualizarTabela(gerente,tabela);
+            if(linhaEscolhida != -1) {
+                String cod = tabelaEstoque.getValueAt(linhaEscolhida, 0).toString();
+                Produto produto = produtoController.buscarProduto(cod);
+                new TelaEditarProduto(this, gerente, produto).setVisible(true);
+                atualizarTabela();
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Selecione um produto para editar!");
+            }
         });
         fecharBtn.addActionListener(event -> {
             dispose();
         });
     }
-    private void atualizarTabela(Gerente gerente,DefaultTableModel tabela) {
+    private void atualizarTabela() {
         String[] colunas = {"Código", "Nome", "Preço", "Quantidade","Status"};
-        tabela = new DefaultTableModel(colunas,0){
+        DefaultTableModel tabela = new DefaultTableModel(colunas,0){
             @Override public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
 
-        List<Produto> produtos = gerente.getFranquia().getEstoque().getProdutos();
-        for(Produto produto : produtos){
-            String status = produto.getQuantidade() <= 5 ? "Em Falta" : "OK";
-            Object[] linha = {
-                    produto.getCod(),
-                    produto.getNome(),
-                    String.format("R$ %.2f",produto.getPreco()),
-                    produto.getQuantidade(),
-                    status
-            };
+        List<Object[]> produtos = produtoController.listarProdutosParaTabela();
+        for(Object[] linha : produtos){
             tabela.addRow(linha);
         }
         tabelaEstoque.setModel(tabela);//aplica os dados a tabela
         tabelaEstoque.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    }
+    public ProdutoController getProdutoController() {
+        return produtoController;
     }
 }
 //ver quais produtos estao com qtd baixa (nessa tela msm) OK

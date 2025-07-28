@@ -1,16 +1,11 @@
 package view;
 
-import com.google.gson.Gson;
-import model.Pessoas.Vendedor;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileWriter;
-import java.io.IOException;
 
-public class TelaCadastro extends JDialog {
+public abstract class TelaCadastro extends JDialog {
     private JLabel titulo;
     private JTextField nomeTxt;
     private JTextField cpfTxt;
@@ -25,32 +20,15 @@ public class TelaCadastro extends JDialog {
     private JPanel tela_Cadastro;
     private JButton voltarBtn;
 
-    public TelaCadastro(JFrame parent) {
+    public TelaCadastro(JDialog parent, String titulo) {
+        super(parent,titulo,true);
+        setContentPane(tela_Cadastro);
+        setSize(800,600);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        cadastrarBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String nome = nomeTxt.getText();
-                String cpf = cpfTxt.getText();
-                String email = emailTxt.getText();
-                String senha = senhaTxt.getText();
-
-                Vendedor vendedor = new Vendedor(nome,cpf,email,senha);
-                System.out.println(vendedor.getNome() + vendedor.getCPF());
-
-                Gson gson = new Gson();
-                String json = gson.toJson(vendedor);
-
-                try{
-                    FileWriter writer = new FileWriter("data/funcionarios",true);
-                    writer.write(json + System.lineSeparator());
-                    writer.close();
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-                JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
-                clean();
-            }
+        cadastrarBtn.addActionListener(e ->  {
+            cadastrar();
         });
         cancelarBtn.addActionListener(new ActionListener() {
             @Override
@@ -66,17 +44,28 @@ public class TelaCadastro extends JDialog {
         emailTxt.setText("");
         senhaTxt.setText("");
     }
-
-    public static void main(String[] args) {
-        TelaCadastro telaCadastro = new TelaCadastro(null);
-        telaCadastro.setTitle("Novo Produto");
-        telaCadastro.setContentPane(telaCadastro.tela_Cadastro);
-        telaCadastro.setMinimumSize(new Dimension(450,500));
-        telaCadastro.setModal(true);
-        telaCadastro.setLocationRelativeTo(null);
-        telaCadastro.setVisible(true);
-
+    //JLABEL
+    public JLabel getTitulo() {
+        return titulo;
     }
 
+    public JLabel getSenha() {
+        return senha;
+    }
+
+    //TEXTOS
+    public JTextField getNomeTxt() {
+        return nomeTxt;
+    }
+    public JTextField getCpfTxt() {
+        return cpfTxt;
+    }
+    public JTextField getEmailTxt() {
+        return emailTxt;
+    }
+    public JTextField getSenhaTxt() {
+        return senhaTxt;
+    }
+    public abstract void cadastrar();
 
 }

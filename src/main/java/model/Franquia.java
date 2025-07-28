@@ -2,6 +2,7 @@ package model;
 
 import model.Pessoas.Funcionario;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Franquia {
@@ -16,26 +17,20 @@ public class Franquia {
         this.nome = nome;
         this.endereco = endereco;
         this.lucro = 0;
-        this.funcionarios = funcionarios;
+        this.funcionarios = new ArrayList<>(funcionarios);
         this.estoque = estoque;
     }
-
+    //GETTERS
     public String getNome() {return nome;}
-
     public String getEndereco() {return endereco;}
-
     public float getLucro() {return lucro;}
-
     public List <Funcionario> getFuncionarios() {return funcionarios;}
-
     public Estoque getEstoque() {return estoque;}
 
+    //SETTERS
     public void setNome(String nome) {this.nome = nome;}
-
     public void setEndereco(String endereco) {this.endereco = endereco;}
-
     public void setLucro(float lucro) {this.lucro = lucro;}
-
     public void setEstoque(Estoque estoque) {
         this.estoque = estoque;
     }

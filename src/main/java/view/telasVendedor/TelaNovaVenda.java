@@ -1,12 +1,13 @@
 package view.telasVendedor;
 
+import controller.vendedor.VendedorOperaController;
 import model.Pedido;
 import model.Pessoas.Cliente;
 import model.Pessoas.Vendedor;
 import model.Produto;
 
 import javax.swing.*;
-import javax.xml.crypto.Data;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,7 +20,6 @@ public class TelaNovaVenda extends JDialog {
     private JComboBox <Produto >produtoCombo;
     private JTextField qtdTxt;
     private JButton adicionarButton;
-    private JTextArea resumoTxT;
     private JButton finalizarButton;
     private JButton cancelarButton;
     private JButton voltarButton;
@@ -28,10 +28,17 @@ public class TelaNovaVenda extends JDialog {
     private JLabel total;
     private JLabel totalTxt;
     private JTextField cpfTxt;
+    private JTextField codVendaTxt;
+    private JTable table1;
+    private JList <Produto>listaProdutos;
+    private DefaultTableModel tabela;
+
+
     private float totalAtual;
     private List<Produto> listProd;
     private Date horaPedido;
-    private Integer codigoVenda;
+    private String codigoVenda;
+    private VendedorOperaController vendedorOperaController;
 
     public TelaNovaVenda(JDialog pai, Vendedor vendedor) {
 
@@ -42,13 +49,22 @@ public class TelaNovaVenda extends JDialog {
         setLocationRelativeTo(null);
         adicionaItensPgto();
         adicionaItensProd();
+        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         this.totalAtual = 0;
-        totalTxt.setText("R$: 0.00");
+        vendedorOperaController = new VendedorOperaController(vendedor);
+        totalTxt.setText("0.00");
         listProd = new ArrayList<>();
-        this.codigoVenda = 0;
+        listaProdutos = new JList<>();
+        String [] colunas = {
+                "Produto", "Quantidade", "Subtotal"
+        };
+        tabela = new DefaultTableModel(colunas, 0){
+            @Override
+            public boolean isCellEditable(int row, int column) {return false;}
 
+        };
 
-        adicionarButton.addActionListener(new ActionListener() {
+                adicionarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 atualizaResumo();
@@ -70,7 +86,7 @@ public class TelaNovaVenda extends JDialog {
         finalizarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                adicionaVenda(vendedor);
+                finalizaVenda(vendedor);
             }
         });
     }
@@ -98,32 +114,45 @@ public class TelaNovaVenda extends JDialog {
 
     public void atualizaResumo(){
         Produto produtoAtual = (Produto) produtoCombo.getSelectedItem();
-        listProd.add(produtoAtual);
         Integer quantidade = Integer.valueOf(qtdTxt.getText());
-        resumoTxT.append(produtoAtual.toString() + " x "  + quantidade +  " = R$: " + (produtoAtual.getPreco() * quantidade + "\n"));
+        float subTotal = produtoAtual.getPreco() * quantidade;
+        Object []  linha = {produtoAtual.getNome(), quantidade, subTotal};
+        tabela.addRow(linha);
+        table1.setModel(tabela);
         totalAtual+= produtoAtual.getPreco() * quantidade;
-        totalTxt.setText("R$: " + Double.toString(totalAtual));
+        totalTxt.setText(Double.toString(totalAtual));
     }
 
     public void clean(){
-        resumoTxT.setText("");
         this.totalAtual = 0;
         totalTxt.setText("R$: 0.00");
         clienteTxt.setText("");
         qtdTxt.setText("");
         cpfTxt.setText("");
+        codVendaTxt.setText("");
     }
 
-    private void adicionaVenda(Vendedor  vendedor){
+    private void finalizaVenda(Vendedor  vendedor){
         String cliente = clienteTxt.getText();
         String cpf = cpfTxt.getText();
-        Cliente cliente1 = new Cliente(cliente,cpf);
+        codigoVenda = codVendaTxt.getText();
+        if(cliente.isBlank() || cpf.isBlank() || codigoVenda.isBlank() ){
+
+        }
+
+        Cliente cliente1;
+        try {
+             cliente1 = new Cliente(cliente, cpf);
+        } catch(IllegalArgumentException e){
+            JOptionPane.showMessageDialog(null,"CPF Inválido!");
+            return;
+        }
         String formaPagamento = pgtoCombo.getSelectedItem().toString();
-        Double valorVenda = Double.parseDouble(qtdTxt.getText());
+        Double valorVenda = Double.parseDouble(totalTxt.getText());
         horaPedido = new Date();
-        codigoVenda++;
-        Pedido venda = new Pedido(codigoVenda.toString(),cliente1,horaPedido, formaPagamento, 0, listProd, valorVenda);
-        vendedor.getHistoricoPedidos().put(codigoVenda.toString(), venda);
+
+        Pedido venda = new Pedido(codigoVenda,cliente1,horaPedido, formaPagamento, 0, listProd, valorVenda);
+        vendedorOperaController.adicionarVenda(venda);
         JOptionPane.showMessageDialog(TelaNovaVenda.this, "Venda realizada com sucesso!");
         clean();
     }

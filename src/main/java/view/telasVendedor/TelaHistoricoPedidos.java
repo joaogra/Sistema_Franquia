@@ -36,7 +36,7 @@ public class TelaHistoricoPedidos extends JDialog {
                     pedido.getCliente().getNome(),
                     pedido.getHorario().toString(),
                     pedido.getFormaPagamento(),
-                    String.format("R$ %2f",pedido.getValVenda())
+                    String.format("R$ " + pedido.getValVenda())
             };
             modelo.addRow(linha);
         }

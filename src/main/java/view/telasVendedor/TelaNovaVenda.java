@@ -30,8 +30,10 @@ public class TelaNovaVenda extends JDialog {
     private JTextField cpfTxt;
     private JTextField codVendaTxt;
     private JTable table1;
+    private JButton removerBtn;
     private JList <Produto>listaProdutos;
     private DefaultTableModel tabela;
+    private JScrollPane scrollPane;
 
 
     private float totalAtual;
@@ -89,6 +91,12 @@ public class TelaNovaVenda extends JDialog {
                 finalizaVenda(vendedor);
             }
         });
+        removerBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                removeLinha();
+            }
+        });
     }
 
     public static void main(String[] args) {
@@ -123,6 +131,19 @@ public class TelaNovaVenda extends JDialog {
         totalTxt.setText(Double.toString(totalAtual));
     }
 
+    public void removeLinha(){
+        int linhaSelecionada = table1.getSelectedRow();
+
+        if(linhaSelecionada == -1){
+            JOptionPane.showMessageDialog(null, "Selecione uma linha para remover");
+        }else{
+            Object valorSubtotal = tabela.getValueAt(linhaSelecionada, 2);
+            totalAtual -= Float.parseFloat(valorSubtotal.toString());
+            totalTxt.setText(totalAtual+"");
+            tabela.removeRow(linhaSelecionada);
+        }
+    }
+
     public void clean(){
         this.totalAtual = 0;
         totalTxt.setText("R$: 0.00");
@@ -130,6 +151,7 @@ public class TelaNovaVenda extends JDialog {
         qtdTxt.setText("");
         cpfTxt.setText("");
         codVendaTxt.setText("");
+        tabela.setRowCount(0);
     }
 
     private void finalizaVenda(Vendedor  vendedor){
@@ -137,7 +159,8 @@ public class TelaNovaVenda extends JDialog {
         String cpf = cpfTxt.getText();
         codigoVenda = codVendaTxt.getText();
         if(cliente.isBlank() || cpf.isBlank() || codigoVenda.isBlank() ){
-
+            JOptionPane.showMessageDialog(null, "Preencha os campos");
+            return;
         }
 
         Cliente cliente1;

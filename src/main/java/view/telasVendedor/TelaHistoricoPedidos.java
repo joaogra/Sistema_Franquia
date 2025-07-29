@@ -11,7 +11,6 @@ import java.util.Map;
 
 public class TelaHistoricoPedidos extends JDialog {
     private JLabel titulo;
-    private JTable table1;
     private JButton voltarBtn = new JButton("Voltar");
 
     public TelaHistoricoPedidos(JDialog telaAnterior, Map <String, Pedido> historicoPedidos){

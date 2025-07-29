@@ -15,12 +15,12 @@ public class ProdutoController {
     public List<Object[]> listarProdutosParaTabela() {
         List<Object[]> dados = new ArrayList<>();
         for (Produto p : gerente.getFranquia().getEstoque().getProdutos()) {
-            String status = p.getQuantidade() <= 50 ? "Em Falta" : "OK";//numero fixado
+            String status = p.getQuantidadeEstoque() <= 50 ? "Em Falta" : "OK";//numero fixado
             Object[] linha = {
                     p.getCod(),
                     p.getNome(),
                     String.format("R$ %.2f", p.getPreco()),
-                    p.getQuantidade(),
+                    p.getQuantidadeEstoque(),
                     status
             };
             dados.add(linha);

@@ -13,7 +13,6 @@ public class Pessoa {
         if(verificaCPF(CPF)){
         this.nome = nome;
         this.CPF = CPF;
-
         }
         else{
         throw new IllegalArgumentException("CPF invalido!");

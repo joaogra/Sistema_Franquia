@@ -17,6 +17,7 @@ public class TelaVisualizaEstoque extends JDialog{
     private JButton removeBtn;
     private JButton editaProdutoBtn;
     private ProdutoController produtoController;
+
     public TelaVisualizaEstoque(JFrame parent, Gerente gerente) {
         super(parent,"Estoque da Franquia", true);
         setContentPane(painelEstoque);
@@ -27,7 +28,7 @@ public class TelaVisualizaEstoque extends JDialog{
         atualizarTabela();
 
         cadastrarProdutoBtn.addActionListener(event ->{
-            new TelaCadastrarProduto(this,gerente).setVisible(true);
+            new TelaCadastrarProduto(TelaVisualizaEstoque.this,gerente).setVisible(true);
             atualizarTabela();
         });
 
@@ -53,7 +54,7 @@ public class TelaVisualizaEstoque extends JDialog{
             if(linhaEscolhida != -1) {
                 String cod = tabelaEstoque.getValueAt(linhaEscolhida, 0).toString();
                 Produto produto = produtoController.buscarProduto(cod);
-                new TelaEditarProduto(this, gerente, produto).setVisible(true);
+                new TelaEditarProduto(TelaVisualizaEstoque.this, gerente, produto).setVisible(true);
                 atualizarTabela();
             }
             else{
@@ -67,7 +68,7 @@ public class TelaVisualizaEstoque extends JDialog{
     private void atualizarTabela() {
         String[] colunas = {"Código", "Nome", "Preço", "Quantidade","Status"};
         DefaultTableModel tabela = new DefaultTableModel(colunas,0){
-            @Override public boolean isCellEditable(int row, int column) {
+            @Override public boolean isCellEditable(int linha, int coluna) {
                 return false;
             }
         };
@@ -78,9 +79,6 @@ public class TelaVisualizaEstoque extends JDialog{
         }
         tabelaEstoque.setModel(tabela);//aplica os dados a tabela
         tabelaEstoque.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-    }
-    public ProdutoController getProdutoController() {
-        return produtoController;
     }
 }
 //ver quais produtos estao com qtd baixa (nessa tela msm) OK

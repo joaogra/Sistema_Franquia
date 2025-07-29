@@ -30,14 +30,14 @@ public class TelaListaVendedores extends JDialog{
         atualizarTabela();
 
         cadastrarVendedorButton.addActionListener(e -> {
-            new TelaCadastrarVendedor(this,gerente).setVisible(true);
+            new TelaCadastrarVendedor(TelaListaVendedores.this,gerente).setVisible(true);
             atualizarTabela();
         });
         editarVendedorButton.addActionListener(e -> {
             int linhaEscolhida = tabelaVendedores.getSelectedRow();
             if (linhaEscolhida != -1) {
                 Vendedor vendedorEscolhido = (Vendedor)  tabelaVendedores.getValueAt(linhaEscolhida,2);
-                new TelaEditarVendedor(this,gerente,vendedorEscolhido).setVisible(true);
+                new TelaEditarVendedor(TelaListaVendedores.this,gerente,vendedorEscolhido).setVisible(true);
                 atualizarTabela();
             }
             else{
@@ -67,11 +67,11 @@ public class TelaListaVendedores extends JDialog{
 
         });
         voltarBtn.addActionListener(e -> {
-            this.dispose();
+            dispose();
         });
     }
     private void atualizarTabela() {
-        String[] colunas = {"Nome", "N° de Vendas","Objeto"};
+        String[] colunas = {"Nome", "N° de Vendas","Vendedor"};
         DefaultTableModel tabela = new DefaultTableModel(colunas, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {

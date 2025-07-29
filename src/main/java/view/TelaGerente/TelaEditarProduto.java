@@ -15,7 +15,7 @@ public class TelaEditarProduto extends TelaProduto {
         getCodigoTxt().setText(produto.getCod());
         getCodigoTxt().setEditable(false);
         getPrecoTxt().setText(Float.toString(produto.getPreco()));
-        getQuantidadeTxt().setText(Integer.toString(produto.getQuantidade()));
+        getQuantidadeTxt().setText(Integer.toString(produto.getQuantidadeEstoque()));
         this.produtoController = new ProdutoController(gerente);
     }
 

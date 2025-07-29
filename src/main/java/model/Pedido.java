@@ -21,21 +21,19 @@ public class Pedido {
         this.horario = horario;
         this.formaPagamento = formaPagamento;
         this.taxa = taxa;
+        this.produtos = produtos;
         this.valVenda = valVenda;
     }
+    //GETTERS
 
     public String getCod(){return cod;}
-
     public Cliente getCliente(){return cliente;}
-
     public Date getHorario(){return horario;}
-
     public String getFormaPagamento(){return formaPagamento;}
-
     public Double getValVenda(){return valVenda;}
-
     public float getTaxa(){return taxa;}
-
+    public  List<Produto> getProdutos(){return produtos;}
+    //SETTERS
     public void setCod(String cod){this.cod = cod;}
 
     public void setCliente(Cliente cliente){this.cliente = cliente;}

@@ -80,5 +80,18 @@ public abstract class TelaProduto extends JDialog {
     public JTextField getQuantidadeTxt() {
         return quantidadeTxt;
     }
+    //BUTTONS
+
+    public JButton getConfirmarBtn() {
+        return confirmarBtn;
+    }
+    public JButton getLimparBtn() {
+        return limparBtn;
+    }
+
+    public JButton getFecharButton() {
+        return fecharButton;
+    }
+
     public abstract void confirmar();
 }

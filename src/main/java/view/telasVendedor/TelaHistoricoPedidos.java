@@ -11,7 +11,6 @@ import java.util.Map;
 
 public class TelaHistoricoPedidos extends JDialog {
     private JLabel titulo;
-    private JTable table1;
     private JButton voltarBtn = new JButton("Voltar");
 
     public TelaHistoricoPedidos(JDialog telaAnterior, Map <String, Pedido> historicoPedidos){
@@ -36,11 +35,15 @@ public class TelaHistoricoPedidos extends JDialog {
                     pedido.getCliente().getNome(),
                     pedido.getHorario().toString(),
                     pedido.getFormaPagamento(),
-                    String.format("R$ %2f",pedido.getValVenda())
+                    String.format("R$ " + pedido.getValVenda())
             };
             modelo.addRow(linha);
         }
-        JTable table = new JTable(modelo);
+        JTable table = new JTable(modelo){
+        @Override
+        public boolean isCellEditable(int row, int column) {return false;}
+
+    };
         JScrollPane scrollPane = new JScrollPane(table);
         add(scrollPane, BorderLayout.CENTER);
 

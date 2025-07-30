@@ -16,34 +16,25 @@ public class Gerente extends Funcionario{
     public void associaGerenteFranquia(Franquia franquia) {
         this.franquia = franquia;
     }
+
     //retorna copia da lista!!!
-    public List<Vendedor> getVendedores() {
-        List<Vendedor> vendedores = new ArrayList<>();
-        for (Funcionario f : franquia.getFuncionarios()) {
-            if (f instanceof Vendedor) {
-                vendedores.add((Vendedor) f);
-            }
-        }
-        return vendedores;
-    }
     public void removerVendedor(Vendedor vendedor) {
-        if(!getVendedores().isEmpty()) {
-            franquia.getFuncionarios().remove(vendedor);
+        if(!franquia.getVendedores().isEmpty()) {
+            franquia.getVendedores().remove(vendedor);
         }
     }
     public void adicionarVendedor(Vendedor vendedor) {
-        franquia.getFuncionarios().add(vendedor);
+        franquia.getVendedores().add(vendedor);
     }
     public void editarVendedor(Vendedor vendedorEditado) {
-        for (Funcionario funcionario : franquia.getFuncionarios()) {
-            if (funcionario instanceof Vendedor) {
-                Vendedor v = (Vendedor) funcionario;
-                if (v.getCPF().equals(vendedorEditado.getCPF())) {
-                    v.setNome(vendedorEditado.getNome());
-                    v.setEmail(vendedorEditado.getEmail());
+        for (Vendedor vendedor : franquia.getVendedores()) {
+                if (vendedor.getCPF().equals(vendedorEditado.getCPF())) {
+
+                    vendedor.setNome(vendedorEditado.getNome());
+                    vendedor.setEmail(vendedorEditado.getEmail());
                     return;
                 }
-            }
+
         }
         throw new IllegalArgumentException("Vendedor com CPF " + vendedorEditado.getCPF() + " não encontrado.");
     }

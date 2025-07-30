@@ -16,6 +16,7 @@ public class TelaVisualizaEstoque extends JDialog{
     private JButton cadastrarProdutoBtn;
     private JButton removeBtn;
     private JButton editaProdutoBtn;
+    private JLabel infoTabela;
     private ProdutoController produtoController;
 
     public TelaVisualizaEstoque(JFrame parent, Gerente gerente) {
@@ -81,7 +82,3 @@ public class TelaVisualizaEstoque extends JDialog{
         tabelaEstoque.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 }
-//ver quais produtos estao com qtd baixa (nessa tela msm) OK
-//CadastrarProdutos OK
-//editar produtos OK
-//remover produtos OK

@@ -119,7 +119,7 @@
         </constraints>
         <properties>
           <font name="Microsoft PhagsPa" size="14" style="0"/>
-          <text value="Cancelar"/>
+          <text value="Limpar"/>
         </properties>
       </component>
       <vspacer id="c6882">

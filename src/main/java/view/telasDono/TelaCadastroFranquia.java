@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 
-public class TelaFranquia extends JDialog {
+public class TelaCadastroFranquia extends JDialog {
     private JPanel panel1;
     private JButton cancelarButton;
     private JButton adicionarButton;
@@ -27,7 +27,7 @@ public class TelaFranquia extends JDialog {
     private JButton buscarBtn;
 
 
-    public TelaFranquia() {
+    public TelaCadastroFranquia() {
         buscarBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -56,7 +56,7 @@ public class TelaFranquia extends JDialog {
     }
 
     public static void main(String[] args) {
-        TelaFranquia telaFranquia = new TelaFranquia();
+        TelaCadastroFranquia telaFranquia = new TelaCadastroFranquia();
         telaFranquia.setTitle("Cadastro de Nova Franquia");
         telaFranquia.setMinimumSize(new Dimension(600,500));
         telaFranquia.setContentPane(telaFranquia.panel1);

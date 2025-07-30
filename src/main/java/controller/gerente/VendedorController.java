@@ -13,7 +13,7 @@ public class VendedorController {
         this.gerente = gerente;
     }
     public List<Object[]> listarVendedorParaTabela() {
-        List<Vendedor> vendedores = new ArrayList<>(gerente.getVendedores());
+        List<Vendedor> vendedores = new ArrayList<>(gerente.getFranquia().getVendedores());
 
         vendedores.sort((v1, v2) -> Integer.compare(v2.getNumVendas(), v1.getNumVendas()));
 

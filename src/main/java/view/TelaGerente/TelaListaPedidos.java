@@ -37,7 +37,7 @@ public class TelaListaPedidos extends JDialog {
            }
         });
         solicitaAlteracaoBtn.addActionListener(e -> {
-
+            //new TelaSolicitaAlteracao
         });
         fecharBtn.addActionListener(e -> {
             this.dispose();

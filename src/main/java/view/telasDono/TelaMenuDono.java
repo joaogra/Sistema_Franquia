@@ -1,48 +1,47 @@
-package view.TelaGerente;
+package view.telasDono;
 
 import model.Estoque;
 import model.Franquia;
 import model.Pedido;
 import model.Pessoas.Cliente;
+import model.Pessoas.Dono;
 import model.Pessoas.Gerente;
 import model.Pessoas.Vendedor;
 import model.Produto;
+import view.TelaGerente.TelaMenuGerente;
 import view.TelaMenu;
 
 import javax.swing.*;
 import java.util.Date;
 import java.util.List;
 
-public class TelaMenuGerente extends TelaMenu {
-    private Gerente gerente;
-    public TelaMenuGerente(JFrame parent,Gerente gerente) {
-        super(parent,gerente);
-        this.gerente = gerente;
-        getTitulo().setText("Menu Principal");
-        getButton1().setText("Vendedores");
-        getButton2().setText("Pedidos");
-        getButton3().setText("Estoque");
-        getButton4().setText("Relatorio");
+public class TelaMenuDono extends JFrame {
+    private JPanel painelMenu;
+    private JLabel titulo;
+    private JLabel boasVindas;
+    private JTable table1;
+    private JButton cadastraFranquiaBtn;
+    private JButton cadastrarGerenteBtn;
+    private JButton removerFranquiaButton;
+    private JButton removerGerenteBtn;
+    private JButton resumoFinanceiroBtn;
+    private JButton rankingVendedoresBtn;
+    private JButton logoutBtn;
 
-    }
-    @Override
-    public void confirmaBtn1(){
-        new TelaListaVendedores(TelaMenuGerente.this,gerente).setVisible(true);
-    }
-    @Override
-    public void confirmaBtn2(){
-        new TelaListaPedidos(TelaMenuGerente.this,gerente).setVisible(true);
-    }
-    @Override
-    public void confirmaBtn3(){
-        new TelaVisualizaEstoque(TelaMenuGerente.this,gerente).setVisible(true);
-    }
-    @Override
-    public void confirmaBtn4(){
-        new TelaRelatorioFranquia(TelaMenuGerente.this,gerente).setVisible(true);
-    }
+    public TelaMenuDono(JFrame parent, Dono dono) {
+        super("Menu Dono");
+        setContentPane(painelMenu);
+        setSize(1000,640);
+        setLocationRelativeTo(parent);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
 
+
+
+        logoutBtn.addActionListener(e -> {
+           this.dispose();
+        });
+    }
 
     public static void main(String[] args) {
         Cliente c1 = new Cliente("adrian", "14518498690");
@@ -55,7 +54,7 @@ public class TelaMenuGerente extends TelaMenu {
         Vendedor v1 = new Vendedor("Carlos Silva","123.456.789-09", "carlos@empresa.com", "senha123");
         p1.setQuantidadePedido(15);
         p2.setQuantidadePedido(5);
-        Pedido pedido1 = new Pedido("001",c1 ,new Date(),"din",0.05f,List.of(p1,p2),1000d);
+        Pedido pedido1 = new Pedido("001",c1 ,new Date(),"din",0.05f, List.of(p1,p2),1000d);
         v1.adicionaPedido(pedido1);
         Vendedor v2 = new Vendedor("Marina Costa", "987.654.321-00", "marina@empresa.com", "senha456");
         Vendedor v3 = new Vendedor("João Pereira", "111.444.777-35", "joao@empresa.com", "senha789");
@@ -64,6 +63,7 @@ public class TelaMenuGerente extends TelaMenu {
         v3.setNumVendas(40);
         Franquia franquia = new Franquia("nome","1234",1000f,gerente1, List.of(v1,v2,v3),estoque);
         gerente1.associaGerenteFranquia(franquia);
-        new TelaMenuGerente(new JFrame(),gerente1).setVisible(true);
+        Dono dono1 = new Dono("Pericles","14518498690","@blalbalba","1234567");
+        new TelaMenuDono(new JFrame(),dono1).setVisible(true);
     }
 }

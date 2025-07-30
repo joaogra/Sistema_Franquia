@@ -13,7 +13,9 @@ public class TelaEditarVendedor extends TelaCadastro {
     private VendedorController vendedorController;
     private String senha;
     public TelaEditarVendedor(JDialog parent, Gerente gerente, Vendedor vendedor) {
-        super(parent,"Editar Produto");
+        super(parent,"Editar Vendedor");
+        getTitulo().setText("Editar Vendedor");
+        getCadastrarBtn().setText("Confirmar");
         getNomeTxt().setText(vendedor.getNome());
         getCpfTxt().setText(vendedor.getCPF());
         getEmailTxt().setText(vendedor.getEmail());

@@ -15,7 +15,7 @@ public class PedidoController {
     }
     public List<Object[]> listaPedidosParaTabela() {
         List<Object[]> listaPedidos = new ArrayList<>();
-        for(Vendedor vendedor : gerente.getVendedores()) {
+        for(Vendedor vendedor : gerente.getFranquia().getVendedores()) {
             for(Pedido pedido : vendedor.getHistoricoPedidos().values()){
                 Object[] linha = {
                         pedido.getCod(),

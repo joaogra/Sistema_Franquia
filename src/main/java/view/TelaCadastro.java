@@ -67,5 +67,8 @@ public abstract class TelaCadastro extends JDialog {
         return senhaTxt;
     }
     public abstract void cadastrar();
-
+    //BUTTONS
+    public JButton getCadastrarBtn() {
+        return  cadastrarBtn;
+    }
 }

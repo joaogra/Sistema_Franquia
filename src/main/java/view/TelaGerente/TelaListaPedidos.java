@@ -1,10 +1,8 @@
 package view.TelaGerente;
 
 import controller.gerente.PedidoController;
-import controller.gerente.VendedorController;
 import model.Pedido;
 import model.Pessoas.Gerente;
-import model.Produto;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -17,6 +15,7 @@ public class TelaListaPedidos extends JDialog {
     private JTable tabelaPedidos;
     private JButton solicitaAlteracaoBtn;
     private JButton fecharBtn;
+    private JButton viewProdutos;
     private PedidoController pedidoController;
     public TelaListaPedidos(JFrame parent, Gerente gerente) {
         super(parent, "Lista de pedidos", true);
@@ -27,17 +26,19 @@ public class TelaListaPedidos extends JDialog {
         this.pedidoController = new PedidoController(gerente);
 
         atualizarTabelaPedidos();
-        tabelaPedidos.addMouseListener(new MouseAdapter() {
-           public void mouseClicked(MouseEvent event) {
-               if(event.getClickCount() == 2){
-                   int linha = tabelaPedidos.getSelectedRow();
-                   Pedido pedido = (Pedido) tabelaPedidos.getValueAt(linha, 5);
-                   new TelaProdutoDoPedido(TelaListaPedidos.this,gerente,pedido).setVisible(true);
-               }
-           }
+        viewProdutos.addActionListener(event -> {
+            int linha = tabelaPedidos.getSelectedRow();
+            if(linha != -1) {
+                Pedido pedido = (Pedido) tabelaPedidos.getValueAt(linha, 5);
+                new TelaProdutoDoPedido(TelaListaPedidos.this, pedido).setVisible(true);
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Selecione um Pedido!");
+            }
         });
+
         solicitaAlteracaoBtn.addActionListener(e -> {
-            //new TelaSolicitaAlteracao
+            new TelaSolicitaAlteracao(parent,gerente).setVisible(true);
         });
         fecharBtn.addActionListener(e -> {
             this.dispose();
@@ -60,7 +61,7 @@ public class TelaListaPedidos extends JDialog {
 
         tabelaPedidos.setModel(tabela);
         tabelaPedidos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
+        tabelaPedidos.getTableHeader().setReorderingAllowed(false);
         //deixa a coluna "Produtos" invisivel
         tabelaPedidos.getColumnModel().getColumn(5).setMaxWidth(0);
         tabelaPedidos.getColumnModel().getColumn(5).setMinWidth(0);

@@ -1,6 +1,7 @@
 package view.telasDono;
 
 import model.Endereco;
+import model.Pessoas.Dono;
 import model.ViaCepService;
 
 import javax.swing.*;
@@ -27,7 +28,15 @@ public class TelaCadastroFranquia extends JDialog {
     private JButton buscarBtn;
 
 
-    public TelaCadastroFranquia() {
+    public TelaCadastroFranquia(JFrame parent, Dono dono) {
+        super(parent, "Cadastro de Nova Franquia", true);
+        setContentPane(panel1);
+        setSize(800,600);
+        setLocationRelativeTo(null);
+
+        adicionarButton.addActionListener(e -> {
+           ///
+        });
         buscarBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -53,18 +62,10 @@ public class TelaCadastroFranquia extends JDialog {
                 clean();
             }
         });
+        voltarButton.addActionListener(e -> {
+           this.dispose();
+        });
     }
-
-    public static void main(String[] args) {
-        TelaCadastroFranquia telaFranquia = new TelaCadastroFranquia();
-        telaFranquia.setTitle("Cadastro de Nova Franquia");
-        telaFranquia.setMinimumSize(new Dimension(600,500));
-        telaFranquia.setContentPane(telaFranquia.panel1);
-        telaFranquia.setModal(true);
-        telaFranquia.setLocationRelativeTo(null);
-        telaFranquia.setVisible(true);
-    }
-
     public void clean(){
         bairroTxt.setText("");
         numeroTxt.setText("");

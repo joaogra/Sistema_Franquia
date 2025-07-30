@@ -14,14 +14,14 @@ public class TelaProdutoDoPedido extends JDialog {
     private JLabel titulo;
     private JButton fecharBtn;
     private PedidoController pedidoController;
-    public TelaProdutoDoPedido(JDialog parent, Gerente gerente, Pedido pedido){
+    public TelaProdutoDoPedido(JDialog parent, Pedido pedido){
         super(parent,"Produtos",true);
         setContentPane(painelProdutoPedido);
         setSize(800,600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        pedidoController = new PedidoController(gerente);
+        pedidoController = new PedidoController();
 
         String[] colunas = {"Codigo","Nome","Quantidade","Preço"};
         DefaultTableModel tabela = new DefaultTableModel(colunas,0){
@@ -35,7 +35,7 @@ public class TelaProdutoDoPedido extends JDialog {
         }
         tabelaProdutos.setModel(tabela);
         tabelaProdutos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
+        tabelaProdutos.getTableHeader().setReorderingAllowed(false);
         fecharBtn.addActionListener(e -> {
            this.dispose();
         });

@@ -50,7 +50,6 @@ public class TelaMenuDono extends JFrame {
         Estoque estoque = new Estoque();
         estoque.getEstoque().put(p1.getCod(), p1);
         estoque.getEstoque().put(p2.getCod(), p2);
-        Gerente gerente1 =  new Gerente("Adrian","14518498690" ,"adra","adrian");
         Vendedor v1 = new Vendedor("Carlos Silva","123.456.789-09", "carlos@empresa.com", "senha123");
         p1.setQuantidadePedido(15);
         p2.setQuantidadePedido(5);
@@ -61,6 +60,7 @@ public class TelaMenuDono extends JFrame {
         v1.setNumVendas(25);
         v2.setNumVendas(0);
         v3.setNumVendas(40);
+        Gerente gerente1 =  new Gerente("Adrian","14518498690" ,"adra","adrian",null);
         Franquia franquia = new Franquia("nome","1234",1000f,gerente1, List.of(v1,v2,v3),estoque);
         gerente1.associaGerenteFranquia(franquia);
         Dono dono1 = new Dono("Pericles","14518498690","@blalbalba","1234567");

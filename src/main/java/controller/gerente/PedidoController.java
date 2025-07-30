@@ -13,6 +13,7 @@ public class PedidoController {
     public PedidoController(Gerente gerente) {
         this.gerente = gerente;
     }
+    public PedidoController() {}
     public List<Object[]> listaPedidosParaTabela() {
         List<Object[]> listaPedidos = new ArrayList<>();
         for(Vendedor vendedor : gerente.getFranquia().getVendedores()) {
@@ -28,6 +29,24 @@ public class PedidoController {
                 listaPedidos.add(linha);
             }
         }
+        return listaPedidos;
+    }
+    public List<Object[]> listaSolicitacaoPedidosParaTabela() {
+        List<Object[]> listaPedidos = new ArrayList<>();
+
+            for(Pedido pedido : gerente.getPedidosParaAlterar()){
+                Object[] linha = {
+                        pedido.getCod(),
+                        pedido.getCliente().getNome(),
+                        pedido.getHorario(),
+                        pedido.getFormaPagamento(),
+                        pedido.getValVenda(),
+                        pedido.getMotivoSolicitacao(),
+                        pedido
+                };
+                listaPedidos.add(linha);
+            }
+
         return listaPedidos;
     }
     public List<Object[]> listaProdutosUnicoPedido(Pedido pedido) {

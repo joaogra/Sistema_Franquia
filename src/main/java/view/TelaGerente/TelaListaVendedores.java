@@ -11,12 +11,12 @@ import java.util.List;
 public class TelaListaVendedores extends JDialog{
     private JPanel painelListaVendedor;
     private JTable tabelaVendedores;
-    private JButton cadastrarVendedorButton;
-    private JButton editarVendedorButton;
-    private JButton removerVendedorButton;
+    private JButton cadastrarBtn;
+    private JButton editarBtn;
+    private JButton removerBtn;
     private JButton voltarBtn;
     private JLabel titulo;
-    private JLabel explicaTabela;
+    private JLabel infoTabela;
     private VendedorController vendedorController;
 
     public TelaListaVendedores(JFrame parent,Gerente gerente) {
@@ -29,11 +29,11 @@ public class TelaListaVendedores extends JDialog{
 
         atualizarTabela();
 
-        cadastrarVendedorButton.addActionListener(e -> {
+        cadastrarBtn.addActionListener(e -> {
             new TelaCadastrarVendedor(TelaListaVendedores.this,gerente).setVisible(true);
             atualizarTabela();
         });
-        editarVendedorButton.addActionListener(e -> {
+        editarBtn.addActionListener(e -> {
             int linhaEscolhida = tabelaVendedores.getSelectedRow();
             if (linhaEscolhida != -1) {
                 Vendedor vendedorEscolhido = (Vendedor)  tabelaVendedores.getValueAt(linhaEscolhida,2);
@@ -45,25 +45,25 @@ public class TelaListaVendedores extends JDialog{
             }
 
         });
-        removerVendedorButton.addActionListener(e -> {
+        removerBtn.addActionListener(e -> {
 
-                int linhaEscolhida = tabelaVendedores.getSelectedRow();
-                if (linhaEscolhida != -1) {
-                    int resposta = JOptionPane.showConfirmDialog(null,
-                            "Tem certeza que deseja remover o vendedor?","Confirmação",
-                            JOptionPane.YES_NO_OPTION);
-                    if(resposta == JOptionPane.YES_OPTION) {
-                        Vendedor vendedorEscolhido = (Vendedor)  tabelaVendedores.getValueAt(linhaEscolhida,2);
-                        vendedorController.removerVendedor(vendedorEscolhido);
-                        atualizarTabela();
-                        JOptionPane.showMessageDialog(null,"Vendedor removido com sucesso!");
-                    }
-                    else{
-                        return;
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Selecione um vendedor para remover!");
+            int linhaEscolhida = tabelaVendedores.getSelectedRow();
+            if (linhaEscolhida != -1) {
+                int resposta = JOptionPane.showConfirmDialog(null,
+                        "Tem certeza que deseja remover o vendedor?","Confirmação",
+                        JOptionPane.YES_NO_OPTION);
+                if(resposta == JOptionPane.YES_OPTION) {
+                    Vendedor vendedorEscolhido = (Vendedor)  tabelaVendedores.getValueAt(linhaEscolhida,2);
+                    vendedorController.removerVendedor(vendedorEscolhido);
+                    atualizarTabela();
+                    JOptionPane.showMessageDialog(null,"Vendedor removido com sucesso!");
                 }
+                else{
+                    return;
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Selecione um vendedor para remover!");
+            }
 
         });
         voltarBtn.addActionListener(e -> {
@@ -91,7 +91,3 @@ public class TelaListaVendedores extends JDialog{
         tabelaVendedores.getColumnModel().getColumn(2).setWidth(0);
     }
 }
-//Lista Ordenada de Vendedores por volume de vendas OK
-//Cadastrar Vendedores OK
-//Remover Vendedores OK
-//Editar informaçoes de Vendedores OK

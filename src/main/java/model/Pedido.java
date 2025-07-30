@@ -39,6 +39,10 @@ public class Pedido {
     public Double getValVenda(){return valVenda;}
     public  String getMotivoSolicitacao(){return motivoSolicitacao;}
 
+    public Integer getQuantidade(Produto produto) {
+        return produtos.get(produto);
+    }
+
     public float getTaxa(){return taxa;}
 
     public void setMotivoSolicitacao(String motivoSolicitacao){this.motivoSolicitacao = motivoSolicitacao;}
@@ -49,5 +53,17 @@ public class Pedido {
     public void setHorario(Date horario){this.horario = horario;}
 
     public void setTaxa(float taxa){this.taxa = taxa;}
+
+    public Double getTotal(){
+        Double total = 0.0;
+        for(Produto produto : produtos.keySet()){
+            total+=produto.getPreco()* produtos.get(produto);
+        }
+        return total;
+    }
+
+    public Map<Produto, Integer> getMapaPedidos(){
+        return produtos;
+    }
 
 }

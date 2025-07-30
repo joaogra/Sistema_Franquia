@@ -3,11 +3,10 @@ package view.TelaGerente;
 import controller.gerente.PedidoController;
 import model.Pedido;
 import model.Pessoas.Gerente;
+import view.TelaProdutoDoPedido;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.List;
 
 public class TelaListaPedidos extends JDialog {

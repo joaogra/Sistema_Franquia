@@ -1,5 +1,6 @@
 package view.telasVendedor;
 
+import controller.gerente.PedidoController;
 import controller.vendedor.VendedorOperaController;
 import model.Pedido;
 import model.Pessoas.Cliente;
@@ -35,7 +36,7 @@ public class TelaNovaVenda extends JDialog {
     private JScrollPane scrollPane;
 
 
-    private float totalAtual;
+    private Double totalAtual;
     private Map<Produto, Integer> listProd;
     private Date horaPedido;
     private String codigoVenda;
@@ -51,7 +52,7 @@ public class TelaNovaVenda extends JDialog {
         adicionaItensPgto();
         adicionaItensProd();
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        this.totalAtual = 0;
+        this.totalAtual = 0.0;
         vendedorOperaController = new VendedorOperaController(vendedor);
         totalTxt.setText("0.00");
         listProd = new HashMap<>();
@@ -95,6 +96,70 @@ public class TelaNovaVenda extends JDialog {
             }
         });
     }
+
+    public TelaNovaVenda(JDialog pai, Vendedor vendedor, Pedido pedido) {
+        setContentPane(telaNovaVenda);
+        setTitle("Alteração de Pedido");
+        setMinimumSize(new Dimension(650,500));
+        setModal(true);
+        setLocationRelativeTo(null);
+        adicionaItensPgto();
+        adicionaItensProd();
+        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        this.totalAtual = pedido.getTotal();
+        vendedorOperaController = new VendedorOperaController(vendedor);
+        PedidoController pedidoController = new PedidoController(pedido);
+        clienteTxt.setText(pedidoController.nomeCliente());
+        clienteTxt.setEditable(false);
+        cpfTxt.setText(pedidoController.cpfCliente());
+        cpfTxt.setEditable(false);
+
+        totalTxt.setText(totalAtual.toString());
+        listProd = pedido.getMapaPedidos();
+        String [] colunas = {
+               "Código" ,"Produto", "Quantidade", "Preço", ""};
+        tabela = new DefaultTableModel(colunas, 0){
+            @Override
+            public boolean isCellEditable(int row, int column) {return false;}
+
+        };
+
+        preencheTabela(pedido);
+
+        adicionarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                atualizaResumo();
+
+            }
+        });
+        cancelarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                clean();
+            }
+        });
+        voltarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+        finalizarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                finalizaVenda(vendedor);
+            }
+        });
+        removerBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                removeLinha();
+            }
+        });
+    }
+
+
 
     public static void main(String[] args) {
 
@@ -150,13 +215,25 @@ public class TelaNovaVenda extends JDialog {
     }
 
     public void clean(){
-        this.totalAtual = 0;
+        this.totalAtual = 0.0;
         totalTxt.setText("R$: 0.00");
         clienteTxt.setText("");
         qtdTxt.setText("");
         cpfTxt.setText("");
         codVendaTxt.setText("");
         tabela.setRowCount(0);
+    }
+
+    public void preencheTabela(Pedido pedido){
+
+        PedidoController pedidoController = new PedidoController();
+        List<Object[]> lista = pedidoController.listaProdutosUnicoPedido(pedido);
+        for(Object[] linha : lista){
+            tabela.addRow(linha);
+        }
+
+
+        table1.setModel(tabela);
     }
 
     private void finalizaVenda(Vendedor  vendedor){

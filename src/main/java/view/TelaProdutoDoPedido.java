@@ -1,8 +1,7 @@
-package view.TelaGerente;
+package view;
 
 import controller.gerente.PedidoController;
 import model.Pedido;
-import model.Pessoas.Gerente;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

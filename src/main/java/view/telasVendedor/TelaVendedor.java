@@ -30,7 +30,7 @@ public class  TelaVendedor extends JDialog {
         btnHistorico.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TelaHistoricoPedidos telaHistoricoPedidos = new TelaHistoricoPedidos(TelaVendedor.this ,vendedor.getHistoricoPedidos());
+                TelaHistoricoPedidos telaHistoricoPedidos = new TelaHistoricoPedidos(TelaVendedor.this ,vendedor.getHistoricoPedidos(),vendedor);
                 telaHistoricoPedidos.setVisible(true);
             }
         });

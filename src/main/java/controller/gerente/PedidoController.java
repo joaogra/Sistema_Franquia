@@ -10,10 +10,12 @@ import java.util.List;
 
 public class PedidoController {
     private Gerente gerente;
+    private Pedido pedido;
     public PedidoController(Gerente gerente) {
         this.gerente = gerente;
     }
     public PedidoController() {}
+    public PedidoController(Pedido pedido)
     public List<Object[]> listaPedidosParaTabela() {
         List<Object[]> listaPedidos = new ArrayList<>();
         for(Vendedor vendedor : gerente.getFranquia().getVendedores()) {
@@ -55,11 +57,19 @@ public class PedidoController {
             Object[] linha = {
                     produto.getCod(),
                     produto.getNome(),
-                    produto.getQuantidadePedido(),
+                    pedido.getQuantidade(produto),
                     produto.getPreco()
             };
             listaProdutos.add(linha);
         }
         return listaProdutos;
+    }
+
+    public String nomeCliente(){
+        return pedido.getCliente().getNome();
+    }
+
+    public String cpfCliente(){
+        return pedido.getCliente().getCPF();
     }
 }

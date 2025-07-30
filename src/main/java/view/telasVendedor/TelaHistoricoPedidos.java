@@ -39,7 +39,11 @@ public class TelaHistoricoPedidos extends JDialog {
             };
             modelo.addRow(linha);
         }
-        JTable table = new JTable(modelo);
+        JTable table = new JTable(modelo){
+        @Override
+        public boolean isCellEditable(int row, int column) {return false;}
+
+    };
         JScrollPane scrollPane = new JScrollPane(table);
         add(scrollPane, BorderLayout.CENTER);
 

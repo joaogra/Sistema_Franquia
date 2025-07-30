@@ -1,3 +1,55 @@
-{"numVendas":0,"historicoPedidos":{},"email":"quantidadeff@gmail.com","senha":"123456","nome":"Joao","CPF":"14945740712"}
-{"numVendas":0,"historicoPedidos":{},"email":"daiwdaw","senha":"1234","nome":"joaoa","CPF":"1234"}
-{"numVendas":0,"historicoPedidos":{},"email":"diowajd","senha":"1234","nome":"Joao","CPF":"14945740712"}
+{
+  "listaFranquias": [
+    {
+      "nome": "nome",
+      "endereco": "1234",
+      "lucro": 0.0,
+      "funcionarios": [
+        {
+          "numVendas": 25,
+          "historicoPedidos": {},
+          "email": "carlos@empresa.com",
+          "senha": "senha123",
+          "nome": "Carlos Silva",
+          "CPF": "12345678909"
+        },
+        {
+          "numVendas": 0,
+          "historicoPedidos": {},
+          "email": "marina@empresa.com",
+          "senha": "senha456",
+          "nome": "Marina Costa",
+          "CPF": "98765432100"
+        },
+        {
+          "numVendas": 40,
+          "historicoPedidos": {},
+          "email": "joao@empresa.com",
+          "senha": "senha789",
+          "nome": "João Pereira",
+          "CPF": "11144477735"
+        }
+      ],
+      "estoque": {
+        "estoque": {
+          "001": {
+            "preco": 10.0,
+            "quantidade": 51,
+            "cod": "001",
+            "nome": "Produto A"
+          },
+          "002": {
+            "preco": 20.5,
+            "quantidade": 33,
+            "cod": "002",
+            "nome": "Produto B"
+          }
+        }
+      }
+    }
+  ],
+  "email": "jorge@empresa.com",
+  "senha": "senha123",
+  "nome": "Jorge",
+  "CPF": "14945740712"
+}

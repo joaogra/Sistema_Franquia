@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class TelaVendedor extends JDialog {
+public class  TelaVendedor extends JDialog {
     private JPanel telaVendedor;
     private JLabel titulo;
     private JButton btnSair;

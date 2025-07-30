@@ -8,11 +8,11 @@ import model.Produto;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
 import java.util.List;
 
 public class TelaNovaVenda extends JDialog {
@@ -31,13 +31,12 @@ public class TelaNovaVenda extends JDialog {
     private JTextField codVendaTxt;
     private JTable table1;
     private JButton removerBtn;
-    private JList <Produto>listaProdutos;
     private DefaultTableModel tabela;
     private JScrollPane scrollPane;
 
 
     private float totalAtual;
-    private List<Produto> listProd;
+    private Map<Produto, Integer> listProd;
     private Date horaPedido;
     private String codigoVenda;
     private VendedorOperaController vendedorOperaController;
@@ -55,11 +54,9 @@ public class TelaNovaVenda extends JDialog {
         this.totalAtual = 0;
         vendedorOperaController = new VendedorOperaController(vendedor);
         totalTxt.setText("0.00");
-        listProd = new ArrayList<>();
-        listaProdutos = new JList<>();
+        listProd = new HashMap<>();
         String [] colunas = {
-                "Produto", "Quantidade", "Subtotal"
-        };
+                "Produto", "Quantidade", "Subtotal", ""};
         tabela = new DefaultTableModel(colunas, 0){
             @Override
             public boolean isCellEditable(int row, int column) {return false;}
@@ -123,16 +120,24 @@ public class TelaNovaVenda extends JDialog {
     public void atualizaResumo(){
         Produto produtoAtual = (Produto) produtoCombo.getSelectedItem();
         Integer quantidade = Integer.valueOf(qtdTxt.getText());
+        listProd.put(produtoAtual, quantidade);
         float subTotal = produtoAtual.getPreco() * quantidade;
-        Object []  linha = {produtoAtual.getNome(), quantidade, subTotal};
+        Object []  linha = {produtoAtual.getNome(), quantidade, subTotal, produtoAtual};
         tabela.addRow(linha);
         table1.setModel(tabela);
+        TableColumn colunaInv = table1.getColumnModel().getColumn(3);
+        colunaInv.setMinWidth(0);
+        colunaInv.setMaxWidth(0);
+        colunaInv.setWidth(0);
+        colunaInv.setPreferredWidth(0);
         totalAtual+= produtoAtual.getPreco() * quantidade;
         totalTxt.setText(Double.toString(totalAtual));
     }
 
     public void removeLinha(){
         int linhaSelecionada = table1.getSelectedRow();
+        Object produto = tabela.getValueAt(linhaSelecionada, 3);
+        listProd.remove(produto);
 
         if(linhaSelecionada == -1){
             JOptionPane.showMessageDialog(null, "Selecione uma linha para remover");

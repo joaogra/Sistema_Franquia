@@ -9,11 +9,11 @@ import java.util.List;
 import java.util.Map;
 
 public class Gerente extends Funcionario{
-    private Franquia franquia;
+    private transient Franquia franquia;
     private List<Pedido> pedidosParaAlterar;//pedido atual e pedido alterado
-    public Gerente (String nome, String CPF, String email,String senha,Franquia franquia) {
+    public Gerente (String nome, String CPF, String email,String senha) {
         super(nome, CPF, email,senha);
-        this.franquia = franquia;
+
         this.pedidosParaAlterar = new ArrayList<>();
     }
     public Franquia getFranquia() {

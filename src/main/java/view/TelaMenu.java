@@ -1,8 +1,12 @@
 package view;
 
+import controller.Arquivo;
+import model.Pessoas.Dono;
 import model.Pessoas.Funcionario;
 
 import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public abstract class TelaMenu extends JFrame{
     private JButton logoutBtn;
@@ -14,13 +18,13 @@ public abstract class TelaMenu extends JFrame{
     private JLabel boasVindas;
     private JPanel painelMenu;
 
-    public TelaMenu(JFrame parent,Funcionario funcionario) {
+    public TelaMenu(JFrame parent, Dono dono,Funcionario funcionario) {
         super("Tela Menu");
         setContentPane(painelMenu);
         boasVindas.setText("Seja bem vindo " + funcionario.getNome().split(" ")[0]);
         setSize(900,600);
         setLocationRelativeTo(parent);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
         button1.addActionListener(e -> {
             confirmaBtn1();
@@ -35,8 +39,18 @@ public abstract class TelaMenu extends JFrame{
             confirmaBtn4();
         });
         logoutBtn.addActionListener(e -> {
+            Arquivo arquivo = new Arquivo();
+            arquivo.salvar(dono);
             dispose();
             //Salvar arquivos
+        });
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e){
+                Arquivo arquivo = new Arquivo();
+                arquivo.salvar(dono);
+                dispose();
+            }
         });
     }
     //BUTTONS

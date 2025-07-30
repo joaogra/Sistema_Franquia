@@ -3,6 +3,7 @@ package controller;
 import model.Franquia;
 import model.Pessoas.Dono;
 import model.Pessoas.Funcionario;
+import model.Pessoas.Vendedor;
 
 import javax.swing.*;
 import java.util.HashMap;
@@ -23,8 +24,9 @@ public class FuncionarioController {
 
         funcionarios.put(dono.getCPF(), dono);
         for(Franquia franquia: dono.getListaFranquias()){
-            for(Funcionario funcionario: franquia.getFuncionarios()){
-                funcionarios.put(funcionario.getCPF(), funcionario);
+            funcionarios.put(franquia.getGerente().getCPF(),franquia.getGerente());
+            for(Vendedor vendedor: franquia.getVendedores()){
+                funcionarios.put(vendedor.getCPF(), vendedor);
             }
         }
     }

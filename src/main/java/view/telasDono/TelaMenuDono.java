@@ -14,6 +14,7 @@ import view.TelaMenu;
 import javax.swing.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public class TelaMenuDono extends JFrame {
     private JPanel painelMenu;
@@ -53,17 +54,17 @@ public class TelaMenuDono extends JFrame {
         Vendedor v1 = new Vendedor("Carlos Silva","123.456.789-09", "carlos@empresa.com", "senha123");
         p1.setQuantidadePedido(15);
         p2.setQuantidadePedido(5);
-        Pedido pedido1 = new Pedido("001",c1 ,new Date(),"din",0.05f, List.of(p1,p2),1000d);
+        Pedido pedido1 = new Pedido("001",c1 ,new Date(),"din",0.05f, Map.of(p1,15,p2,5),1000d);
         v1.adicionaPedido(pedido1);
         Vendedor v2 = new Vendedor("Marina Costa", "987.654.321-00", "marina@empresa.com", "senha456");
         Vendedor v3 = new Vendedor("João Pereira", "111.444.777-35", "joao@empresa.com", "senha789");
         v1.setNumVendas(25);
         v2.setNumVendas(0);
         v3.setNumVendas(40);
-        Gerente gerente1 =  new Gerente("Adrian","14518498690" ,"adra","adrian",null);
+        Gerente gerente1 =  new Gerente("Adrian","14518498690" ,"adra","adrian");
         Franquia franquia = new Franquia("nome","1234",1000f,gerente1, List.of(v1,v2,v3),estoque);
         gerente1.associaGerenteFranquia(franquia);
-        Dono dono1 = new Dono("Pericles","14518498690","@blalbalba","1234567");
+        Dono dono1 = new Dono("Pericles","14518498690","@blalbalba","1234567",null);
         new TelaMenuDono(new JFrame(),dono1).setVisible(true);
     }
 }

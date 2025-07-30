@@ -38,7 +38,7 @@ public class Franquia {
     public float getLucro() {return lucro;}
     public List <Vendedor> getVendedores() {return vendedores;}
     public Estoque getEstoque() {return estoque;}
-
+    public Gerente getGerente() {return gerente;}
     //SETTERS
     public void setNome(String nome) {this.nome = nome;}
     public void setEndereco(String endereco) {this.endereco = endereco;}

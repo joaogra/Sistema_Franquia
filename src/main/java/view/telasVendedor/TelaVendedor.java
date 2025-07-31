@@ -1,5 +1,7 @@
 package view.telasVendedor;
 
+import controller.gerente.PedidoController;
+import controller.vendedor.VendedorOperaController;
 import model.Pessoas.Funcionario;
 import model.Pessoas.Vendedor;
 
@@ -13,7 +15,6 @@ public class  TelaVendedor extends JDialog {
     private JLabel titulo;
     private JButton btnSair;
     private JButton btnNovaVenda;
-    private JButton btnAlteraPedido;
     private JButton btnHistorico;
     private JLabel boasVindasTxt;
 
@@ -30,8 +31,8 @@ public class  TelaVendedor extends JDialog {
         btnHistorico.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TelaHistoricoPedidos telaHistoricoPedidos = new TelaHistoricoPedidos(TelaVendedor.this ,vendedor.getHistoricoPedidos(),vendedor);
-                telaHistoricoPedidos.setVisible(true);
+                PedidoController controller = new PedidoController(vendedor);
+                new TelaHistoricoPedidos(vendedor, controller.getListaPedidos()).setVisible(true);
             }
         });
         btnNovaVenda.addActionListener(new ActionListener() {

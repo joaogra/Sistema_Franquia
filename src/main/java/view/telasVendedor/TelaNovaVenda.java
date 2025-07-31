@@ -32,6 +32,7 @@ public class TelaNovaVenda extends JDialog {
     private JTextField codVendaTxt;
     private JTable table1;
     private JButton removerBtn;
+    private JLabel titulo;
     private DefaultTableModel tabela;
     private JScrollPane scrollPane;
 
@@ -100,6 +101,7 @@ public class TelaNovaVenda extends JDialog {
     public TelaNovaVenda(JDialog pai, Vendedor vendedor, Pedido pedido) {
         setContentPane(telaNovaVenda);
         setTitle("Alteração de Pedido");
+        titulo.setText("Alteração de Pedido");
         setMinimumSize(new Dimension(650,500));
         setModal(true);
         setLocationRelativeTo(null);
@@ -113,6 +115,8 @@ public class TelaNovaVenda extends JDialog {
         clienteTxt.setEditable(false);
         cpfTxt.setText(pedidoController.cpfCliente());
         cpfTxt.setEditable(false);
+        codVendaTxt.setText(pedidoController.getCodigo());
+        codVendaTxt.setEditable(false);
 
         totalTxt.setText(totalAtual.toString());
         listProd = pedido.getMapaPedidos();
@@ -125,6 +129,8 @@ public class TelaNovaVenda extends JDialog {
         };
 
         preencheTabela(pedido);
+
+        finalizarButton.setText("Solicitar Alteração");
 
         adicionarButton.addActionListener(new ActionListener() {
             @Override

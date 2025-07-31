@@ -58,7 +58,7 @@ public class TelaNovaVenda extends JDialog {
         totalTxt.setText("0.00");
         listProd = new HashMap<>();
         String [] colunas = {
-                "Produto", "Quantidade", "Subtotal", ""};
+                "Código" ,"Produto", "Quantidade", "Preço", ""};
         tabela = new DefaultTableModel(colunas, 0){
             @Override
             public boolean isCellEditable(int row, int column) {return false;}
@@ -117,6 +117,7 @@ public class TelaNovaVenda extends JDialog {
         cpfTxt.setEditable(false);
         codVendaTxt.setText(pedidoController.getCodigo());
         codVendaTxt.setEditable(false);
+        cancelarButton.setVisible(false);
 
         totalTxt.setText(totalAtual.toString());
         listProd = pedido.getMapaPedidos();
@@ -193,10 +194,10 @@ public class TelaNovaVenda extends JDialog {
         Integer quantidade = Integer.valueOf(qtdTxt.getText());
         listProd.put(produtoAtual, quantidade);
         float subTotal = produtoAtual.getPreco() * quantidade;
-        Object []  linha = {produtoAtual.getNome(), quantidade, subTotal, produtoAtual};
+        Object []  linha = {produtoAtual.getCod() ,produtoAtual.getNome(), quantidade, produtoAtual.getPreco(), produtoAtual};
         tabela.addRow(linha);
         table1.setModel(tabela);
-        TableColumn colunaInv = table1.getColumnModel().getColumn(3);
+        TableColumn colunaInv = table1.getColumnModel().getColumn(4);
         colunaInv.setMinWidth(0);
         colunaInv.setMaxWidth(0);
         colunaInv.setWidth(0);
@@ -208,16 +209,21 @@ public class TelaNovaVenda extends JDialog {
     public void removeLinha(){
         int linhaSelecionada = table1.getSelectedRow();
         Object produto = tabela.getValueAt(linhaSelecionada, 3);
-        listProd.remove(produto);
-
         if(linhaSelecionada == -1){
             JOptionPane.showMessageDialog(null, "Selecione uma linha para remover");
         }else{
-            Object valorSubtotal = tabela.getValueAt(linhaSelecionada, 2);
-            totalAtual -= Float.parseFloat(valorSubtotal.toString());
+            Object quantidade = tabela.getValueAt(linhaSelecionada, 2);
+            Object preco = tabela.getValueAt(linhaSelecionada, 3);
+            Integer qtd = Integer.valueOf(quantidade.toString());
+            Double precoO = Double.valueOf(preco.toString());
+            Double subtotal = qtd * precoO;
+            totalAtual -= Float.parseFloat(subtotal.toString());
             totalTxt.setText(totalAtual+"");
             tabela.removeRow(linhaSelecionada);
         }
+        listProd.remove(produto);
+
+
     }
 
     public void clean(){
@@ -240,6 +246,12 @@ public class TelaNovaVenda extends JDialog {
 
 
         table1.setModel(tabela);
+        TableColumn colunaInv = table1.getColumnModel().getColumn(4);
+        colunaInv.setMinWidth(0);
+        colunaInv.setMaxWidth(0);
+        colunaInv.setWidth(0);
+        colunaInv.setPreferredWidth(0);
+
     }
 
     private void finalizaVenda(Vendedor  vendedor){

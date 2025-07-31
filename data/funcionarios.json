@@ -12,15 +12,15 @@
               "001": {
                 "cod": "001",
                 "produtos": {
-                  "Produto B": 5,
-                  "Produto A": 15
+                  "Produto A": 15,
+                  "Produto B": 5
                 },
                 "valVenda": 1000.0,
                 "cliente": {
                   "nome": "adrian",
                   "CPF": "14518498690"
                 },
-                "horario": "Jul 30, 2025, 6:04:06 PM",
+                "horario": "Jul 30, 2025, 10:41:48 PM",
                 "formaPagamento": "din",
                 "taxa": 0.05,
                 "motivoSolicitacao": "motibvo aleatorio"
@@ -36,15 +36,15 @@
           {
             "cod": "001",
             "produtos": {
-              "Produto B": 5,
-              "Produto A": 15
+              "Produto A": 15,
+              "Produto B": 5
             },
             "valVenda": 1000.0,
             "cliente": {
               "nome": "adrian",
               "CPF": "14518498690"
             },
-            "horario": "Jul 30, 2025, 6:04:06 PM",
+            "horario": "Jul 30, 2025, 10:41:48 PM",
             "formaPagamento": "din",
             "taxa": 0.05,
             "motivoSolicitacao": "motibvo aleatorio"
@@ -62,15 +62,15 @@
             "001": {
               "cod": "001",
               "produtos": {
-                "Produto B": 5,
-                "Produto A": 15
+                "Produto A": 15,
+                "Produto B": 5
               },
               "valVenda": 1000.0,
               "cliente": {
                 "nome": "adrian",
                 "CPF": "14518498690"
               },
-              "horario": "Jul 30, 2025, 6:04:06 PM",
+              "horario": "Jul 30, 2025, 10:41:48 PM",
               "formaPagamento": "din",
               "taxa": 0.05,
               "motivoSolicitacao": "motibvo aleatorio"

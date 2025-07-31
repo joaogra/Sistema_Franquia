@@ -19,6 +19,7 @@ public class TelaMenuGerente extends TelaMenu {
     private Gerente gerente;
     public TelaMenuGerente(JFrame parent,Dono dono,Gerente gerente) {
         super(parent,dono,gerente);
+        setTitle("Menu Tela Gerente");
         this.gerente = gerente;
         getTitulo().setText("Menu Principal");
         getButton1().setText("Vendedores");

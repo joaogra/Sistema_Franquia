@@ -5,7 +5,6 @@ import model.Pedido;
 import model.Pessoas.Gerente;
 import model.Pessoas.Vendedor;
 import view.TelaProdutoDoPedido;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;

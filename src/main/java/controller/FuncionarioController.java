@@ -34,12 +34,12 @@ public class FuncionarioController {
     public void verificaNoSitema(String cpf, String senha){
         if(funcionarios.containsKey(cpf)){
             if(funcionarios.get(cpf).getSenha().equals(senha)){
-                JOptionPane.showMessageDialog(null, "Acesso Permitido");
+                //JOptionPane.showMessageDialog(null, "Acesso Permitido");
             }else{
-                JOptionPane.showMessageDialog(null, "Senha Incorreta");
+               // JOptionPane.showMessageDialog(null, "Senha Incorreta");
             }
         }else{
-            JOptionPane.showMessageDialog(null,"Você não está no Sistema");
+            //JOptionPane.showMessageDialog(null,"Você não está no Sistema");
         }
     }
 

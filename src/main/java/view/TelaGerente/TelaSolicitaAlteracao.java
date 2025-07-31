@@ -3,6 +3,8 @@ package view.TelaGerente;
 import controller.gerente.PedidoController;
 import model.Pedido;
 import model.Pessoas.Gerente;
+import model.Pessoas.Vendedor;
+import view.TelaProdutoDoPedido;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -33,8 +35,9 @@ public class TelaSolicitaAlteracao extends JDialog{
         verificarBtn.addActionListener(e -> {
             int pedidoEscolhido = tabelaPedidos.getSelectedRow();
             if (pedidoEscolhido != -1) {
+                Pedido pedido =  (Pedido) tabelaPedidos.getValueAt(pedidoEscolhido, 6);
                 JOptionPane.showMessageDialog(null, "Motivo: \n"
-                        + tabelaPedidos.getValueAt(pedidoEscolhido, 5).toString());
+                        + pedido.getMotivoSolicitacao());
             }
             else{
                 JOptionPane.showMessageDialog(null,"Selecione um pedido");
@@ -50,12 +53,38 @@ public class TelaSolicitaAlteracao extends JDialog{
                 JOptionPane.showMessageDialog(null, "Selecione um Pedido!");
             }
         });
+        aceitarBtn.addActionListener(event -> {
+            int linhaEscolhido = tabelaPedidos.getSelectedRow();
+            if (linhaEscolhido != -1) {
+                Pedido pedido = (Pedido) tabelaPedidos.getValueAt(linhaEscolhido, 6);
+                Vendedor vendedor = (Vendedor) tabelaPedidos.getValueAt(linhaEscolhido, 5);
+                pedidoController.editaPedido(vendedor,pedido);
+                JOptionPane.showMessageDialog(null, "Pedido alterado com sucesso");
+                atualizarTabelaPedidos();
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Selecione um pedido");
+            }
+        });
+        rejeitarBtn.addActionListener(event -> {
+           int linhaEscolhido = tabelaPedidos.getSelectedRow();
+           if (linhaEscolhido != -1) {
+               Pedido pedido = (Pedido) tabelaPedidos.getValueAt(linhaEscolhido, 6);
+               Vendedor vendedor = (Vendedor) tabelaPedidos.getValueAt(linhaEscolhido, 5);
+               pedidoController.rejeitaAlteracao( vendedor,pedido);
+               JOptionPane.showMessageDialog(null, "Pedido rejeitado com sucesso");
+               atualizarTabelaPedidos();
+           }
+           else{
+               JOptionPane.showMessageDialog(null,"Selecione um pedido");
+           }
+        });
         voltarBtn.addActionListener(e -> {
            dispose();
         });
     }
     private void atualizarTabelaPedidos() {
-        String[] colunas = {"Codigo","Cliente","Horário","Forma de Pagamento","Valor","Motivo","Pedidos"};
+        String[] colunas = {"Codigo","Cliente","Horário","Forma de Pagamento","Valor","Vendedor","Pedidos"};
         DefaultTableModel tabela = new DefaultTableModel(colunas, 0){
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -75,5 +104,9 @@ public class TelaSolicitaAlteracao extends JDialog{
         tabelaPedidos.getColumnModel().getColumn(5).setMaxWidth(0);
         tabelaPedidos.getColumnModel().getColumn(5).setMinWidth(0);
         tabelaPedidos.getColumnModel().getColumn(5).setWidth(0);
+
+        tabelaPedidos.getColumnModel().getColumn(6).setMaxWidth(0);
+        tabelaPedidos.getColumnModel().getColumn(6).setMinWidth(0);
+        tabelaPedidos.getColumnModel().getColumn(6).setWidth(0);
     }
 }

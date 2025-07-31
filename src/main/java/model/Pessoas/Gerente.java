@@ -2,6 +2,7 @@ package model.Pessoas;
 
 import model.Franquia;
 import model.Pedido;
+import model.Produto;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,10 +11,11 @@ import java.util.Map;
 
 public class Gerente extends Funcionario{
     private transient Franquia franquia;
-    private List<Pedido> pedidosParaAlterar;//pedido atual e pedido alterado
+    List<Vendedor> vendedoresPedidosAlterados;
+    List<Pedido> pedidosParaAlterar;
     public Gerente (String nome, String CPF, String email,String senha) {
         super(nome, CPF, email,senha);
-
+        this.vendedoresPedidosAlterados = new ArrayList<>();
         this.pedidosParaAlterar = new ArrayList<>();
     }
     public Franquia getFranquia() {
@@ -40,14 +42,17 @@ public class Gerente extends Funcionario{
                     vendedor.setEmail(vendedorEditado.getEmail());
                     return;
                 }
-
         }
         throw new IllegalArgumentException("Vendedor com CPF " + vendedorEditado.getCPF() + " não encontrado.");
     }
-    public List<Pedido> getPedidosParaAlterar() {
+    public void adicionarSolicitaoPedido(Vendedor vendedor,Pedido pedido) {
+        this.pedidosParaAlterar.add(pedido);
+        this.vendedoresPedidosAlterados.add(vendedor);
+    }
+    public List<Pedido>  getPedidosParaAlterar() {
         return pedidosParaAlterar;
     }
-    public void adicionarSolicitaoPedido(Pedido pedido) {
-        this.pedidosParaAlterar.add(pedido);
+    public List<Vendedor> getVendedoresPedidosAlterados() {
+        return vendedoresPedidosAlterados;
     }
 }

@@ -5,19 +5,46 @@
       "endereco": "1234",
       "lucro": 0.0,
       "gerente": {
+        "vendedoresPedidosAlterados": [
+          {
+            "numVendas": 25,
+            "historicoPedidos": {
+              "001": {
+                "cod": "001",
+                "produtos": {
+                  "Produto B": 5,
+                  "Produto A": 15
+                },
+                "valVenda": 1000.0,
+                "cliente": {
+                  "nome": "adrian",
+                  "CPF": "14518498690"
+                },
+                "horario": "Jul 30, 2025, 6:04:06 PM",
+                "formaPagamento": "din",
+                "taxa": 0.05,
+                "motivoSolicitacao": "motibvo aleatorio"
+              }
+            },
+            "email": "carlos@empresa.com",
+            "senha": "senha123",
+            "nome": "Carlos Silva",
+            "CPF": "123.456.789-09"
+          }
+        ],
         "pedidosParaAlterar": [
           {
             "cod": "001",
             "produtos": {
-              "Produto A": 15,
-              "Produto B": 5
+              "Produto B": 5,
+              "Produto A": 15
             },
             "valVenda": 1000.0,
             "cliente": {
               "nome": "adrian",
               "CPF": "14518498690"
             },
-            "horario": "Jul 30, 2025, 4:05:31 PM",
+            "horario": "Jul 30, 2025, 6:04:06 PM",
             "formaPagamento": "din",
             "taxa": 0.05,
             "motivoSolicitacao": "motibvo aleatorio"
@@ -35,15 +62,15 @@
             "001": {
               "cod": "001",
               "produtos": {
-                "Produto A": 15,
-                "Produto B": 5
+                "Produto B": 5,
+                "Produto A": 15
               },
               "valVenda": 1000.0,
               "cliente": {
                 "nome": "adrian",
                 "CPF": "14518498690"
               },
-              "horario": "Jul 30, 2025, 4:05:31 PM",
+              "horario": "Jul 30, 2025, 6:04:06 PM",
               "formaPagamento": "din",
               "taxa": 0.05,
               "motivoSolicitacao": "motibvo aleatorio"
@@ -76,14 +103,12 @@
         "estoque": {
           "001": {
             "preco": 10.0,
-            "quantidadePedido": 15,
             "quantidadeEstoque": 51,
             "cod": "001",
             "nome": "Produto A"
           },
           "002": {
             "preco": 20.5,
-            "quantidadePedido": 5,
             "quantidadeEstoque": 33,
             "cod": "002",
             "nome": "Produto B"

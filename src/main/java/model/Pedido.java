@@ -29,18 +29,14 @@ public class Pedido {
     }
     public List<Produto> getProdutos(){return new ArrayList<>(produtos.keySet());}
     public String getCod(){return cod;}
-
     public Cliente getCliente(){return cliente;}
-
     public Date getHorario(){return horario;}
-
     public String getFormaPagamento(){return formaPagamento;}
-
     public Double getValVenda(){return valVenda;}
     public  String getMotivoSolicitacao(){return motivoSolicitacao;}
-
     public float getTaxa(){return taxa;}
-
+    public Integer getQuantidade(Produto produto){return produtos.get(produto);}
+    public Map<Produto,Integer> getMapProdutos(){return produtos;}
     public void setMotivoSolicitacao(String motivoSolicitacao){this.motivoSolicitacao = motivoSolicitacao;}
     public void setCod(String cod){this.cod = cod;}
 
@@ -50,4 +46,11 @@ public class Pedido {
 
     public void setTaxa(float taxa){this.taxa = taxa;}
 
+    public void setPedido(Pedido pedido){
+        this.valVenda = pedido.getValVenda();
+        this.formaPagamento = pedido.getFormaPagamento();
+        this.produtos = pedido.getMapProdutos();
+        this.taxa = pedido.getTaxa();
+        this.motivoSolicitacao = "";
+    }
 }

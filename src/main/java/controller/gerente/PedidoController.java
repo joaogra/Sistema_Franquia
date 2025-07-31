@@ -33,7 +33,7 @@ public class PedidoController {
     }
     public List<Object[]> listaSolicitacaoPedidosParaTabela() {
         List<Object[]> listaPedidos = new ArrayList<>();
-
+            int i = 0;
             for(Pedido pedido : gerente.getPedidosParaAlterar()){
                 Object[] linha = {
                         pedido.getCod(),
@@ -41,10 +41,11 @@ public class PedidoController {
                         pedido.getHorario(),
                         pedido.getFormaPagamento(),
                         pedido.getValVenda(),
-                        pedido.getMotivoSolicitacao(),
+                        gerente.getVendedoresPedidosAlterados().get(i),
                         pedido
                 };
                 listaPedidos.add(linha);
+                i++;
             }
 
         return listaPedidos;
@@ -55,11 +56,21 @@ public class PedidoController {
             Object[] linha = {
                     produto.getCod(),
                     produto.getNome(),
-                    produto.getQuantidadePedido(),
+                    pedido.getQuantidade(produto),
                     produto.getPreco()
             };
             listaProdutos.add(linha);
         }
         return listaProdutos;
+    }
+    public void editaPedido(Vendedor vendedor,Pedido pedidoAlterado) {
+        vendedor.getHistoricoPedidos().get(pedidoAlterado.getCod()).setPedido(pedidoAlterado);
+        System.out.println("pedido alterado");
+        gerente.getVendedoresPedidosAlterados().remove(vendedor);
+        gerente.getPedidosParaAlterar().remove(pedidoAlterado);
+    }
+    public void rejeitaAlteracao(Vendedor vendedor, Pedido pedido) {
+        gerente.getVendedoresPedidosAlterados().remove(vendedor);
+        gerente.getPedidosParaAlterar().remove(pedido);
     }
 }

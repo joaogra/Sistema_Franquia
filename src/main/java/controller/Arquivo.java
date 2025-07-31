@@ -15,7 +15,7 @@ public class Arquivo {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         try(FileWriter writer = new FileWriter("data/funcionarios.json");){
             gson.toJson(dono,writer);
-            JOptionPane.showMessageDialog(null, "Dados salvos com sucesso!");
+            //JOptionPane.showMessageDialog(null, "Dados salvos com sucesso!");
         } catch(IOException e){
             JOptionPane.showMessageDialog(null, "Erro ao salvar dados!");
         }
@@ -26,10 +26,10 @@ public class Arquivo {
 
         try(FileReader reader = new FileReader("data/funcionarios.json")) {
             Dono dono = gson.fromJson(reader, Dono.class);
-            JOptionPane.showMessageDialog(null, "Dados inicializados com sucesso!");
+            //JOptionPane.showMessageDialog(null, "Dados inicializados com sucesso!");
             return dono;
         } catch(IOException e){
-            JOptionPane.showMessageDialog(null, "Erro ao inicializar dados!");
+            //JOptionPane.showMessageDialog(null, "Erro ao inicializar dados!");
         }
 
     return null;

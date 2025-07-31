@@ -4,30 +4,35 @@ import model.Pedido;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
 
 public class TelaHistoricoPedidos extends JDialog {
     private JLabel titulo;
-    private JButton voltarBtn = new JButton("Voltar");
+    private JPanel painel;
+    private JButton fecharBtn;
+    private JTable tabela;
+
 
     public TelaHistoricoPedidos(JDialog telaAnterior, Map <String, Pedido> historicoPedidos){
+        super(telaAnterior);
         setTitle("Histórico de Pedidos");
         setModal(true);
-        setLocationRelativeTo(telaAnterior);
+        setLocationRelativeTo(null);
         setSize(600,500);
+        setContentPane(painel);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         String [] colunas = {"ID","Cliente","Horario","FormaPagamento", "Valor: "};
         DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
-        add(voltarBtn, BorderLayout.SOUTH);
-        voltarBtn.setMargin(new Insets(10,10,10,10));
-        voltarBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
+
+
+        fecharBtn.addActionListener(e -> {
+           dispose();
         });
+
+
+
 
         for(Pedido pedido : historicoPedidos.values()){
             Object [] linha = {
@@ -39,13 +44,8 @@ public class TelaHistoricoPedidos extends JDialog {
             };
             modelo.addRow(linha);
         }
-        JTable table = new JTable(modelo){
-        @Override
-        public boolean isCellEditable(int row, int column) {return false;}
-
-    };
-        JScrollPane scrollPane = new JScrollPane(table);
-        add(scrollPane, BorderLayout.CENTER);
+        tabela.setModel(modelo);
+        //add(scrollPane, BorderLayout.CENTER);
 
     }
 

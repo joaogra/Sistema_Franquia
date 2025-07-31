@@ -52,8 +52,6 @@ public class TelaMenuDono extends JFrame {
         estoque.getEstoque().put(p1.getCod(), p1);
         estoque.getEstoque().put(p2.getCod(), p2);
         Vendedor v1 = new Vendedor("Carlos Silva","123.456.789-09", "carlos@empresa.com", "senha123");
-        p1.setQuantidadePedido(15);
-        p2.setQuantidadePedido(5);
         Pedido pedido1 = new Pedido("001",c1 ,new Date(),"din",0.05f, Map.of(p1,15,p2,5),1000d);
         v1.adicionaPedido(pedido1);
         Vendedor v2 = new Vendedor("Marina Costa", "987.654.321-00", "marina@empresa.com", "senha456");

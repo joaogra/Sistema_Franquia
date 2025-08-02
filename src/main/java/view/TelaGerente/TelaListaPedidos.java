@@ -6,7 +6,9 @@ import model.Pessoas.Gerente;
 import view.TelaProdutoDoPedido;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.util.List;
 
 public class TelaListaPedidos extends JDialog {
@@ -65,5 +67,17 @@ public class TelaListaPedidos extends JDialog {
         tabelaPedidos.getColumnModel().getColumn(5).setMaxWidth(0);
         tabelaPedidos.getColumnModel().getColumn(5).setMinWidth(0);
         tabelaPedidos.getColumnModel().getColumn(5).setWidth(0);
+
+        //centraliza os itens
+        DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+        centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+        centralizado.setVerticalAlignment(SwingConstants.CENTER);
+        for (int i = 0; i < tabelaPedidos.getColumnCount(); i++) {
+            tabelaPedidos.getColumnModel().getColumn(i).setCellRenderer(centralizado);
+        }
+
+        //coloca fontes no cabecalho e nos itens
+        tabelaPedidos.setFont(new Font("SansSerif", Font.PLAIN, 13));
+        tabelaPedidos.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 14));
     }
 }

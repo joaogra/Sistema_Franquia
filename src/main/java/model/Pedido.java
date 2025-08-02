@@ -10,7 +10,7 @@ import java.util.Map;
 public class Pedido {
 
     private String cod;
-    private Map<Produto,Integer> produtos;//map
+    private Map<Produto,Integer> produtos;
     private Double valVenda;
     private Cliente cliente;
     private Date horario;

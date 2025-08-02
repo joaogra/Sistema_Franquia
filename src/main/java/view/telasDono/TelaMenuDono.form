@@ -13,7 +13,7 @@
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font name="JetBrains Mono ExtraBold" size="20" style="1"/>
+          <font name="Segoe UI" size="24" style="1"/>
           <text value="Menu Principal"/>
         </properties>
       </component>
@@ -30,7 +30,8 @@
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Selecione uma franquia para visualizar:"/>
+          <font name="Segoe UI" size="14" style="1"/>
+          <text value="Selecione uma franquia para:"/>
         </properties>
       </component>
       <scrollpane id="196f9">
@@ -40,9 +41,11 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="a2bcf" class="javax.swing.JTable" binding="table1" default-binding="true">
+          <component id="a2bcf" class="javax.swing.JTable" binding="tabelaFranquias">
             <constraints/>
-            <properties/>
+            <properties>
+              <autoCreateRowSorter value="false"/>
+            </properties>
           </component>
         </children>
       </scrollpane>
@@ -59,6 +62,7 @@
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font name="Segoe UI" size="14" style="1"/>
               <text value="Cadastrar Franquia"/>
             </properties>
           </component>
@@ -67,6 +71,7 @@
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font name="Segoe UI" size="14" style="1"/>
               <text value="Cadastrar Gerente"/>
             </properties>
           </component>
@@ -75,6 +80,7 @@
               <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font name="Segoe UI" size="14" style="1"/>
               <text value="Remover Franquia"/>
             </properties>
           </component>
@@ -83,6 +89,7 @@
               <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font name="Segoe UI" size="14" style="1"/>
               <text value="Remover Gerente"/>
             </properties>
           </component>
@@ -91,6 +98,7 @@
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font name="Segoe UI" size="14" style="1"/>
               <text value="Ver Resumo Financeiro"/>
             </properties>
           </component>
@@ -99,6 +107,7 @@
               <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font name="Segoe UI" size="14" style="1"/>
               <text value="Ver Ranking de Vendedores"/>
             </properties>
           </component>
@@ -125,6 +134,7 @@
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font name="Segoe UI" size="14" style="1"/>
               <text value="Encerrar Sessão"/>
             </properties>
           </component>

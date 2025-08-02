@@ -15,7 +15,6 @@ public class Arquivo {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         try(FileWriter writer = new FileWriter("data/funcionarios.json");){
             gson.toJson(dono,writer);
-            //JOptionPane.showMessageDialog(null, "Dados salvos com sucesso!");
         } catch(IOException e){
             JOptionPane.showMessageDialog(null, "Erro ao salvar dados!");
         }

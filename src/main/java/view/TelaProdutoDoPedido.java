@@ -4,7 +4,9 @@ import controller.gerente.PedidoController;
 import model.Pedido;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.util.List;
 
 public class TelaProdutoDoPedido extends JDialog {
@@ -35,6 +37,18 @@ public class TelaProdutoDoPedido extends JDialog {
         tabelaProdutos.setModel(tabela);
         tabelaProdutos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tabelaProdutos.getTableHeader().setReorderingAllowed(false);
+        //centraliza os itens
+        DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+        centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+        centralizado.setVerticalAlignment(SwingConstants.CENTER);
+        for (int i = 0; i < tabelaProdutos.getColumnCount(); i++) {
+            tabelaProdutos.getColumnModel().getColumn(i).setCellRenderer(centralizado);
+        }
+
+        //coloca fontes no cabecalho e nos itens
+        tabelaProdutos.setFont(new Font("SansSerif", Font.PLAIN, 13));
+        tabelaProdutos.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 14));
+
         fecharBtn.addActionListener(e -> {
            this.dispose();
         });

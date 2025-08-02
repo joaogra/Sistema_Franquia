@@ -30,4 +30,11 @@ public class Vendedor extends Funcionario {
         }
         return false;
     }
+    public float valorTotalVendas() {
+        float somaVendas = 0;
+        for(Pedido pedido : historicoPedidos.values()) {
+            somaVendas += pedido.getValVenda();
+        }
+        return somaVendas;
+    }
 }

@@ -1,18 +1,17 @@
-package view.TelaGerente;
+package view.telasDono;
 
-import controller.gerente.VendedorController;
 import model.Pessoas.Gerente;
 import model.Pessoas.Vendedor;
 import view.TelaCadastro;
 
 import javax.swing.*;
 
-public class TelaCadastrarVendedor extends TelaCadastro {
-    VendedorController vendedorController;
-    public TelaCadastrarVendedor(JDialog parent, Gerente gerente) {
-        super(parent,"Cadastro de Vendedor");
-        getTitulo().setText("Cadastro de Vendedor");
-        vendedorController = new VendedorController(gerente);
+public class TelaCadastroGerente extends TelaCadastro {
+    Gerente gerenteCadastrado;
+    public TelaCadastroGerente(JDialog parent) {
+        super(parent,"Cadastro de Gerente");
+        getTitulo().setText("Cadastro de Gerente");
+        this.gerenteCadastrado = null;
     }
 
     @Override
@@ -26,13 +25,14 @@ public class TelaCadastrarVendedor extends TelaCadastro {
             return;
         }
         try {
-            Vendedor vendedorNovo = new Vendedor(nome, cpf, email, senha);
-            vendedorController.adicionarVendedor(vendedorNovo);
-            JOptionPane.showMessageDialog(null, "Vendedor cadastrado com sucesso!");
+            gerenteCadastrado = new Gerente(nome, cpf, email, senha);
             dispose();
         }
         catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
+    }
+    protected Gerente getGerenteCadastrado() {
+        return gerenteCadastrado;
     }
 }

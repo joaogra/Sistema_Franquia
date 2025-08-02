@@ -1,9 +1,14 @@
 package view.TelaGerente;
 
-import model.Franquia;
+import controller.gerente.ClienteController;
+import controller.gerente.FranquiaController;
 import model.Pessoas.Gerente;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.util.List;
 
 public class TelaRelatorioFranquia extends JDialog {
     private JPanel painelRelatorio;
@@ -11,21 +16,78 @@ public class TelaRelatorioFranquia extends JDialog {
     private JLabel totalVendasTxt;
     private JLabel lucroTxt;
     private JLabel mediaLucro;
-    private JTable table1;
+    private JTable tabelaClientes;
     private JButton fecharBtn;
     private JLabel infoTabela;
-
+    private JButton ordenaBtn;
+    private FranquiaController franquiaController;
+    private ClienteController clienteController;
+    private boolean modoOrdenar;
     public TelaRelatorioFranquia(JFrame parent, Gerente gerente) {
         super(parent, "Relatório da Franquia", true);
         setContentPane(painelRelatorio);
         setSize(1280,720);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        modoOrdenar = false;
+        tabelaClientes.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 14));//fonte cabeçalho
+        tabelaClientes.setFont(new Font("SansSerif", Font.PLAIN, 13));//fonte itens
 
-        totalVendasTxt.setText("Total de vendas realizados: ");
-        lucroTxt.setText("Soma total das vendas: ");
-        mediaLucro.setText("Media de valor por venda: ");
+        franquiaController = new FranquiaController(gerente);
+        clienteController = new ClienteController(gerente);
 
-        infoTabela.setText("Clientes mais recorrentes(Ordenados pela quantidade de compras efetuadas)");
+        int numTotalVendas = franquiaController.numTotalVendas();
+        float somaVendas = franquiaController.somaVendas();
+        float mediaVendas = numTotalVendas != 0 ? somaVendas / numTotalVendas: 0;
+        totalVendasTxt.setText("Total de vendas realizados: " + numTotalVendas);
+        lucroTxt.setText("Soma total das vendas: R$" + String.format("%.2f", somaVendas));
+        mediaLucro.setText("Media de valor por venda: R$" +  String.format("%.2f", mediaVendas));
+
+        infoTabela.setText("Clientes mais recorrentes(Ordenados pela QUANTIDADE DE COMPRAS efetuadas)");
+        atualizarTabela();
+        ordenaBtn.addActionListener(e -> {
+            atualizarTabela();
+            String info = modoOrdenar ? "Clientes mais recorrentes(Ordenados pela QUANTIDADE DE COMPRAS efetuadas)"
+                    :"Clientes mais recorrentes(Ordenados pelo GASTO TOTAL nas compras efetuadas)";
+            infoTabela.setText(info);
+            modoOrdenar = !modoOrdenar;
+
+        });
+
+
+
+        fecharBtn.addActionListener(e -> {
+            this.dispose();
+        });
+    }
+    public void atualizarTabela() {
+        String[] colunas = {"Cliente", "Quantidade de Compras", "Gasto Total", "Ticket Médio"};
+        DefaultTableModel tabela = new DefaultTableModel(colunas, 0) {
+            @Override
+            public boolean isCellEditable(int linha, int coluna) {
+                return false;
+            }
+        };
+
+        List<Object[]> produtos = clienteController.listaOrdenadaClientesNumCompras(modoOrdenar);
+        for (Object[] linha : produtos) {
+            tabela.addRow(linha);
+        }
+
+        tabelaClientes.setModel(tabela);
+        tabelaClientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tabelaClientes.getTableHeader().setReorderingAllowed(false);
+
+        //centraliza os itens
+        DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+        centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+        centralizado.setVerticalAlignment(SwingConstants.CENTER);
+        for (int i = 0; i < tabelaClientes.getColumnCount(); i++) {
+            tabelaClientes.getColumnModel().getColumn(i).setCellRenderer(centralizado);
+        }
+
+        //coloca fontes no cabecalho e nos itens
+        tabelaClientes.setFont(new Font("SansSerif", Font.PLAIN, 13));
+        tabelaClientes.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 14));
     }
 }

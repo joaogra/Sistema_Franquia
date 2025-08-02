@@ -39,8 +39,8 @@ public abstract class TelaMenu extends JFrame{
             confirmaBtn4();
         });
         logoutBtn.addActionListener(e -> {
-            Arquivo arquivo = new Arquivo();
-            arquivo.salvar(dono);
+            //Arquivo arquivo = new Arquivo();
+            //arquivo.salvar(dono);
             dispose();
             //Salvar arquivos
         });

@@ -42,6 +42,7 @@ public class TelaNovaVenda extends JDialog {
     private Date horaPedido;
     private String codigoVenda;
     private VendedorOperaController vendedorOperaController;
+    private Vendedor vendedor;
 
     public TelaNovaVenda(JDialog pai, Vendedor vendedor) {
 
@@ -87,7 +88,7 @@ public class TelaNovaVenda extends JDialog {
         finalizarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                finalizaVenda(vendedor);
+                finalizaVenda();
             }
         });
         removerBtn.addActionListener(new ActionListener() {
@@ -155,7 +156,7 @@ public class TelaNovaVenda extends JDialog {
         finalizarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                finalizaVenda(vendedor);
+                lancaAlteracaoPedido();
             }
         });
         removerBtn.addActionListener(new ActionListener() {
@@ -180,13 +181,9 @@ public class TelaNovaVenda extends JDialog {
     }
 
     public void adicionaItensProd(){
-        Produto produto = new Produto(15,15,"001","Do");
-        Produto produto1 = new Produto(5,15,"002","Re");
-        Produto produto2 = new Produto(10,15,"003","Mi");
-
-        produtoCombo.addItem(produto);
-        produtoCombo.addItem(produto1);
-        produtoCombo.addItem(produto2);
+        for(Produto p : vendedorOperaController.retornaFranquia().getEstoque().getProdutos()){
+            produtoCombo.addItem(p);
+        }
     }
 
     public void atualizaResumo(){
@@ -254,7 +251,7 @@ public class TelaNovaVenda extends JDialog {
 
     }
 
-    private void finalizaVenda(Vendedor  vendedor){
+    private void finalizaVenda(){
         String cliente = clienteTxt.getText();
         String cpf = cpfTxt.getText();
         codigoVenda = codVendaTxt.getText();
@@ -262,7 +259,6 @@ public class TelaNovaVenda extends JDialog {
             JOptionPane.showMessageDialog(null, "Preencha os campos");
             return;
         }
-
         Cliente cliente1;
         try {
              cliente1 = new Cliente(cliente, cpf);
@@ -277,6 +273,26 @@ public class TelaNovaVenda extends JDialog {
         Pedido venda = new Pedido(codigoVenda,cliente1,horaPedido, formaPagamento, 0, listProd, valorVenda);
         vendedorOperaController.adicionarVenda(venda);
         JOptionPane.showMessageDialog(TelaNovaVenda.this, "Venda realizada com sucesso!");
+        clean();
+    }
+
+    public void lancaAlteracaoPedido(){
+        String cliente = clienteTxt.getText();
+        String cpf = cpfTxt.getText();
+        codigoVenda = codVendaTxt.getText();
+        Cliente cliente1;
+        try {
+            cliente1 = new Cliente(cliente, cpf);
+        } catch(IllegalArgumentException e){
+            JOptionPane.showMessageDialog(null,"CPF Inválido!");
+            return;
+        }
+        String formaPagamento = pgtoCombo.getSelectedItem().toString();
+        Double valorVenda = Double.parseDouble(totalTxt.getText());
+        horaPedido = new Date();
+
+        Pedido solicita = new Pedido(codigoVenda,cliente1,horaPedido, formaPagamento, 0, listProd, valorVenda);
+        new TelaMotivo(this.vendedorOperaController, solicita);
         clean();
     }
 

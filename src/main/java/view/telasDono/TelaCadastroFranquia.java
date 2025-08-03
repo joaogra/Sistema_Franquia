@@ -34,7 +34,7 @@ public class TelaCadastroFranquia extends JDialog {
     private JButton buscarBtn;
     private DonoController donoController;
 
-    public TelaCadastroFranquia(JFrame parent, Dono dono) {
+    public TelaCadastroFranquia(JFrame parent) {
         super(parent, "Cadastro de Nova Franquia", true);
         setContentPane(panelCadastroFranquias);
         setSize(800,600);
@@ -134,5 +134,9 @@ public class TelaCadastroFranquia extends JDialog {
         } catch (IOException | InterruptedException | URISyntaxException e) {
             return false;
         }
+    }
+
+    public static void main (String [] args){
+        new TelaCadastroFranquia(null).setVisible(true);
     }
 }

@@ -2,27 +2,8 @@
   "listaFranquias": [
     {
       "nome": "nome",
-      "endereco": "1234",
-      "lucro": 0.0,
+      "endereco": {},
       "gerente": {
-        "pedidosParaAlterar": [
-          {
-            "cod": "001",
-            "produtos": {
-              "Produto A": 15,
-              "Produto B": 5
-            },
-            "valVenda": 1000.0,
-            "cliente": {
-              "nome": "adrian",
-              "CPF": "14518498690"
-            },
-            "horario": "Jul 30, 2025, 4:05:31 PM",
-            "formaPagamento": "din",
-            "taxa": 0.05,
-            "motivoSolicitacao": "motibvo aleatorio"
-          }
-        ],
         "email": "adra",
         "senha": "adrian",
         "nome": "Adrian",
@@ -40,10 +21,12 @@
               },
               "valVenda": 1000.0,
               "cliente": {
+                "quantidadeCompras": 9,
+                "gastoTotal": 1341234.0,
                 "nome": "adrian",
                 "CPF": "14518498690"
               },
-              "horario": "Jul 30, 2025, 4:05:31 PM",
+              "horario": "Aug 1, 2025, 11:25:51 PM",
               "formaPagamento": "din",
               "taxa": 0.05,
               "motivoSolicitacao": "motibvo aleatorio"
@@ -76,20 +59,20 @@
         "estoque": {
           "001": {
             "preco": 10.0,
-            "quantidadePedido": 15,
             "quantidadeEstoque": 51,
             "cod": "001",
             "nome": "Produto A"
           },
           "002": {
             "preco": 20.5,
-            "quantidadePedido": 5,
             "quantidadeEstoque": 33,
             "cod": "002",
             "nome": "Produto B"
           }
         }
-      }
+      },
+      "vendedoresPedidosAlterados": [],
+      "pedidosParaAlterar": []
     }
   ],
   "email": "jorge@empresa.com",

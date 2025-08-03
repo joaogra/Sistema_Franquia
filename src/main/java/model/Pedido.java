@@ -10,7 +10,7 @@ import java.util.Map;
 public class Pedido {
 
     private String cod;
-    private Map<Produto,Integer> produtos;//map
+    private Map<Produto,Integer> produtos;
     private Double valVenda;
     private Cliente cliente;
     private Date horario;
@@ -39,12 +39,9 @@ public class Pedido {
     public Double getValVenda(){return valVenda;}
     public  String getMotivoSolicitacao(){return motivoSolicitacao;}
 
-    public Integer getQuantidade(Produto produto) {
-        return produtos.get(produto);
-    }
-
     public float getTaxa(){return taxa;}
-
+    public Integer getQuantidade(Produto produto){return produtos.get(produto);}
+    public Map<Produto,Integer> getMapProdutos(){return produtos;}
     public void setMotivoSolicitacao(String motivoSolicitacao){this.motivoSolicitacao = motivoSolicitacao;}
     public void setCod(String cod){this.cod = cod;}
 
@@ -54,6 +51,13 @@ public class Pedido {
 
     public void setTaxa(float taxa){this.taxa = taxa;}
 
+    public void setPedido(Pedido pedido){
+        this.valVenda = pedido.getValVenda();
+        this.formaPagamento = pedido.getFormaPagamento();
+        this.produtos = pedido.getMapProdutos();
+        this.taxa = pedido.getTaxa();
+        this.motivoSolicitacao = "";
+    }
     public Double getTotal(){
         Double total = 0.0;
         for(Produto produto : produtos.keySet()){

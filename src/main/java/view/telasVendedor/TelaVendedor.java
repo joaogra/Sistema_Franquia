@@ -32,7 +32,7 @@ public class  TelaVendedor extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 PedidoController controller = new PedidoController(vendedor);
-                new TelaHistoricoPedidos(vendedor, controller.getListaPedidos()).setVisible(true);
+                //new TelaHistoricoPedidos(vendedor, controller.getListaPedidos()).setVisible(true);
             }
         });
         btnNovaVenda.addActionListener(new ActionListener() {

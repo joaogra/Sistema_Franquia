@@ -5,7 +5,9 @@ import model.Pessoas.Gerente;
 import model.Produto;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.util.List;
 
 public class TelaVisualizaEstoque extends JDialog{
@@ -80,5 +82,19 @@ public class TelaVisualizaEstoque extends JDialog{
         }
         tabelaEstoque.setModel(tabela);//aplica os dados a tabela
         tabelaEstoque.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tabelaEstoque.getTableHeader().setReorderingAllowed(false);
+
+        //centraliza os itens
+        DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+        centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+        centralizado.setVerticalAlignment(SwingConstants.CENTER);
+        for (int i = 0; i < tabelaEstoque.getColumnCount(); i++) {
+            tabelaEstoque.getColumnModel().getColumn(i).setCellRenderer(centralizado);
+        }
+
+        //coloca fontes no cabecalho e nos itens
+        tabelaEstoque.setFont(new Font("SansSerif", Font.PLAIN, 13));
+        tabelaEstoque.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 14));
     }
+
 }

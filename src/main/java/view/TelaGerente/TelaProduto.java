@@ -1,8 +1,6 @@
 package view.TelaGerente;
 
-import model.Franquia;
 import model.Pessoas.Gerente;
-import model.Produto;
 
 import javax.swing.*;
 
@@ -20,7 +18,6 @@ public abstract class TelaProduto extends JDialog {
     private JLabel quantidade;
     private JButton confirmarBtn;
     private JButton fecharButton;
-    private JButton limparBtn;
     private Gerente gerente;
     public TelaProduto(JDialog parent, String titulo) {
         super(parent,titulo,true);
@@ -31,12 +28,7 @@ public abstract class TelaProduto extends JDialog {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         confirmarBtn.addActionListener(event ->{
-            //validar textos
             confirmar();
-        });
-
-        limparBtn.addActionListener(event ->{
-            clean();
         });
         fecharButton.addActionListener(event ->{
             this.dispose();
@@ -55,9 +47,6 @@ public abstract class TelaProduto extends JDialog {
     }
     public JLabel getCodigo() {
         return codigo;
-    }
-    public JLabel getPreco() {
-        return preco;
     }
     public JLabel getQuantidade() {
         return quantidade;
@@ -82,17 +71,5 @@ public abstract class TelaProduto extends JDialog {
         return quantidadeTxt;
     }
     //BUTTONS
-
-    public JButton getConfirmarBtn() {
-        return confirmarBtn;
-    }
-    public JButton getLimparBtn() {
-        return limparBtn;
-    }
-
-    public JButton getFecharButton() {
-        return fecharButton;
-    }
-
     public abstract void confirmar();
 }

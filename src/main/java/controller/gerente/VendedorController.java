@@ -44,8 +44,8 @@ public class VendedorController {
             Object[] linha = {
                     v.getNome(),
                     numVendas,
-                    v.getValorTotalVendas(),
-                    numVendas == 0 ? 0 : v.getValorTotalVendas() /  numVendas,
+                    "R$" + String.format("%.2f",v.getValorTotalVendas()),
+                    numVendas == 0 ? "R%0,00" : "R$" + String.format("%.2f",v.getValorTotalVendas()/numVendas),
                     v
             };
             dados.add(linha);
@@ -71,8 +71,9 @@ public class VendedorController {
         }
         return false;
     }
-    public void editarVendedor(Vendedor vendedor) {
-
-        franquia.getGerente().editarVendedor(vendedor);
+    public void editarVendedor(Vendedor vendedor,Vendedor vendedorEditado){
+        vendedor.setNome(vendedorEditado.getNome());
+        vendedor.setEmail(vendedorEditado.getEmail());
+        vendedor.setSenha(vendedorEditado.getSenha());
     }
 }

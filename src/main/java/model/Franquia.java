@@ -109,4 +109,7 @@ public class Franquia {
         int numPedidos = getTotalPedidos();
         return numPedidos == 0 ? 0 : getFaturamentoBruto() / numPedidos;
     }
+    public float getTicketMedioCliente(){
+        return clientes.isEmpty() ? 0 : getFaturamentoBruto() / clientes.size();
+    }
 }

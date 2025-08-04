@@ -47,8 +47,8 @@ public abstract class TelaMenu extends JFrame{
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e){
-                Arquivo arquivo = new Arquivo();
-                arquivo.salvar(dono);
+                //Arquivo arquivo = new Arquivo();
+                //arquivo.salvar(dono);
                 dispose();
             }
         });

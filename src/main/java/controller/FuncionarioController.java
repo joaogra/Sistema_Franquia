@@ -24,7 +24,9 @@ public class FuncionarioController {
 
         funcionarios.put(dono.getCPF(), dono);
         for(Franquia franquia: dono.getListaFranquias()){
-            funcionarios.put(franquia.getGerente().getCPF(),franquia.getGerente());
+            if(franquia.getGerente() != null) {
+                funcionarios.put(franquia.getGerente().getCPF(), franquia.getGerente());
+            }
             for(Vendedor vendedor: franquia.getVendedores()){
                 funcionarios.put(vendedor.getCPF(), vendedor);
             }

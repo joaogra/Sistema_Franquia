@@ -5,12 +5,16 @@ import controller.gerente.VendedorController;
 import model.Franquia;
 import model.Pessoas.Gerente;
 import model.Pessoas.Vendedor;
+import validadores.ValidadorCampoVazio;
+import validadores.ValidadorEmail;
+import validadores.ValidadorEntradas;
 import view.TelaCadastro;
 
 import javax.swing.*;
 
 public class TelaCadastrarVendedor extends TelaCadastro {
     VendedorController vendedorController;
+
     public TelaCadastrarVendedor(JFrame parent, Franquia franquia) {
         super(parent,"Cadastro de Vendedor");
         getTitulo().setText("Cadastro de Vendedor");
@@ -19,12 +23,20 @@ public class TelaCadastrarVendedor extends TelaCadastro {
 
     @Override
     public void cadastrar() {
-        String nome = getNomeTxt().getText();
-        String cpf = getCpfTxt().getText();
-        String email = getEmailTxt().getText();
-        String senha = getSenhaTxt().getText();
-        if (nome.isEmpty() || cpf.isEmpty() || email.isEmpty() || senha.isEmpty()) {
+        ValidadorEntradas validadorCampoVazio = new ValidadorCampoVazio();
+        String nome = getNomeTxt().getText().trim();
+        String cpf = getCpfTxt().getText().trim().replaceAll("\\D", "");
+        String email = getEmailTxt().getText().trim();
+        String senha = getSenhaTxt().getText().trim();
+
+        if (validadorCampoVazio.validar(nome) || validadorCampoVazio.validar(cpf)
+                || validadorCampoVazio.validar(email) || validadorCampoVazio.validar(senha)) {
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+            return;
+        }
+        ValidadorEntradas validadorEmail = new ValidadorEmail();
+        if(!validadorEmail.validar(email)) {
+            JOptionPane.showMessageDialog(null,validadorEmail.getMensagemErro());
             return;
         }
         try {

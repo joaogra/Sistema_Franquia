@@ -111,11 +111,11 @@ public class TelaNovaVenda extends JDialog {
         this.totalAtual = pedido.getTotal();
         vendedorOperaController = new VendedorOperaController(vendedor);
         PedidoController pedidoController = new PedidoController(pedido);
-        clienteTxt.setText(pedidoController.nomeCliente());
+        clienteTxt.setText(pedido.getCliente().getNome());
         clienteTxt.setEditable(false);
-        cpfTxt.setText(pedidoController.cpfCliente());
+        cpfTxt.setText(pedido.getCliente().getCPF());
         cpfTxt.setEditable(false);
-        codVendaTxt.setText(pedidoController.getCodigo());
+        codVendaTxt.setText(pedido.getCod());
         codVendaTxt.setEditable(false);
 
         totalTxt.setText(totalAtual.toString());

@@ -83,4 +83,7 @@ public class DonoController {
         }
         franquia.desassociaGerente();
     }
+    public boolean removeFranquia(Franquia franquia) {
+        return dono.getListaFranquias().remove(franquia);
+    }
 }

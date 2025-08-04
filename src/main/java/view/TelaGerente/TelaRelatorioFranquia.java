@@ -19,17 +19,22 @@ public class TelaRelatorioFranquia extends JDialog {
     private JButton fecharBtn;
     private JLabel infoTabela;
     private JButton ordenaBtn;
+    private JLabel nomeFranquiaLabel;
     private ClienteController clienteController;
     private boolean modoOrdenar;
+
     public TelaRelatorioFranquia(JFrame parent, Franquia franquia) {
         super(parent, "Relatório da Franquia", true);
         setContentPane(painelRelatorio);
         setSize(1280,720);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
         modoOrdenar = true;
+
         tabelaClientes.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 14));//fonte cabeçalho
         tabelaClientes.setFont(new Font("SansSerif", Font.PLAIN, 13));//fonte itens
+        nomeFranquiaLabel.setText( "Franquia: "+ franquia.getNome());
 
         clienteController = new ClienteController(franquia);
 

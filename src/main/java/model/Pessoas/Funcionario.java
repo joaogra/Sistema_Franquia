@@ -20,4 +20,6 @@ public class Funcionario extends Pessoa {
     }
 
     public String getSenha() { return senha;}
+
+    public void setSenha(String senha) {this.senha = senha;}
 }

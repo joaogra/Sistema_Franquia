@@ -2,7 +2,6 @@ package view.TelaGerente;
 
 import controller.gerente.ProdutoController;
 import model.Franquia;
-import model.Pessoas.Gerente;
 import model.Produto;
 
 import javax.swing.*;
@@ -39,14 +38,18 @@ public class TelaVisualizaEstoque extends JDialog{
         removeBtn.addActionListener(event ->{
             int linhaEscolhida = tabelaEstoque.getSelectedRow();
             if (linhaEscolhida != -1) {
-                String codigo = (String) tabelaEstoque.getValueAt(linhaEscolhida, 0);
-                String nome = (String) tabelaEstoque.getValueAt(linhaEscolhida, 1);
-                if(produtoController.removerProduto(codigo)){//remove do estoque
-                    atualizarTabela();
-                    JOptionPane.showMessageDialog(null,"O produto " + nome + " foi removido com sucesso!");
-                }
-                else{
-                    JOptionPane.showMessageDialog(null,"Não foi possível remover o produto!");
+                int resposta = JOptionPane.showConfirmDialog(null,
+                        "Tem certeza que deseja remover o gerente?", "Confirmação",
+                        JOptionPane.YES_NO_OPTION);
+                if (resposta == JOptionPane.YES_OPTION) {
+                    String codigo = (String) tabelaEstoque.getValueAt(linhaEscolhida, 0);
+                    String nome = (String) tabelaEstoque.getValueAt(linhaEscolhida, 1);
+                    if (produtoController.removerProduto(codigo)) {//remove do estoque
+                        atualizarTabela();
+                        JOptionPane.showMessageDialog(null, "O produto " + nome + " foi removido com sucesso!");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Não foi possível remover o produto!");
+                    }
                 }
             }
             else{

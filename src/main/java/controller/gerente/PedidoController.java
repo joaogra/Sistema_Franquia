@@ -30,7 +30,7 @@ public class PedidoController {
                         pedido.getCliente().getNome(),
                         pedido.getHorario(),
                         pedido.getFormaPagamento(),
-                        pedido.getValVenda(),
+                        "R$" + String.format("%.2f",pedido.getValVenda()),
                         pedido
                 };
                 listaPedidos.add(linha);
@@ -47,7 +47,7 @@ public class PedidoController {
                         pedido.getCliente().getNome(),
                         pedido.getHorario(),
                         pedido.getFormaPagamento(),
-                        pedido.getValVenda(),
+                        "R$" + String.format("%.2f",pedido.getValVenda()),
                         franquia.getVendedoresPedidosAlterados().get(i),
                         pedido
                 };
@@ -64,27 +64,11 @@ public class PedidoController {
                     produto.getCod(),
                     produto.getNome(),
                     pedido.getQuantidade(produto),
-                    produto.getPreco()
+                    "R$" + String.format("%.2f",produto.getPreco())
             };
             listaProdutos.add(linha);
         }
         return listaProdutos;
-    }
-
-    public String nomeCliente(){
-        return pedido.getCliente().getNome();
-    }
-
-    public String cpfCliente(){
-        return pedido.getCliente().getCPF();
-    }
-
-    public String getCodigo(){
-        return pedido.getCod();
-    }
-
-    public Map<String, Pedido> getListaPedidos() {
-        return vendedor.getHistoricoPedidos();
     }
     public void editaPedido(Vendedor vendedor,Pedido pedidoAlterado) {
         pedidoAlterado.setMotivoSolicitacao("");

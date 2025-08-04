@@ -26,7 +26,7 @@ public class TelaEditarProduto extends TelaProduto {
         try {
             String nome = getNomeTxt().getText().trim();
             String codigo = getCodigoTxt().getText().trim();
-            String precoStr = getPrecoTxt().getText().trim();
+            String precoStr = getPrecoTxt().getText().trim().replace(",",".");
             String qtdStr = getQuantidadeTxt().getText().trim();
 
             if (nome.isEmpty() || codigo.isEmpty() || precoStr.isEmpty() || qtdStr.isEmpty()) {

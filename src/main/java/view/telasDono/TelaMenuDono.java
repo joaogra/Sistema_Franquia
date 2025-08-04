@@ -8,11 +8,14 @@ import model.Pessoas.Cliente;
 import model.Pessoas.Dono;
 import model.Pessoas.Gerente;
 import model.Pessoas.Vendedor;
+import view.TelaGerente.TelaRelatorioFranquia;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +39,7 @@ public class TelaMenuDono extends JFrame {
         setContentPane(painelMenu);
         setSize(1000,640);
         setLocationRelativeTo(parent);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         boasVindasTxt.setText("Seja bem vindo " + dono.getNome().split(" ")[0]);
         this.donoController = new DonoController(dono);
 
@@ -46,13 +49,29 @@ public class TelaMenuDono extends JFrame {
             new TelaCadastroFranquia(this, dono).setVisible(true);
             atualizarTabela();
         });
-        removerFranquiaButton.addActionListener(e -> {
 
+        removerFranquiaButton.addActionListener(e -> {
+            int linhaEscolhida = tabelaFranquias.getSelectedRow();
+            if(linhaEscolhida != -1){
+                int resposta = JOptionPane.showConfirmDialog(null,
+                        "Tem certeza que deseja remover a franquia?", "Confirmação",
+                        JOptionPane.YES_NO_OPTION);
+                if (resposta == JOptionPane.YES_OPTION) {
+                    Franquia franquia = (Franquia) tabelaFranquias.getValueAt(linhaEscolhida, 4);
+                    donoController.removeFranquia(franquia);
+                    atualizarTabela();
+                    JOptionPane.showMessageDialog(null, "Franquia removida com sucesso!");
+                }
+            }
+            else  {
+                JOptionPane.showMessageDialog(null, "Escolha uma franquia!");
+            }
         });
+
         cadastrarGerenteBtn.addActionListener(e -> {
             int linhaEscolhida = tabelaFranquias.getSelectedRow();
             if (linhaEscolhida == -1) {
-                JOptionPane.showMessageDialog(null, "Escolha uma franquia para cadastrar um gerente!");
+                JOptionPane.showMessageDialog(null, "Escolha uma franquia!");
                 return;
             }
 
@@ -69,11 +88,13 @@ public class TelaMenuDono extends JFrame {
                 try {
                     donoController.cadastrarGerente(franquia, gerente);
                     atualizarTabela();
+                    JOptionPane.showMessageDialog(null, "Gerente cadastrado com sucesso!");
                 } catch (CPFJaCadastradoException exception) {
                     JOptionPane.showMessageDialog(null, exception.getMessage());
                 }
             }
         });
+
         rankingVendedoresBtn.addActionListener(e -> {
             int linhaEscolhida = tabelaFranquias.getSelectedRow();
             if(linhaEscolhida != -1){
@@ -81,30 +102,54 @@ public class TelaMenuDono extends JFrame {
                 new TelaRankingVendedores(parent,franquia).setVisible(true);
             }
             else{
-                JOptionPane.showMessageDialog(null,"Escolha uma franquia");
+                JOptionPane.showMessageDialog(null,"Escolha uma franquia!");
             }
         });
+
         removerGerenteBtn.addActionListener(e -> {
             int linhaEscolhida = tabelaFranquias.getSelectedRow();
             if(linhaEscolhida != -1){
-                Franquia franquia = (Franquia) tabelaFranquias.getValueAt(linhaEscolhida, 4);
-                try {
-                    donoController.removeGerente(franquia);
-                    atualizarTabela();
-                }
-                catch (FranquiaNaoPossuiGerenteException exception) {
-                    JOptionPane.showMessageDialog(null, exception.getMessage());
+                int resposta = JOptionPane.showConfirmDialog(null,
+                        "Tem certeza que deseja remover o gerente?", "Confirmação",
+                        JOptionPane.YES_NO_OPTION);
+                if (resposta == JOptionPane.YES_OPTION) {
+                    Franquia franquia = (Franquia) tabelaFranquias.getValueAt(linhaEscolhida, 4);
+                    try {
+                        donoController.removeGerente(franquia);
+                        atualizarTabela();
+                    }
+                    catch (FranquiaNaoPossuiGerenteException exception) {
+                        JOptionPane.showMessageDialog(null, exception.getMessage());
+                    }
                 }
             }
             else{
-                JOptionPane.showMessageDialog(null, "Escolha uma franquia para cadastrar um gerente!");
+                JOptionPane.showMessageDialog(null, "Escolha uma franquia!");
             }
         });
-        resumoFinanceiroBtn.addActionListener(e -> {
 
+        resumoFinanceiroBtn.addActionListener(e -> {
+            int linhaEscolhida = tabelaFranquias.getSelectedRow();
+            if(linhaEscolhida != -1) {
+                Franquia franquia = (Franquia) tabelaFranquias.getValueAt(linhaEscolhida, 4);
+                new TelaResumoFinanceiro(parent, franquia).setVisible(true);
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Escolha uma franquia para vizualizar o relatório!");
+            }
         });
+
         logoutBtn.addActionListener(e -> {
            this.dispose();
+        });
+
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e){
+                //Arquivo arquivo = new Arquivo();
+                //arquivo.salvar(dono);
+                dispose();
+            }
         });
     }
 
@@ -124,7 +169,9 @@ public class TelaMenuDono extends JFrame {
         v2.setNumVendas(0);
         v3.setNumVendas(40);
         Gerente gerente1 =  new Gerente("Adrian","14518498690" ,"adra","adrian");
-        Franquia franquia = new Franquia("nome",new Endereco(),gerente1, List.of(v1,v2,v3),estoque);
+        Endereco endereco = new Endereco();
+        endereco.setCep("0000000");
+        Franquia franquia = new Franquia("nome",endereco,gerente1, List.of(v1,v2,v3),estoque);
         gerente1.associaGerenteFranquia(franquia);
         Dono dono1 = new Dono("Pericles","14518498690","@blalbalba","1234567",List.of(franquia));
         new TelaMenuDono(new JFrame(),dono1).setVisible(true);

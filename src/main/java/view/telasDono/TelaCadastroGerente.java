@@ -1,7 +1,9 @@
 package view.telasDono;
 
 import model.Pessoas.Gerente;
-import model.Pessoas.Vendedor;
+import validadores.ValidadorCampoVazio;
+import validadores.ValidadorEmail;
+import validadores.ValidadorEntradas;
 import view.TelaCadastro;
 
 import javax.swing.*;
@@ -16,13 +18,19 @@ public class TelaCadastroGerente extends TelaCadastro {
 
     @Override
     public void cadastrar() {
-        String nome = getNomeTxt().getText();
-        String cpf = getCpfTxt().getText();
-        String email = getEmailTxt().getText();
-        String senha = getSenhaTxt().getText();
-        if (nome.isEmpty() || cpf.isEmpty() || email.isEmpty() || senha.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+        ValidadorEntradas validadorCampoVazio = new ValidadorCampoVazio();
+        String nome = getNomeTxt().getText().trim();
+        String cpf = getCpfTxt().getText().trim().replaceAll("\\D","");
+        String email = getEmailTxt().getText().trim();
+        String senha = getSenhaTxt().getText().trim();
+        if (validadorCampoVazio.validar(nome) || validadorCampoVazio.validar(cpf)
+                || validadorCampoVazio.validar(email) || validadorCampoVazio.validar(senha)) {
+            JOptionPane.showMessageDialog(null, validadorCampoVazio.getMensagemErro());
             return;
+        }
+        ValidadorEntradas validadorEmail =  new ValidadorEmail();
+        if(!validadorEmail.validar(email)){
+           JOptionPane.showMessageDialog(null, validadorEmail.getMensagemErro());
         }
         try {
             gerenteCadastrado = new Gerente(nome, cpf, email, senha);

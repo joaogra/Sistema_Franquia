@@ -16,8 +16,8 @@
             "001": {
               "cod": "001",
               "produtos": {
-                "PRODUTO B": 5,
-                "PRODUTO A": 15
+                "PRODUTO A": 15,
+                "PRODUTO B": 5
               },
               "valVenda": 1000.0,
               "cliente": {
@@ -26,7 +26,7 @@
                 "nome": "ADRIAN",
                 "CPF": "14518498690"
               },
-              "horario": "Aug 3, 2025, 5:57:04 AM",
+              "horario": "Aug 4, 2025, 5:52:02 PM",
               "formaPagamento": "din",
               "taxa": 0.05,
               "motivoSolicitacao": "motibvo aleatorio"
@@ -55,15 +55,6 @@
           "senha": "senha789",
           "nome": "JOÃO PEREIRA",
           "CPF": "111.444.777-35"
-        },
-        {
-          "numVendas": 0,
-          "historicoPedidos": {},
-          "valorTotalVendas": 0.0,
-          "email": "asefas",
-          "senha": "asdfasdf",
-          "nome": "SADFASDF",
-          "CPF": "14518498690"
         }
       ],
       "clientes": [],
@@ -90,8 +81,8 @@
             "001": {
               "cod": "001",
               "produtos": {
-                "PRODUTO B": 5,
-                "PRODUTO A": 15
+                "PRODUTO A": 15,
+                "PRODUTO B": 5
               },
               "valVenda": 1000.0,
               "cliente": {
@@ -100,7 +91,7 @@
                 "nome": "ADRIAN",
                 "CPF": "14518498690"
               },
-              "horario": "Aug 3, 2025, 5:57:04 AM",
+              "horario": "Aug 4, 2025, 5:52:02 PM",
               "formaPagamento": "din",
               "taxa": 0.05,
               "motivoSolicitacao": "motibvo aleatorio"
@@ -117,8 +108,8 @@
         {
           "cod": "001",
           "produtos": {
-            "PRODUTO B": 5,
-            "PRODUTO A": 15
+            "PRODUTO A": 15,
+            "PRODUTO B": 5
           },
           "valVenda": 1000.0,
           "cliente": {
@@ -127,7 +118,7 @@
             "nome": "ADRIAN",
             "CPF": "14518498690"
           },
-          "horario": "Aug 3, 2025, 5:57:04 AM",
+          "horario": "Aug 4, 2025, 5:52:02 PM",
           "formaPagamento": "din",
           "taxa": 0.05,
           "motivoSolicitacao": "motibvo aleatorio"

@@ -16,7 +16,6 @@ public abstract class TelaCadastro extends JDialog {
     private JLabel email;
     private JLabel senha;
     private JButton cadastrarBtn;
-    private JButton cancelarBtn;
     private JPanel tela_Cadastro;
     private JButton voltarBtn;
 
@@ -30,11 +29,8 @@ public abstract class TelaCadastro extends JDialog {
         cadastrarBtn.addActionListener(e ->  {
             cadastrar();
         });
-        cancelarBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                clean();
-            }
+        voltarBtn.addActionListener(e -> {
+           dispose();
         });
     }
 

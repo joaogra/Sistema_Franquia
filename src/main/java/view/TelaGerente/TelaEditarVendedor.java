@@ -1,22 +1,25 @@
 package view.TelaGerente;
 
-import controller.gerente.ProdutoController;
 import controller.gerente.VendedorController;
 import model.Franquia;
-import model.Pessoas.Gerente;
+
 import model.Pessoas.Vendedor;
-import model.Produto;
+import validadores.ValidadorCampoVazio;
+import validadores.ValidadorEmail;
+import validadores.ValidadorEntradas;
 import view.TelaCadastro;
 
 import javax.swing.*;
 
 public class TelaEditarVendedor extends TelaCadastro {
     private VendedorController vendedorController;
-    private String senha;
+    private Vendedor vendedor;
     public TelaEditarVendedor(JFrame parent, Franquia franquia, Vendedor vendedor) {
         super(parent,"Editar Vendedor");
         getTitulo().setText("Editar Vendedor");
         getCadastrarBtn().setText("Confirmar");
+        this.vendedor = vendedor;
+        getCpfTxt().setEditable(false);
         getNomeTxt().setText(vendedor.getNome());
         getCpfTxt().setText(vendedor.getCPF());
         getEmailTxt().setText(vendedor.getEmail());
@@ -26,23 +29,24 @@ public class TelaEditarVendedor extends TelaCadastro {
 
     @Override
     public void cadastrar() {
-        String nome = getNomeTxt().getText();
-        String cpf = getCpfTxt().getText();
-        String email = getEmailTxt().getText();
-        String senha = getSenhaTxt().getText();
-        if (nome.isEmpty() || cpf.isEmpty() || email.isEmpty() ) {
+        ValidadorEntradas validadorCampoVazio = new ValidadorCampoVazio();
+        String nome = getNomeTxt().getText().trim();
+        String cpf = getCpfTxt().getText().trim().replaceAll("\\D", "");
+        String email = getEmailTxt().getText().trim();
+        String senha = getSenhaTxt().getText().trim();
+        if (validadorCampoVazio.validar(nome) || validadorCampoVazio.validar(cpf)
+                || validadorCampoVazio.validar(email) || validadorCampoVazio.validar(senha)) {
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
             return;
         }
-        try {
+        ValidadorEntradas validadorEmail = new ValidadorEmail();
+        if(!validadorEmail.validar(email)) {
+            JOptionPane.showMessageDialog(null,validadorEmail.getMensagemErro());
+            return;
+        }
             Vendedor vendedorNovo = new Vendedor(nome, cpf, email, senha);
-            vendedorController.editarVendedor(vendedorNovo);
+            vendedorController.editarVendedor(vendedor,vendedorNovo);
             JOptionPane.showMessageDialog(null, "Vendedor cadastrado com sucesso!");
             dispose();
-        }
-        catch (IllegalArgumentException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
     }
 }
-//alterar para poder editar a senha

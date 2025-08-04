@@ -8,7 +8,7 @@ import javax.swing.*;
 
 public class TelaCadastroGerente extends TelaCadastro {
     Gerente gerenteCadastrado;
-    public TelaCadastroGerente(JDialog parent) {
+    public TelaCadastroGerente(JFrame parent) {
         super(parent,"Cadastro de Gerente");
         getTitulo().setText("Cadastro de Gerente");
         this.gerenteCadastrado = null;
@@ -20,7 +20,7 @@ public class TelaCadastroGerente extends TelaCadastro {
         String cpf = getCpfTxt().getText();
         String email = getEmailTxt().getText();
         String senha = getSenhaTxt().getText();
-        if (nome.isEmpty() || cpf.isEmpty() || email.isEmpty()) {
+        if (nome.isEmpty() || cpf.isEmpty() || email.isEmpty() || senha.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
             return;
         }

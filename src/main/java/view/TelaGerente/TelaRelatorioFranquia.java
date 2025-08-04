@@ -1,8 +1,7 @@
 package view.TelaGerente;
 
 import controller.gerente.ClienteController;
-import controller.gerente.FranquiaController;
-import model.Pessoas.Gerente;
+import model.Franquia;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -20,42 +19,36 @@ public class TelaRelatorioFranquia extends JDialog {
     private JButton fecharBtn;
     private JLabel infoTabela;
     private JButton ordenaBtn;
-    private FranquiaController franquiaController;
     private ClienteController clienteController;
     private boolean modoOrdenar;
-    public TelaRelatorioFranquia(JFrame parent, Gerente gerente) {
+    public TelaRelatorioFranquia(JFrame parent, Franquia franquia) {
         super(parent, "Relatório da Franquia", true);
         setContentPane(painelRelatorio);
         setSize(1280,720);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        modoOrdenar = false;
+        modoOrdenar = true;
         tabelaClientes.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 14));//fonte cabeçalho
         tabelaClientes.setFont(new Font("SansSerif", Font.PLAIN, 13));//fonte itens
 
-        franquiaController = new FranquiaController(gerente);
-        clienteController = new ClienteController(gerente);
+        clienteController = new ClienteController(franquia);
 
-        int numTotalVendas = franquiaController.numTotalVendas();
-        float somaVendas = franquiaController.somaVendas();
-        float mediaVendas = numTotalVendas != 0 ? somaVendas / numTotalVendas: 0;
-        totalVendasTxt.setText("Total de vendas realizados: " + numTotalVendas);
-        lucroTxt.setText("Soma total das vendas: R$" + String.format("%.2f", somaVendas));
-        mediaLucro.setText("Media de valor por venda: R$" +  String.format("%.2f", mediaVendas));
+        int totalPedidos = franquia.getTotalPedidos();
+        float faturamentoBruto = franquia.getFaturamentoBruto();
+        float ticketMedio = franquia.getTicketMedio();
+        totalVendasTxt.setText("Total de vendas realizados: " + totalPedidos);
+        lucroTxt.setText("Soma total das vendas: R$" + String.format("%.2f", faturamentoBruto));
+        mediaLucro.setText("Media de valor por venda: R$" +  String.format("%.2f", ticketMedio));
 
         infoTabela.setText("Clientes mais recorrentes(Ordenados pela QUANTIDADE DE COMPRAS efetuadas)");
         atualizarTabela();
+
         ordenaBtn.addActionListener(e -> {
-            atualizarTabela();
             String info = modoOrdenar ? "Clientes mais recorrentes(Ordenados pela QUANTIDADE DE COMPRAS efetuadas)"
                     :"Clientes mais recorrentes(Ordenados pelo GASTO TOTAL nas compras efetuadas)";
+            atualizarTabela();
             infoTabela.setText(info);
-            modoOrdenar = !modoOrdenar;
-
         });
-
-
-
         fecharBtn.addActionListener(e -> {
             this.dispose();
         });
@@ -73,6 +66,7 @@ public class TelaRelatorioFranquia extends JDialog {
         for (Object[] linha : produtos) {
             tabela.addRow(linha);
         }
+        modoOrdenar = !modoOrdenar;
 
         tabelaClientes.setModel(tabela);
         tabelaClientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

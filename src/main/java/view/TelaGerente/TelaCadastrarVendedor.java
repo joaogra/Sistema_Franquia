@@ -1,6 +1,8 @@
 package view.TelaGerente;
 
+import Exceptions.CPFJaCadastradoException;
 import controller.gerente.VendedorController;
+import model.Franquia;
 import model.Pessoas.Gerente;
 import model.Pessoas.Vendedor;
 import view.TelaCadastro;
@@ -9,10 +11,10 @@ import javax.swing.*;
 
 public class TelaCadastrarVendedor extends TelaCadastro {
     VendedorController vendedorController;
-    public TelaCadastrarVendedor(JDialog parent, Gerente gerente) {
+    public TelaCadastrarVendedor(JFrame parent, Franquia franquia) {
         super(parent,"Cadastro de Vendedor");
         getTitulo().setText("Cadastro de Vendedor");
-        vendedorController = new VendedorController(gerente);
+        vendedorController = new VendedorController(franquia);
     }
 
     @Override
@@ -21,7 +23,7 @@ public class TelaCadastrarVendedor extends TelaCadastro {
         String cpf = getCpfTxt().getText();
         String email = getEmailTxt().getText();
         String senha = getSenhaTxt().getText();
-        if (nome.isEmpty() || cpf.isEmpty() || email.isEmpty()) {
+        if (nome.isEmpty() || cpf.isEmpty() || email.isEmpty() || senha.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
             return;
         }
@@ -31,7 +33,7 @@ public class TelaCadastrarVendedor extends TelaCadastro {
             JOptionPane.showMessageDialog(null, "Vendedor cadastrado com sucesso!");
             dispose();
         }
-        catch (IllegalArgumentException e) {
+        catch (IllegalArgumentException | CPFJaCadastradoException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }

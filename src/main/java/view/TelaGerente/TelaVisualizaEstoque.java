@@ -1,6 +1,7 @@
 package view.TelaGerente;
 
 import controller.gerente.ProdutoController;
+import model.Franquia;
 import model.Pessoas.Gerente;
 import model.Produto;
 
@@ -21,17 +22,17 @@ public class TelaVisualizaEstoque extends JDialog{
     private JLabel infoTabela;
     private ProdutoController produtoController;
 
-    public TelaVisualizaEstoque(JFrame parent, Gerente gerente) {
+    public TelaVisualizaEstoque(JFrame parent, Franquia franquia) {
         super(parent,"Estoque da Franquia", true);
         setContentPane(painelEstoque);
         setSize(800,600);
         setLocationRelativeTo(parent);
-        this.produtoController = new ProdutoController(gerente);
+        this.produtoController = new ProdutoController(franquia);
 
         atualizarTabela();
 
         cadastrarProdutoBtn.addActionListener(event ->{
-            new TelaCadastrarProduto(TelaVisualizaEstoque.this,gerente).setVisible(true);
+            new TelaCadastrarProduto(TelaVisualizaEstoque.this,franquia).setVisible(true);
             atualizarTabela();
         });
 
@@ -57,7 +58,7 @@ public class TelaVisualizaEstoque extends JDialog{
             if(linhaEscolhida != -1) {
                 String cod = tabelaEstoque.getValueAt(linhaEscolhida, 0).toString();
                 Produto produto = produtoController.buscarProduto(cod);
-                new TelaEditarProduto(TelaVisualizaEstoque.this, gerente, produto).setVisible(true);
+                new TelaEditarProduto(TelaVisualizaEstoque.this, franquia, produto).setVisible(true);
                 atualizarTabela();
             }
             else{

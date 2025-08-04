@@ -1,5 +1,6 @@
 package controller.gerente;
 
+import model.Franquia;
 import model.Pedido;
 import model.Pessoas.Cliente;
 import model.Pessoas.Gerente;
@@ -10,13 +11,13 @@ import java.util.HashSet;
 import java.util.List;
 
 public class ClienteController {
-    Gerente gerente;
-    public ClienteController(Gerente gerente) {
-        this.gerente = gerente;
+    private Franquia franquia;
+    public ClienteController(Franquia franquia) {
+        this.franquia = franquia;
     }
     public List<Cliente> listaClientes(){
         HashSet<Cliente> lista = new HashSet<>();
-        for(Vendedor vendedor: gerente.getFranquia().getVendedores()){
+        for(Vendedor vendedor: franquia.getVendedores()){
             for(Pedido pedido : vendedor.getHistoricoPedidos().values()){
                 lista.add(pedido.getCliente());
             }

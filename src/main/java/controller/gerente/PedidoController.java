@@ -1,5 +1,6 @@
 package controller.gerente;
 
+import model.Franquia;
 import model.Pedido;
 import model.Pessoas.Gerente;
 import model.Pessoas.Vendedor;
@@ -10,18 +11,19 @@ import java.util.List;
 import java.util.Map;
 
 public class PedidoController {
-    private Gerente gerente;
+    private Franquia franquia;
     private Vendedor vendedor;
     private Pedido pedido;
-    public PedidoController(Gerente gerente) {
-        this.gerente = gerente;
+    public PedidoController(Franquia franquia) {
+        this.franquia = franquia;
     }
     public PedidoController() {}
+
     public PedidoController(Pedido pedido){this.pedido = pedido;}
     public PedidoController(Vendedor vendedor){this.vendedor = vendedor;}
     public List<Object[]> listaPedidosParaTabela() {
         List<Object[]> listaPedidos = new ArrayList<>();
-        for(Vendedor vendedor : gerente.getFranquia().getVendedores()) {
+        for(Vendedor vendedor : franquia.getVendedores()) {
             for(Pedido pedido : vendedor.getHistoricoPedidos().values()){
                 Object[] linha = {
                         pedido.getCod(),
@@ -39,14 +41,14 @@ public class PedidoController {
     public List<Object[]> listaSolicitacaoPedidosParaTabela() {
         List<Object[]> listaPedidos = new ArrayList<>();
             int i = 0;
-            for(Pedido pedido : gerente.getFranquia().getPedidosParaAlterar()){
+            for(Pedido pedido : franquia.getPedidosParaAlterar()){
                 Object[] linha = {
                         pedido.getCod(),
                         pedido.getCliente().getNome(),
                         pedido.getHorario(),
                         pedido.getFormaPagamento(),
                         pedido.getValVenda(),
-                        gerente.getFranquia().getVendedoresPedidosAlterados().get(i),
+                        franquia.getVendedoresPedidosAlterados().get(i),
                         pedido
                 };
                 listaPedidos.add(linha);
@@ -85,10 +87,11 @@ public class PedidoController {
         return vendedor.getHistoricoPedidos();
     }
     public void editaPedido(Vendedor vendedor,Pedido pedidoAlterado) {
+        pedidoAlterado.setMotivoSolicitacao("");
         vendedor.getHistoricoPedidos().get(pedidoAlterado.getCod()).setPedido(pedidoAlterado);
-        gerente.removeSolicitacaoPedido(vendedor, pedidoAlterado);
+        franquia.getGerente().removeSolicitacaoPedido(vendedor, pedidoAlterado);
     }
     public void rejeitaAlteracao(Vendedor vendedor, Pedido pedido) {
-        gerente.removeSolicitacaoPedido(vendedor, pedido);
+        franquia.getGerente().removeSolicitacaoPedido(vendedor, pedido);
     }
 }

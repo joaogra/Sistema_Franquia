@@ -1,7 +1,8 @@
 package view.telasDono;
 
+import Exceptions.CPFJaCadastradoException;
+import Exceptions.FranquiaNaoPossuiGerenteException;
 import controller.DonoController;
-import controller.gerente.FranquiaController;
 import model.*;
 import model.Pessoas.Cliente;
 import model.Pessoas.Dono;
@@ -19,7 +20,6 @@ import java.util.Map;
 public class TelaMenuDono extends JFrame {
     private JPanel painelMenu;
     private JLabel titulo;
-    private JLabel boasVindas;
     private JTable tabelaFranquias;
     private JButton cadastraFranquiaBtn;
     private JButton cadastrarGerenteBtn;
@@ -28,6 +28,7 @@ public class TelaMenuDono extends JFrame {
     private JButton resumoFinanceiroBtn;
     private JButton rankingVendedoresBtn;
     private JButton logoutBtn;
+    private JLabel boasVindasTxt;
     private DonoController donoController;
 
     public TelaMenuDono(JFrame parent, Dono dono) {
@@ -36,6 +37,7 @@ public class TelaMenuDono extends JFrame {
         setSize(1000,640);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        boasVindasTxt.setText("Seja bem vindo " + dono.getNome().split(" ")[0]);
         this.donoController = new DonoController(dono);
 
         atualizarTabela();
@@ -48,12 +50,57 @@ public class TelaMenuDono extends JFrame {
 
         });
         cadastrarGerenteBtn.addActionListener(e -> {
+            int linhaEscolhida = tabelaFranquias.getSelectedRow();
+            if (linhaEscolhida == -1) {
+                JOptionPane.showMessageDialog(null, "Escolha uma franquia para cadastrar um gerente!");
+                return;
+            }
 
+            Franquia franquia = (Franquia) tabelaFranquias.getValueAt(linhaEscolhida, 4);
+            if (franquia.getGerente() != null) {
+                JOptionPane.showMessageDialog(null, "Esta franquia já possui um gerente!");
+                return;
+            }
+
+            TelaCadastroGerente telaCadastroGerente = new TelaCadastroGerente(TelaMenuDono.this);
+            telaCadastroGerente.setVisible(true);
+            Gerente gerente = telaCadastroGerente.getGerenteCadastrado();
+            if(gerente != null) {
+                try {
+                    donoController.cadastrarGerente(franquia, gerente);
+                    atualizarTabela();
+                } catch (CPFJaCadastradoException exception) {
+                    JOptionPane.showMessageDialog(null, exception.getMessage());
+                }
+            }
         });
         rankingVendedoresBtn.addActionListener(e -> {
-
+            int linhaEscolhida = tabelaFranquias.getSelectedRow();
+            if(linhaEscolhida != -1){
+                Franquia franquia = (Franquia) tabelaFranquias.getValueAt(linhaEscolhida,4);
+                new TelaRankingVendedores(parent,franquia).setVisible(true);
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Escolha uma franquia");
+            }
         });
         removerGerenteBtn.addActionListener(e -> {
+            int linhaEscolhida = tabelaFranquias.getSelectedRow();
+            if(linhaEscolhida != -1){
+                Franquia franquia = (Franquia) tabelaFranquias.getValueAt(linhaEscolhida, 4);
+                try {
+                    donoController.removeGerente(franquia);
+                    atualizarTabela();
+                }
+                catch (FranquiaNaoPossuiGerenteException exception) {
+                    JOptionPane.showMessageDialog(null, exception.getMessage());
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Escolha uma franquia para cadastrar um gerente!");
+            }
+        });
+        resumoFinanceiroBtn.addActionListener(e -> {
 
         });
         logoutBtn.addActionListener(e -> {
@@ -83,7 +130,7 @@ public class TelaMenuDono extends JFrame {
         new TelaMenuDono(new JFrame(),dono1).setVisible(true);
     }
     public void atualizarTabela() {
-        String[] colunas = {"Nome", "Endereço", "Gerente", "Lucro",""};
+        String[] colunas = {"Franquia", "Endereço", "Gerente", "Lucro","Franquia"};
         DefaultTableModel tabela = new DefaultTableModel(colunas,0){
             @Override public boolean isCellEditable(int linha, int coluna) {
                 return false;
@@ -101,8 +148,6 @@ public class TelaMenuDono extends JFrame {
         tabelaFranquias.getColumnModel().getColumn(4).setMaxWidth(0);
         tabelaFranquias.getColumnModel().getColumn(4).setWidth(0);
         tabelaFranquias.getColumnModel().getColumn(4).setMinWidth(0);
-
-
 
         //centraliza os itens
         DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();

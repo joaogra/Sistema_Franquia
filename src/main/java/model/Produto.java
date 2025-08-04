@@ -11,7 +11,7 @@ public class Produto {
         this.preco = preco;
         this.quantidadeEstoque = quantidadeEstoque;
         this.cod = cod;
-        this.nome = nome;
+        this.nome = nome.toUpperCase().trim();
     }
 
     public String toString(){

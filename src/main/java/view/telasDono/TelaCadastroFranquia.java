@@ -1,5 +1,6 @@
 package view.telasDono;
 
+import Exceptions.CPFJaCadastradoException;
 import Exceptions.FranquiaNomeIgualException;
 import controller.DonoController;
 import model.Endereco;
@@ -15,6 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -51,15 +53,27 @@ public class TelaCadastroFranquia extends JDialog {
             String complemento = complementoTxt.getText();
             String bairro = bairroTxt.getText();
             String numero = numeroTxt.getText();
+            float num;
+            try {
+                num = Float.parseFloat(numero);
+            }
+            catch (NumberFormatException exception){
+                JOptionPane.showMessageDialog(null,"Digite um numero positivo válido!");
+                return;
+            }
             if(nome.isBlank() || cep.isBlank() || cidade.isBlank()
                     || estado.isBlank() || rua.isBlank() || complemento.isBlank() || bairro.isBlank() ||numero.isBlank()){
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos");
                 return;
             }
+            if(num < 0){
+                JOptionPane.showMessageDialog(null,"Digite um numero positivo válido!");
+                return;
+            }
             if (!buscarEnderecoPorCep(cep)) {
                 return;
             }
-            TelaCadastroGerente telaCadastroGerente = new TelaCadastroGerente(TelaCadastroFranquia.this);
+            TelaCadastroGerente telaCadastroGerente = new TelaCadastroGerente(parent);
             telaCadastroGerente.setVisible(true);
             Gerente gerenteCadastrado = telaCadastroGerente.getGerenteCadastrado();
             if(gerenteCadastrado == null){
@@ -70,13 +84,13 @@ public class TelaCadastroFranquia extends JDialog {
             String[] informacoes = {cep,cidade,estado,rua,bairro,complemento,numero};
 
             Endereco CEP = donoController.cadastraCEP(informacoes);
-            Franquia franquia = new Franquia(nome,CEP,gerenteCadastrado, List.of(), new Estoque());
+            Franquia franquia = new Franquia(nome,CEP,gerenteCadastrado, new ArrayList<>(), new Estoque());
             try {
                 donoController.cadastrarFranquia(franquia,gerenteCadastrado);
-                clean();
                 JOptionPane.showMessageDialog(null, "Franquia cadastrada com sucesso!");
+                dispose();
             }
-            catch(FranquiaNomeIgualException exception){
+            catch(FranquiaNomeIgualException | CPFJaCadastradoException exception){
                 JOptionPane.showMessageDialog(null,exception.getMessage());
             }
         });

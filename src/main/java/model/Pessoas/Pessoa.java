@@ -11,7 +11,7 @@ public class Pessoa {
 
     public Pessoa(String nome, String CPF){
         if(verificaCPF(CPF)){
-        this.nome = nome;
+        this.nome = nome.toUpperCase().trim();
         this.CPF = CPF;
         }
         else{
@@ -31,10 +31,8 @@ public class Pessoa {
         CPFValidator validador = new CPFValidator();
         try{
             validador.assertValid(CPF);
-            //System.out.println("CPF válido!");
             return true;
         } catch (InvalidStateException e ){
-            //System.out.println("CPF Inválido!");
             return false;
 
         }

@@ -20,7 +20,7 @@ public abstract class TelaCadastro extends JDialog {
     private JPanel tela_Cadastro;
     private JButton voltarBtn;
 
-    public TelaCadastro(JDialog parent, String titulo) {
+    public TelaCadastro(JFrame parent, String titulo) {
         super(parent,titulo,true);
         setContentPane(tela_Cadastro);
         setSize(800,600);

@@ -1,11 +1,14 @@
 package view.TelaGerente;
 
 import controller.gerente.VendedorController;
+import model.Franquia;
 import model.Pessoas.Gerente;
 import model.Pessoas.Vendedor;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.util.List;
 
 public class TelaListaVendedores extends JDialog{
@@ -19,25 +22,25 @@ public class TelaListaVendedores extends JDialog{
     private JLabel infoTabela;
     private VendedorController vendedorController;
 
-    public TelaListaVendedores(JFrame parent,Gerente gerente) {
+    public TelaListaVendedores(JFrame parent, Franquia franquia) {
         super(parent,"Lista de Vendedores",true);
         setContentPane(painelListaVendedor);
         setSize(800,600);
         setLocationRelativeTo(parent);
-        vendedorController = new VendedorController(gerente);
+        vendedorController = new VendedorController(franquia);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         atualizarTabela();
 
         cadastrarBtn.addActionListener(e -> {
-            new TelaCadastrarVendedor(TelaListaVendedores.this,gerente).setVisible(true);
+            new TelaCadastrarVendedor(parent,franquia).setVisible(true);
             atualizarTabela();
         });
         editarBtn.addActionListener(e -> {
             int linhaEscolhida = tabelaVendedores.getSelectedRow();
             if (linhaEscolhida != -1) {
                 Vendedor vendedorEscolhido = (Vendedor)  tabelaVendedores.getValueAt(linhaEscolhida,2);
-                new TelaEditarVendedor(TelaListaVendedores.this,gerente,vendedorEscolhido).setVisible(true);
+                new TelaEditarVendedor(parent,franquia,vendedorEscolhido).setVisible(true);
                 atualizarTabela();
             }
             else{
@@ -89,5 +92,16 @@ public class TelaListaVendedores extends JDialog{
         tabelaVendedores.getColumnModel().getColumn(2).setMinWidth(0);
         tabelaVendedores.getColumnModel().getColumn(2).setMaxWidth(0);
         tabelaVendedores.getColumnModel().getColumn(2).setWidth(0);
+        //centraliza os itens
+        DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+        centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+        centralizado.setVerticalAlignment(SwingConstants.CENTER);
+        for (int i = 0; i < tabelaVendedores.getColumnCount(); i++) {
+            tabelaVendedores.getColumnModel().getColumn(i).setCellRenderer(centralizado);
+        }
+
+        //coloca fontes no cabecalho e nos itens
+        tabelaVendedores.setFont(new Font("SansSerif", Font.PLAIN, 13));
+        tabelaVendedores.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 14));
     }
 }

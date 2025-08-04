@@ -49,4 +49,7 @@ public class Gerente extends Funcionario{
         this.franquia.getVendedoresPedidosAlterados().remove(vendedor);
         this.franquia.getPedidosParaAlterar().remove(pedido);
     }
+    public void desassociaGerenteFranquia(){
+        this.franquia = null;
+    }
 }

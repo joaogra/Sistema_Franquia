@@ -28,20 +28,16 @@ public class TelaMenuGerente extends TelaMenu {
     }
     @Override
     public void confirmaBtn1(){
-        new TelaListaVendedores(TelaMenuGerente.this,gerente).setVisible(true);
+        new TelaListaVendedores(TelaMenuGerente.this,gerente.getFranquia()).setVisible(true);
     }
     @Override
     public void confirmaBtn2(){
-        new TelaListaPedidos(TelaMenuGerente.this,gerente).setVisible(true);
+        new TelaListaPedidos(TelaMenuGerente.this,gerente.getFranquia()).setVisible(true);
     }
     @Override
-    public void confirmaBtn3(){
-        new TelaVisualizaEstoque(TelaMenuGerente.this,gerente).setVisible(true);
-    }
+    public void confirmaBtn3(){new TelaVisualizaEstoque(TelaMenuGerente.this,gerente.getFranquia()).setVisible(true);}
     @Override
-    public void confirmaBtn4(){
-        new TelaRelatorioFranquia(TelaMenuGerente.this,gerente).setVisible(true);
-    }
+    public void confirmaBtn4(){new TelaRelatorioFranquia(TelaMenuGerente.this,gerente.getFranquia()).setVisible(true);}
 
 
 

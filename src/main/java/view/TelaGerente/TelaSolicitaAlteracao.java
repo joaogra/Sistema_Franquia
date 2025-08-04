@@ -1,6 +1,7 @@
 package view.TelaGerente;
 
 import controller.gerente.PedidoController;
+import model.Franquia;
 import model.Pedido;
 import model.Pessoas.Gerente;
 import model.Pessoas.Vendedor;
@@ -23,13 +24,13 @@ public class TelaSolicitaAlteracao extends JDialog{
     private JButton viewProdutosBtn;
     private PedidoController pedidoController;
 
-    public TelaSolicitaAlteracao(JFrame parent, Gerente gerente) {
+    public TelaSolicitaAlteracao(JFrame parent, Franquia franquia) {
         super(parent,"Alteração de pedidos",true);
         setContentPane(painelPrincipal);
         setSize(800,600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        pedidoController = new PedidoController(gerente);
+        pedidoController = new PedidoController(franquia);
 
         atualizarTabelaPedidos();
 

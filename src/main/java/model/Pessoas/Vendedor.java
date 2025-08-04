@@ -8,20 +8,20 @@ import java.util.Map;
 public class Vendedor extends Funcionario {
     private int numVendas;
     private Map<String, Pedido> historicoPedidos;
-
+    private float valorTotalVendas;
     public Vendedor(String nome, String CPF, String email,String senha) {
         super(nome,CPF, email,senha);
         this.numVendas = 0;
-        historicoPedidos = new HashMap<>();
-
+        this.historicoPedidos = new HashMap<>();
+        this.valorTotalVendas = 0;
     }
     //GETTERS
     public int getNumVendas() { return numVendas;}
     public Map <String, Pedido> getHistoricoPedidos() {return historicoPedidos;}
-
+    public float getValorTotalVendas(){return valorTotalVendas;}
     //SETTERS
     public void setNumVendas(int numVendas) { this.numVendas = numVendas;}
-
+    public void setValorTotalVendas(float valPedidoAtual) { this.valorTotalVendas += valPedidoAtual;}
     //
     public boolean adicionaPedido(Pedido pedido) {
         if(!historicoPedidos.containsKey(pedido.getCod())) {
@@ -29,12 +29,5 @@ public class Vendedor extends Funcionario {
             return true;
         }
         return false;
-    }
-    public float valorTotalVendas() {
-        float somaVendas = 0;
-        for(Pedido pedido : historicoPedidos.values()) {
-            somaVendas += pedido.getValVenda();
-        }
-        return somaVendas;
     }
 }

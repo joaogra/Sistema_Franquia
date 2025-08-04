@@ -1,6 +1,7 @@
 package view.TelaGerente;
 
 import controller.gerente.PedidoController;
+import model.Franquia;
 import model.Pedido;
 import model.Pessoas.Gerente;
 import view.TelaProdutoDoPedido;
@@ -18,13 +19,13 @@ public class TelaListaPedidos extends JDialog {
     private JButton fecharBtn;
     private JButton viewProdutos;
     private PedidoController pedidoController;
-    public TelaListaPedidos(JFrame parent, Gerente gerente) {
+    public TelaListaPedidos(JFrame parent, Franquia franquia) {
         super(parent, "Lista de pedidos", true);
         setContentPane(painelListaPedidos);
         setSize(1280,720);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.pedidoController = new PedidoController(gerente);
+        this.pedidoController = new PedidoController(franquia);
 
         atualizarTabelaPedidos();
         viewProdutos.addActionListener(event -> {
@@ -39,7 +40,7 @@ public class TelaListaPedidos extends JDialog {
         });
 
         solicitaAlteracaoBtn.addActionListener(e -> {
-            new TelaSolicitaAlteracao(parent,gerente).setVisible(true);
+            new TelaSolicitaAlteracao(parent,franquia).setVisible(true);
         });
         fecharBtn.addActionListener(e -> {
             this.dispose();

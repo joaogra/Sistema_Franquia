@@ -15,7 +15,7 @@
           <grid row="0" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font name="JetBrains Mono" size="36" style="1"/>
+          <font name="Segoe UI" size="48" style="1"/>
           <foreground color="-16777216"/>
           <text value="Novo Cadastro"/>
         </properties>
@@ -25,7 +25,7 @@
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font style="1"/>
+          <font name="Segoe UI" size="16" style="1"/>
           <foreground color="-16777216"/>
           <text value="Nome:"/>
         </properties>
@@ -37,7 +37,7 @@
           </grid>
         </constraints>
         <properties>
-          <font style="1"/>
+          <font name="SansSerif" size="14" style="1"/>
           <foreground color="-16777216"/>
           <text value=""/>
         </properties>
@@ -47,7 +47,7 @@
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font style="1"/>
+          <font name="Segoe UI" size="16" style="1"/>
           <foreground color="-16777216"/>
           <text value="CPF:"/>
         </properties>
@@ -59,7 +59,7 @@
           </grid>
         </constraints>
         <properties>
-          <font style="1"/>
+          <font name="SansSerif" size="14" style="1"/>
           <foreground color="-16777216"/>
         </properties>
       </component>
@@ -68,7 +68,7 @@
           <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font style="1"/>
+          <font name="Segoe UI" size="16" style="1"/>
           <foreground color="-16777216"/>
           <text value="Email: "/>
         </properties>
@@ -80,7 +80,7 @@
           </grid>
         </constraints>
         <properties>
-          <font style="1"/>
+          <font name="SansSerif" size="14" style="1"/>
           <foreground color="-16777216"/>
         </properties>
       </component>
@@ -89,7 +89,7 @@
           <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font style="1"/>
+          <font name="Segoe UI" size="16" style="1"/>
           <foreground color="-16777216"/>
           <text value="Senha:"/>
         </properties>
@@ -101,7 +101,7 @@
           </grid>
         </constraints>
         <properties>
-          <font name="Microsoft PhagsPa" size="14" style="0"/>
+          <font name="SansSerif" size="14" style="1"/>
         </properties>
       </component>
       <component id="8a1c8" class="javax.swing.JButton" binding="cadastrarBtn">
@@ -109,7 +109,7 @@
           <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font name="Microsoft PhagsPa" size="14" style="0"/>
+          <font name="Segoe UI" size="14" style="1"/>
           <text value="Cadastrar"/>
         </properties>
       </component>
@@ -118,7 +118,7 @@
           <grid row="6" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font name="Microsoft PhagsPa" size="14" style="0"/>
+          <font name="Segoe UI" size="14" style="1"/>
           <text value="Limpar"/>
         </properties>
       </component>
@@ -132,6 +132,7 @@
           <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <font name="Segoe UI" size="14" style="1"/>
           <text value="Voltar"/>
         </properties>
       </component>

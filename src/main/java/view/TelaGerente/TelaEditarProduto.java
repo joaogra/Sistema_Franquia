@@ -1,6 +1,7 @@
 package view.TelaGerente;
 
 import controller.gerente.ProdutoController;
+import model.Franquia;
 import model.Pessoas.Gerente;
 import model.Produto;
 
@@ -8,15 +9,15 @@ import javax.swing.*;
 
 public class TelaEditarProduto extends TelaProduto {
     private ProdutoController produtoController;
-    public TelaEditarProduto(JDialog parent, Gerente gerente, Produto produto) {
-        super(parent,"Editar Produto",gerente);
+    public TelaEditarProduto(JDialog parent, Franquia franquia, Produto produto) {
+        super(parent,"Editar Produto");
         getTitulo().setText("Editar Produto");
         getNomeTxt().setText(produto.getNome());
         getCodigoTxt().setText(produto.getCod());
         getCodigoTxt().setEditable(false);
         getPrecoTxt().setText(Float.toString(produto.getPreco()));
         getQuantidadeTxt().setText(Integer.toString(produto.getQuantidadeEstoque()));
-        this.produtoController = new ProdutoController(gerente);
+        this.produtoController = new ProdutoController(franquia);
     }
 
 

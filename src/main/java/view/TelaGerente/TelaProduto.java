@@ -1,5 +1,6 @@
 package view.TelaGerente;
 
+import model.Franquia;
 import model.Pessoas.Gerente;
 import model.Produto;
 
@@ -21,7 +22,7 @@ public abstract class TelaProduto extends JDialog {
     private JButton fecharButton;
     private JButton limparBtn;
     private Gerente gerente;
-    public TelaProduto(JDialog parent,String titulo, Gerente gerente) {
+    public TelaProduto(JDialog parent, String titulo) {
         super(parent,titulo,true);
         this.gerente = gerente;
         setContentPane(painelNovoProduto);

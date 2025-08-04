@@ -1,6 +1,7 @@
 package view.TelaGerente;
 
 import controller.gerente.ProdutoController;
+import model.Franquia;
 import model.Pessoas.Gerente;
 import model.Produto;
 
@@ -8,10 +9,10 @@ import javax.swing.*;
 
 public class TelaCadastrarProduto extends TelaProduto {
     private ProdutoController produtoController;
-    public TelaCadastrarProduto(JDialog parent, Gerente gerente) {
-        super(parent,"Cadastrar Produto",gerente);
+    public TelaCadastrarProduto(JDialog parent, Franquia franquia) {
+        super(parent,"Cadastrar Produto");
         getTitulo().setText("Cadastrar Produto");
-        this.produtoController = new ProdutoController(gerente);
+        this.produtoController = new ProdutoController(franquia);
     }
     @Override
     public void confirmar() {
@@ -25,8 +26,16 @@ public class TelaCadastrarProduto extends TelaProduto {
                 return;
             }
 
-            float preco = Float.parseFloat(precoStr);
-            int quantidade = Integer.parseInt(qtdStr);
+            float preco;
+            int quantidade;
+            try{
+                preco = Float.parseFloat(precoStr);
+                quantidade = Integer.parseInt(qtdStr);
+            }
+            catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Digite um numero válido!");
+                return;
+            }
 
             if(preco <= 0 || quantidade < 0) {
                 JOptionPane.showMessageDialog(null,"Preço e Quantidade devem ser números positivos!");

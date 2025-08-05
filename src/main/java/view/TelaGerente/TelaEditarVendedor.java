@@ -14,6 +14,7 @@ import javax.swing.*;
 public class TelaEditarVendedor extends TelaCadastro {
     private VendedorController vendedorController;
     private Vendedor vendedor;
+    private Franquia franquia;
     public TelaEditarVendedor(JFrame parent, Franquia franquia, Vendedor vendedor) {
         super(parent,"Editar Vendedor");
         getTitulo().setText("Editar Vendedor");
@@ -25,6 +26,7 @@ public class TelaEditarVendedor extends TelaCadastro {
         getEmailTxt().setText(vendedor.getEmail());
         getSenhaTxt().setText(vendedor.getSenha());
         this.vendedorController = new VendedorController(franquia);
+        this.franquia = franquia;
     }
 
     @Override
@@ -44,7 +46,7 @@ public class TelaEditarVendedor extends TelaCadastro {
             JOptionPane.showMessageDialog(null,validadorEmail.getMensagemErro());
             return;
         }
-            Vendedor vendedorNovo = new Vendedor(nome, cpf, email, senha);
+            Vendedor vendedorNovo = new Vendedor(nome, cpf, email, senha,franquia);
             vendedorController.editarVendedor(vendedor,vendedorNovo);
             JOptionPane.showMessageDialog(null, "Vendedor cadastrado com sucesso!");
             dispose();

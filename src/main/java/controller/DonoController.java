@@ -8,7 +8,6 @@ import model.Endereco;
 import model.Franquia;
 import model.Pessoas.Dono;
 import model.Pessoas.Gerente;
-import model.ViaCepService;
 
 import java.util.ArrayList;
 import java.util.List;

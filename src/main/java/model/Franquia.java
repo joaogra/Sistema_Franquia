@@ -3,7 +3,6 @@ package model;
 import model.Pessoas.Cliente;
 import model.Pessoas.Gerente;
 import model.Pessoas.Vendedor;
-
 import java.util.ArrayList;
 import java.util.List;
 

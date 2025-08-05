@@ -13,12 +13,13 @@ import view.TelaCadastro;
 import javax.swing.*;
 
 public class TelaCadastrarVendedor extends TelaCadastro {
-    VendedorController vendedorController;
-
+    private VendedorController vendedorController;
+    private Franquia franquia;
     public TelaCadastrarVendedor(JFrame parent, Franquia franquia) {
         super(parent,"Cadastro de Vendedor");
         getTitulo().setText("Cadastro de Vendedor");
         vendedorController = new VendedorController(franquia);
+        this.franquia = franquia;
     }
 
     @Override
@@ -40,7 +41,7 @@ public class TelaCadastrarVendedor extends TelaCadastro {
             return;
         }
         try {
-            Vendedor vendedorNovo = new Vendedor(nome, cpf, email, senha);
+            Vendedor vendedorNovo = new Vendedor(nome, cpf, email, senha,franquia);
             vendedorController.adicionarVendedor(vendedorNovo);
             JOptionPane.showMessageDialog(null, "Vendedor cadastrado com sucesso!");
             dispose();

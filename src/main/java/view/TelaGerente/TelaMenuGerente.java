@@ -54,9 +54,9 @@ public class TelaMenuGerente extends TelaMenu {
         estoque.getEstoque().put(p1.getCod(), p1);
         estoque.getEstoque().put(p2.getCod(), p2);
         Gerente gerente1 =  new Gerente("Adrian","14518498690" ,"adra","adrian");
-        Vendedor v1 = new Vendedor("Carlos Silva","123.456.789-09", "carlos@empresa.com", "senha123");
-        Vendedor v2 = new Vendedor("Marina Costa", "987.654.321-00", "marina@empresa.com", "senha456");
-        Vendedor v3 = new Vendedor("João Pereira", "111.444.777-35", "joao@empresa.com", "senha789");
+        Vendedor v1 = new Vendedor("Carlos Silva","123.456.789-09", "carlos@empresa.com", "senha123",null);
+        Vendedor v2 = new Vendedor("Marina Costa", "987.654.321-00", "marina@empresa.com", "senha456",null);
+        Vendedor v3 = new Vendedor("João Pereira", "111.444.777-35", "joao@empresa.com", "senha789",null);
         Franquia franquia = new Franquia("nome",new Endereco(),gerente1, List.of(v1,v2,v3),estoque);
         gerente1.associaGerenteFranquia(franquia);
         Pedido pedido1 = new Pedido("001",c1 ,new Date(),"din",0.05f, Map.of(p1,15,p2,5),1000d);

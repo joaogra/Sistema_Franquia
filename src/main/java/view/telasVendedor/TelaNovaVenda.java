@@ -42,6 +42,7 @@ public class TelaNovaVenda extends JDialog {
     private Date horaPedido;
     private String codigoVenda;
     private VendedorOperaController vendedorOperaController;
+    private Vendedor vendedor;
 
     public TelaNovaVenda(JDialog pai, Vendedor vendedor) {
 
@@ -58,7 +59,7 @@ public class TelaNovaVenda extends JDialog {
         totalTxt.setText("0.00");
         listProd = new HashMap<>();
         String [] colunas = {
-                "Produto", "Quantidade", "Subtotal", ""};
+                "Código" ,"Produto", "Quantidade", "Preço", ""};
         tabela = new DefaultTableModel(colunas, 0){
             @Override
             public boolean isCellEditable(int row, int column) {return false;}
@@ -87,7 +88,7 @@ public class TelaNovaVenda extends JDialog {
         finalizarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                finalizaVenda(vendedor);
+                finalizaVenda();
             }
         });
         removerBtn.addActionListener(new ActionListener() {
@@ -117,6 +118,7 @@ public class TelaNovaVenda extends JDialog {
         cpfTxt.setEditable(false);
         codVendaTxt.setText(pedido.getCod());
         codVendaTxt.setEditable(false);
+        cancelarButton.setVisible(false);
 
         totalTxt.setText(totalAtual.toString());
         listProd = pedido.getMapaPedidos();
@@ -154,7 +156,7 @@ public class TelaNovaVenda extends JDialog {
         finalizarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                finalizaVenda(vendedor);
+                lancaAlteracaoPedido();
             }
         });
         removerBtn.addActionListener(new ActionListener() {
@@ -179,13 +181,9 @@ public class TelaNovaVenda extends JDialog {
     }
 
     public void adicionaItensProd(){
-        Produto produto = new Produto(15,15,"001","Do");
-        Produto produto1 = new Produto(5,15,"002","Re");
-        Produto produto2 = new Produto(10,15,"003","Mi");
-
-        produtoCombo.addItem(produto);
-        produtoCombo.addItem(produto1);
-        produtoCombo.addItem(produto2);
+        for(Produto p : vendedorOperaController.retornaFranquia().getEstoque().getProdutos()){
+            produtoCombo.addItem(p);
+        }
     }
 
     public void atualizaResumo(){
@@ -193,10 +191,10 @@ public class TelaNovaVenda extends JDialog {
         Integer quantidade = Integer.valueOf(qtdTxt.getText());
         listProd.put(produtoAtual, quantidade);
         float subTotal = produtoAtual.getPreco() * quantidade;
-        Object []  linha = {produtoAtual.getNome(), quantidade, subTotal, produtoAtual};
+        Object []  linha = {produtoAtual.getCod() ,produtoAtual.getNome(), quantidade, produtoAtual.getPreco(), produtoAtual};
         tabela.addRow(linha);
         table1.setModel(tabela);
-        TableColumn colunaInv = table1.getColumnModel().getColumn(3);
+        TableColumn colunaInv = table1.getColumnModel().getColumn(4);
         colunaInv.setMinWidth(0);
         colunaInv.setMaxWidth(0);
         colunaInv.setWidth(0);
@@ -208,16 +206,21 @@ public class TelaNovaVenda extends JDialog {
     public void removeLinha(){
         int linhaSelecionada = table1.getSelectedRow();
         Object produto = tabela.getValueAt(linhaSelecionada, 3);
-        listProd.remove(produto);
-
         if(linhaSelecionada == -1){
             JOptionPane.showMessageDialog(null, "Selecione uma linha para remover");
         }else{
-            Object valorSubtotal = tabela.getValueAt(linhaSelecionada, 2);
-            totalAtual -= Float.parseFloat(valorSubtotal.toString());
+            Object quantidade = tabela.getValueAt(linhaSelecionada, 2);
+            Object preco = tabela.getValueAt(linhaSelecionada, 3);
+            Integer qtd = Integer.valueOf(quantidade.toString());
+            Double precoO = Double.valueOf(preco.toString());
+            Double subtotal = qtd * precoO;
+            totalAtual -= Float.parseFloat(subtotal.toString());
             totalTxt.setText(totalAtual+"");
             tabela.removeRow(linhaSelecionada);
         }
+        listProd.remove(produto);
+
+
     }
 
     public void clean(){
@@ -240,9 +243,15 @@ public class TelaNovaVenda extends JDialog {
 
 
         table1.setModel(tabela);
+        TableColumn colunaInv = table1.getColumnModel().getColumn(4);
+        colunaInv.setMinWidth(0);
+        colunaInv.setMaxWidth(0);
+        colunaInv.setWidth(0);
+        colunaInv.setPreferredWidth(0);
+
     }
 
-    private void finalizaVenda(Vendedor  vendedor){
+    private void finalizaVenda(){
         String cliente = clienteTxt.getText();
         String cpf = cpfTxt.getText();
         codigoVenda = codVendaTxt.getText();
@@ -250,7 +259,6 @@ public class TelaNovaVenda extends JDialog {
             JOptionPane.showMessageDialog(null, "Preencha os campos");
             return;
         }
-
         Cliente cliente1;
         try {
              cliente1 = new Cliente(cliente, cpf);
@@ -265,6 +273,26 @@ public class TelaNovaVenda extends JDialog {
         Pedido venda = new Pedido(codigoVenda,cliente1,horaPedido, formaPagamento, 0, listProd, valorVenda);
         vendedorOperaController.adicionarVenda(venda);
         JOptionPane.showMessageDialog(TelaNovaVenda.this, "Venda realizada com sucesso!");
+        clean();
+    }
+
+    public void lancaAlteracaoPedido(){
+        String cliente = clienteTxt.getText();
+        String cpf = cpfTxt.getText();
+        codigoVenda = codVendaTxt.getText();
+        Cliente cliente1;
+        try {
+            cliente1 = new Cliente(cliente, cpf);
+        } catch(IllegalArgumentException e){
+            JOptionPane.showMessageDialog(null,"CPF Inválido!");
+            return;
+        }
+        String formaPagamento = pgtoCombo.getSelectedItem().toString();
+        Double valorVenda = Double.parseDouble(totalTxt.getText());
+        horaPedido = new Date();
+
+        Pedido solicita = new Pedido(codigoVenda,cliente1,horaPedido, formaPagamento, 0, listProd, valorVenda);
+        new TelaMotivo(this.vendedorOperaController, solicita);
         clean();
     }
 

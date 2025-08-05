@@ -1,6 +1,7 @@
 package controller.vendedor;
 
 import controller.gerente.VendedorController;
+import model.Franquia;
 import model.Pedido;
 import model.Pessoas.Vendedor;
 
@@ -14,5 +15,9 @@ public class VendedorOperaController {
 
     public void adicionarVenda(Pedido venda){
         vendedor.adicionaPedido(venda);
+    }
+
+    public Franquia retornaFranquia(){
+        return vendedor.getFranquia();
     }
 }

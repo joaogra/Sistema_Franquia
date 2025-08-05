@@ -58,6 +58,10 @@ public class Pedido {
         this.taxa = pedido.getTaxa();
         this.motivoSolicitacao = "";
     }
+
+    public void setMotivo(String motivo){this.motivoSolicitacao=motivo;}
+
+
     public Double getTotal(){
         Double total = 0.0;
         for(Produto produto : produtos.keySet()){

@@ -1,0 +1,18 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Sistema_Franquia:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Sistema_Franquia_jar</output-path>
+    <root id="archive" name="Sistema_Franquia.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="Sistema_Franquia" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/br/com/caelum/stella/caelum-stella-core/2.1.2/caelum-stella-core-2.1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/br/com/caelum/stella/caelum-stella-bean-validation/2.1.2/caelum-stella-bean-validation-2.1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/errorprone/error_prone_annotations/2.38.0/error_prone_annotations-2.38.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/javax/validation/validation-api/1.0.0.GA/validation-api-1.0.0.GA.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.13.1/gson-2.13.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/net/vidageek/mirror/1.5/mirror-1.5.jar" path-in-jar="/" />
+      <element id="dir-copy" path="$PROJECT_DIR$/src/main/java/view" />
+    </root>
+  </artifact>
+</component>

@@ -1,7 +1,9 @@
 package view;
 
+import Exceptions.SenhaInvalidaException;
+import Exceptions.UsuarioNaoCadastradoException;
 import controller.Arquivo;
-import controller.FuncionarioController;
+import controller.LoginController;
 import model.Pessoas.Dono;
 
 import javax.swing.*;
@@ -21,7 +23,7 @@ public class TelaLogin extends JDialog {
 
     public TelaLogin(Dono dono){
 
-        FuncionarioController funcionarioController = new FuncionarioController(dono);
+        LoginController loginController = new LoginController(dono);
 
         sairBtn.addActionListener(new ActionListener() {
             @Override
@@ -34,7 +36,14 @@ public class TelaLogin extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 String cpf = cpfTxt.getText();
                 String senha = String.valueOf(passwordField1.getPassword());
-                funcionarioController.verificaNoSitema(cpf, senha);
+                try {
+                    if (loginController.verificaNoSitema(cpf, senha)) {
+
+                    }
+                }
+                catch (UsuarioNaoCadastradoException | SenhaInvalidaException ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                }
             }
         });
     }

@@ -14,8 +14,8 @@ import java.util.Map;
 
 public class TelaMenuGerente extends TelaMenu {
     private Gerente gerente;
-    public TelaMenuGerente(JFrame parent,Dono dono,Gerente gerente) {
-        super(parent,dono,gerente);
+    public TelaMenuGerente(Dono dono,Gerente gerente) {
+        super(null,dono,gerente);
         setTitle("Menu Tela Gerente");
         this.gerente = gerente;
         getTitulo().setText("Menu Principal");
@@ -68,6 +68,6 @@ public class TelaMenuGerente extends TelaMenu {
         v3.setNumVendas(40);
 
         Dono dono1 = new Dono("Jorge", "14945740712", "jorge@empresa.com", "senha123", List.of(franquia));
-        new TelaMenuGerente(new JFrame(),dono1,gerente1).setVisible(true);
+        new TelaMenuGerente(dono1,gerente1).setVisible(true);
     }
 }

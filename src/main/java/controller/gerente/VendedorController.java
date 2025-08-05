@@ -1,18 +1,24 @@
 package controller.gerente;
 
 import Exceptions.CPFJaCadastradoException;
+import controller.FuncionarioController;
 import model.Franquia;
 import model.Pessoas.Gerente;
 import model.Pessoas.Vendedor;
 import model.Produto;
+import view.telasVendedor.TelaVendedor;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class VendedorController {
+public class VendedorController extends FuncionarioController {
     private Franquia franquia;
+    private Vendedor vendedor;
     public VendedorController(Franquia franquia) {
         this.franquia = franquia;
+    }
+    public VendedorController(Vendedor vendedor) {
+        this.vendedor = vendedor;
     }
     public List<Object[]> listarVendedorParaTabela() {
         List<Vendedor> vendedores = new ArrayList<>(franquia.getVendedores());
@@ -75,5 +81,9 @@ public class VendedorController {
         vendedor.setNome(vendedorEditado.getNome());
         vendedor.setEmail(vendedorEditado.getEmail());
         vendedor.setSenha(vendedorEditado.getSenha());
+    }
+    @Override
+    protected void abrirTela() {
+        new TelaVendedor(vendedor).setVisible(true);
     }
 }

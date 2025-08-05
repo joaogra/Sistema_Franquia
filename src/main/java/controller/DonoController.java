@@ -8,13 +8,14 @@ import model.Endereco;
 import model.Franquia;
 import model.Pessoas.Dono;
 import model.Pessoas.Gerente;
+import view.telasDono.TelaMenuDono;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DonoController {
+public class DonoController extends FuncionarioController {
     Dono dono;
-    public DonoController(Dono dono) {
+    public DonoController(Dono dono)  {
         this.dono = dono;
     }
     public List<Object[]> listaFranquias() {
@@ -84,5 +85,10 @@ public class DonoController {
     }
     public boolean removeFranquia(Franquia franquia) {
         return dono.getListaFranquias().remove(franquia);
+    }
+
+    @Override
+    protected void abrirTela() {
+        new TelaMenuDono(dono).setVisible(true);
     }
 }

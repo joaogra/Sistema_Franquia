@@ -34,11 +34,11 @@ public class TelaMenuDono extends JFrame {
     private JLabel boasVindasTxt;
     private DonoController donoController;
 
-    public TelaMenuDono(JFrame parent, Dono dono) {
+    public TelaMenuDono(Dono dono) {
         super("Menu Dono");
         setContentPane(painelMenu);
         setSize(1000,640);
-        setLocationRelativeTo(parent);
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         boasVindasTxt.setText("Seja bem vindo " + dono.getNome().split(" ")[0]);
         this.donoController = new DonoController(dono);
@@ -99,7 +99,7 @@ public class TelaMenuDono extends JFrame {
             int linhaEscolhida = tabelaFranquias.getSelectedRow();
             if(linhaEscolhida != -1){
                 Franquia franquia = (Franquia) tabelaFranquias.getValueAt(linhaEscolhida,4);
-                new TelaRankingVendedores(parent,franquia).setVisible(true);
+                new TelaRankingVendedores(TelaMenuDono.this,franquia).setVisible(true);
             }
             else{
                 JOptionPane.showMessageDialog(null,"Escolha uma franquia!");
@@ -132,7 +132,7 @@ public class TelaMenuDono extends JFrame {
             int linhaEscolhida = tabelaFranquias.getSelectedRow();
             if(linhaEscolhida != -1) {
                 Franquia franquia = (Franquia) tabelaFranquias.getValueAt(linhaEscolhida, 4);
-                new TelaResumoFinanceiro(parent, franquia).setVisible(true);
+                new TelaResumoFinanceiro(TelaMenuDono.this, franquia).setVisible(true);
             }
             else{
                 JOptionPane.showMessageDialog(null,"Escolha uma franquia para vizualizar o relatório!");
@@ -174,7 +174,7 @@ public class TelaMenuDono extends JFrame {
         Franquia franquia = new Franquia("nome",endereco,gerente1, List.of(v1,v2,v3),estoque);
         gerente1.associaGerenteFranquia(franquia);
         Dono dono1 = new Dono("Pericles","14518498690","@blalbalba","1234567",List.of(franquia));
-        new TelaMenuDono(new JFrame(),dono1).setVisible(true);
+        new TelaMenuDono(dono1).setVisible(true);
     }
     public void atualizarTabela() {
         String[] colunas = {"Franquia", "Endereço", "Gerente", "Lucro","Franquia"};

@@ -1,5 +1,7 @@
 package model.Pessoas;
 
+import Exceptions.CodigoPedidoJaCadastradoException;
+import Exceptions.QuantidadeProdutoInsuficienteException;
 import model.Franquia;
 import model.Pedido;
 import model.Produto;
@@ -33,7 +35,7 @@ public class Vendedor extends Funcionario {
     public void setNumVendas(int numVendas) { this.numVendas = numVendas;}
     public void setValorTotalVendas(float valPedidoAtual) { this.valorTotalVendas += valPedidoAtual;}
     //
-    public boolean adicionaPedido(Pedido pedido) {
+    public boolean adicionaPedido(Pedido pedido) throws CodigoPedidoJaCadastradoException, QuantidadeProdutoInsuficienteException {
         if(!this.historicoPedidos.containsKey(pedido.getCod())) {
             List<Produto> produtosPedido = new ArrayList<>();
             Set<String> listaCodigos = pedido.getMapProdutos().keySet();
@@ -43,7 +45,7 @@ public class Vendedor extends Funcionario {
 
             for(Produto produto : produtosPedido){
                 if(produto.getQuantidadeEstoque() < pedido.getMapProdutos().get(produto.getCod())){
-                    return false;
+                    throw new QuantidadeProdutoInsuficienteException("Não tem quantidade suficiente do produto!");
                 }
             }
             historicoPedidos.put(pedido.getCod(), pedido);
@@ -62,7 +64,7 @@ public class Vendedor extends Funcionario {
             this.numVendas++;
             return true;
         }
-        return false;
+        throw new CodigoPedidoJaCadastradoException("Codigo pedido ja esta cadastrado!");
     }
     public float valorTotalVendas() {
         float somaVendas = 0;
@@ -70,5 +72,8 @@ public class Vendedor extends Funcionario {
             somaVendas += pedido.getValVenda();
         }
         return somaVendas;
+    }
+    public boolean jaExistePedido(String cod) {
+        return historicoPedidos.containsKey(cod);
     }
 }

@@ -1,5 +1,7 @@
 package controller.vendedor;
 
+import Exceptions.CodigoPedidoJaCadastradoException;
+import Exceptions.QuantidadeProdutoInsuficienteException;
 import controller.gerente.VendedorController;
 import model.Franquia;
 import model.Pedido;
@@ -13,7 +15,7 @@ public class VendedorOperaController {
         this.vendedor = v1;
     }
 
-    public boolean adicionarVenda(Pedido venda){
+    public boolean adicionarVenda(Pedido venda) throws CodigoPedidoJaCadastradoException, QuantidadeProdutoInsuficienteException {
         return vendedor.adicionaPedido(venda);
     }
 
@@ -22,5 +24,8 @@ public class VendedorOperaController {
     }
     public Vendedor getVendedor() {
         return vendedor;
+    }
+    public boolean jaExistePedido(String cod) {
+        return vendedor.jaExistePedido(cod);
     }
 }

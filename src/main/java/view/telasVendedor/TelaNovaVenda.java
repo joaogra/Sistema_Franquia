@@ -1,5 +1,7 @@
 package view.telasVendedor;
 
+import Exceptions.CodigoPedidoJaCadastradoException;
+import Exceptions.QuantidadeProdutoInsuficienteException;
 import controller.gerente.PedidoController;
 import controller.vendedor.VendedorOperaController;
 import model.Pedido;
@@ -48,6 +50,7 @@ public class TelaNovaVenda extends JDialog {
 
     public TelaNovaVenda(JFrame parent, Vendedor vendedor) {
         this.vendedor = vendedor;
+        codVendaTxt.setEditable(false);
         setContentPane(telaNovaVenda);
         setTitle("Nova Venda");
         setMinimumSize(new Dimension(650,500));
@@ -249,36 +252,45 @@ public class TelaNovaVenda extends JDialog {
 
     }
 
-    private void finalizaVenda(){
+    private void finalizaVenda() {
         ValidadorEntradas validadorCampoVazio = new ValidadorCampoVazio();
         String cliente = clienteTxt.getText().trim().toUpperCase();
-        String cpf = cpfTxt.getText().trim().replaceAll("\\D","");
-        codigoVenda = codVendaTxt.getText().trim();
-        if(validadorCampoVazio.validar(cliente) || validadorCampoVazio.validar(cpf)
-                || validadorCampoVazio.validar(codigoVenda)){
+        String cpf = cpfTxt.getText().trim().replaceAll("\\D", "");
+
+        if (validadorCampoVazio.validar(cliente) || validadorCampoVazio.validar(cpf)) {
             JOptionPane.showMessageDialog(null, validadorCampoVazio.getMensagemErro());
             return;
         }
+
         Cliente cliente1;
         try {
-             cliente1 = new Cliente(cliente, cpf);
-        } catch(IllegalArgumentException e){
-            JOptionPane.showMessageDialog(null,"CPF Inválido!");
+            cliente1 = new Cliente(cliente, cpf);
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(null, "CPF Inválido!");
             return;
         }
+
         String formaPagamento = pgtoCombo.getSelectedItem().toString();
         Double valorVenda = Double.parseDouble(totalTxt.getText());
         horaPedido = new Date();
 
-        Pedido venda = new Pedido(codigoVenda,cliente1,horaPedido, formaPagamento, 0, listProd, valorVenda);
-        if(vendedorOperaController.adicionarVenda(venda)) {
-            JOptionPane.showMessageDialog(TelaNovaVenda.this, "Venda realizada com sucesso!");
-            clean();
+        // Gerar código único e garantir que não exista
+        do {
+            codigoVenda = gerarCodigoUnico();
+        } while (vendedorOperaController.jaExistePedido(codigoVenda));
+
+        Pedido venda = new Pedido(codigoVenda, cliente1, horaPedido, formaPagamento, 0, listProd, valorVenda);
+        try {
+            if (vendedorOperaController.adicionarVenda(venda)) {
+                JOptionPane.showMessageDialog(TelaNovaVenda.this, "Venda realizada com sucesso!");
+                clean();
+            }
         }
-        else{
-            JOptionPane.showMessageDialog(null,"Não é possivel adicionar um pedido com codigo repetido!");
+        catch (CodigoPedidoJaCadastradoException | QuantidadeProdutoInsuficienteException e){
+            JOptionPane.showMessageDialog(null,e.getMessage());
         }
     }
+
 
     public void lancaAlteracaoPedido(){
         String cliente = clienteTxt.getText().trim();
@@ -300,5 +312,7 @@ public class TelaNovaVenda extends JDialog {
         new TelaMotivo(this.vendedorOperaController, solicita).setVisible(true);
         dispose();
     }
-
+    private String gerarCodigoUnico() {
+        return String.valueOf(System.currentTimeMillis());
+    }
 }

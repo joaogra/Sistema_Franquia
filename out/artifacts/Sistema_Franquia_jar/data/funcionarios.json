@@ -108,7 +108,7 @@
       },
       "vendedores": [
         {
-          "numVendas": 1,
+          "numVendas": 2,
           "historicoPedidos": {
             "0000123": {
               "cod": "0000123",
@@ -160,6 +160,23 @@
               "formaPagamento": "Dinheiro",
               "taxa": 0.0,
               "motivoSolicitacao": ""
+            },
+            "1754430411673": {
+              "cod": "1754430411673",
+              "produtos": {
+                "003": 5
+              },
+              "valVenda": 50.0,
+              "cliente": {
+                "quantidadeCompras": 1,
+                "gastoTotal": 50.0,
+                "nome": "ALVIN",
+                "CPF": "20352613092"
+              },
+              "horario": "Aug 5, 2025, 6:46:51 PM",
+              "formaPagamento": "Dinheiro",
+              "taxa": 0.0,
+              "motivoSolicitacao": ""
             }
           },
           "valorTotalVendas": 0.0,
@@ -181,7 +198,7 @@
         "estoque": {
           "003": {
             "preco": 10.0,
-            "quantidadeEstoque": -4,
+            "quantidadeEstoque": 9990,
             "cod": "003",
             "nome": "PRODUTO 6"
           }

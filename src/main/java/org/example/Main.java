@@ -12,5 +12,6 @@ public class Main {
         Arquivo arquivo = new Arquivo();
         Dono dono = arquivo.inicializa();
         new TelaLogin(dono).setVisible(true);
+        //arquivo.salvar(dono);
     }
 }

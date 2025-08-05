@@ -14,8 +14,7 @@ import java.util.Map;
 
 public class TelaMenuGerente extends TelaMenu {
     private Gerente gerente;
-    private Franquia franquia;
-    public TelaMenuGerente(Dono dono,Gerente gerente,Franquia franquia) {
+    public TelaMenuGerente(Dono dono,Gerente gerente) {
         super(null,dono,gerente);
         setTitle("Menu Tela Gerente");
         this.gerente = gerente;
@@ -24,12 +23,12 @@ public class TelaMenuGerente extends TelaMenu {
         getButton2().setText("Pedidos");
         getButton3().setText("Estoque");
         getButton4().setText("Relatorio");
-        this.franquia = franquia;
+
 
     }
     @Override
     public void confirmaBtn1(){
-        new TelaListaVendedores(TelaMenuGerente.this,franquia).setVisible(true);
+        new TelaListaVendedores(TelaMenuGerente.this,gerente.getFranquia()).setVisible(true);
     }
     @Override
     public void confirmaBtn2(){

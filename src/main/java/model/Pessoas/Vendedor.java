@@ -4,6 +4,7 @@ import model.Franquia;
 import model.Pedido;
 import model.Produto;
 
+import javax.swing.*;
 import java.util.*;
 
 public class Vendedor extends Funcionario {
@@ -33,12 +34,13 @@ public class Vendedor extends Funcionario {
     public void setValorTotalVendas(float valPedidoAtual) { this.valorTotalVendas += valPedidoAtual;}
     //
     public boolean adicionaPedido(Pedido pedido) {
-        if(!historicoPedidos.containsKey(pedido.getCod())) {
+        if(!this.historicoPedidos.containsKey(pedido.getCod())) {
             List<Produto> produtosPedido = new ArrayList<>();
             Set<String> listaCodigos = pedido.getMapProdutos().keySet();
             for(String codigo : listaCodigos){
                 produtosPedido.add(franquia.getEstoque().buscaProduto(codigo));
             }
+
             for(Produto produto : produtosPedido){
                 if(produto.getQuantidadeEstoque() < pedido.getMapProdutos().get(produto.getCod())){
                     return false;
@@ -56,6 +58,8 @@ public class Vendedor extends Funcionario {
             }
             pedido.getCliente().setQuantidadeCompras();
             pedido.getCliente().setGastoTotal( pedido.getValVenda());
+            JOptionPane.showMessageDialog(null,"aaaa");
+            this.numVendas++;
             return true;
         }
         return false;

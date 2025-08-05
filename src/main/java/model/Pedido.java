@@ -28,7 +28,7 @@ public class Pedido {
         this.produtos = produtos;
     }
 
-    public String getCod(){return cod;}
+    public String getCod(){return this.cod;}
 
     public Cliente getCliente(){return cliente;}
 

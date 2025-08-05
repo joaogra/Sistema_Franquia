@@ -39,7 +39,7 @@ public class TelaVisualizaEstoque extends JDialog{
             int linhaEscolhida = tabelaEstoque.getSelectedRow();
             if (linhaEscolhida != -1) {
                 int resposta = JOptionPane.showConfirmDialog(null,
-                        "Tem certeza que deseja remover o gerente?", "Confirmação",
+                        "Tem certeza que deseja remover o produto?", "Confirmação",
                         JOptionPane.YES_NO_OPTION);
                 if (resposta == JOptionPane.YES_OPTION) {
                     String codigo = (String) tabelaEstoque.getValueAt(linhaEscolhida, 0);

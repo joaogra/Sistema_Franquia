@@ -42,7 +42,7 @@ public class TelaEditarProduto extends TelaProduto {
             }
             Produto novoProduto = new Produto(preco, quantidade, codigo, nome);
             produtoController.editarProduto(codigo,novoProduto);
-            getGerente().getFranquia().getEstoque().editarProduto(codigo, novoProduto);
+            //getGerente().getFranquia().getEstoque().editarProduto(codigo, novoProduto);
             JOptionPane.showMessageDialog(null, "Produto editado com sucesso!");
             dispose();
         }

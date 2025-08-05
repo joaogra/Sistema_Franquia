@@ -41,6 +41,6 @@ public class Estoque {
         Produto produtoAtual = estoque.get(codigo);
         produtoAtual.setNome(produtoNovo.getNome());
         produtoAtual.setPreco(produtoNovo.getPreco());
-        produtoAtual.setQuantidadeEstoque(produtoNovo.getQuantidadeEstoque());
+        produtoAtual.setQuandidadeEditada(produtoNovo.getQuantidadeEstoque());
     }
 }

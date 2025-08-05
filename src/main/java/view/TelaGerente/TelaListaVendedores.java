@@ -21,9 +21,13 @@ public class TelaListaVendedores extends JDialog{
     private JLabel titulo;
     private JLabel infoTabela;
     private VendedorController vendedorController;
-
+    private Franquia franquia;
     public TelaListaVendedores(JFrame parent, Franquia franquia) {
         super(parent,"Lista de Vendedores",true);
+        this.franquia = franquia;
+        if(franquia == null){
+            System.out.println("aaaaaabbbcc");
+        }
         setContentPane(painelListaVendedor);
         setSize(800,600);
         setLocationRelativeTo(parent);

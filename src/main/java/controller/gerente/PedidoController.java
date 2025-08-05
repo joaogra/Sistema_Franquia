@@ -9,6 +9,7 @@ import model.Produto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class PedidoController {
     private Franquia franquia;
@@ -17,10 +18,6 @@ public class PedidoController {
     public PedidoController(Franquia franquia) {
         this.franquia = franquia;
     }
-    public PedidoController() {}
-
-    public PedidoController(Pedido pedido){this.pedido = pedido;}
-    public PedidoController(Vendedor vendedor){this.vendedor = vendedor;}
     public List<Object[]> listaPedidosParaTabela() {
         List<Object[]> listaPedidos = new ArrayList<>();
         for(Vendedor vendedor : franquia.getVendedores()) {
@@ -59,12 +56,19 @@ public class PedidoController {
     }
     public List<Object[]> listaProdutosUnicoPedido(Pedido pedido) {
         List<Object[]> listaProdutos = new ArrayList<>();
-        for(Produto produto : pedido.getProdutos()) {
+        List<Produto> produtosPedido = new ArrayList<>();
+
+        Set<String> listaCodigos = pedido.getMapProdutos().keySet();
+        for(String codigo : listaCodigos){
+            produtosPedido.add(franquia.getEstoque().buscaProduto(codigo));
+        }
+        for(Produto produto : produtosPedido) {
             Object[] linha = {
                     produto.getCod(),
                     produto.getNome(),
                     pedido.getQuantidade(produto),
-                    "R$" + String.format("%.2f",produto.getPreco())
+                    "R$" + String.format("%.2f",produto.getPreco()),
+                    produto
             };
             listaProdutos.add(linha);
         }

@@ -1,5 +1,6 @@
 package view.telasDono;
 
+import model.Franquia;
 import model.Pessoas.Gerente;
 import validadores.ValidadorCampoVazio;
 import validadores.ValidadorEmail;
@@ -9,11 +10,13 @@ import view.TelaCadastro;
 import javax.swing.*;
 
 public class TelaCadastroGerente extends TelaCadastro {
-    Gerente gerenteCadastrado;
+    private Gerente gerenteCadastrado;
+    private Franquia franquia;
     public TelaCadastroGerente(JFrame parent) {
         super(parent,"Cadastro de Gerente");
         getTitulo().setText("Cadastro de Gerente");
         this.gerenteCadastrado = null;
+        this.franquia = franquia;
     }
 
     @Override

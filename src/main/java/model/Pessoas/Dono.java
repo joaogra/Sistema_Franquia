@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Dono extends Funcionario{
 
-    List<Franquia> listaFranquias;
+    private List<Franquia> listaFranquias;
 
     public Dono(String nome, String CPF, String email,String senha, List<Franquia>listaFranquias) {
         super(nome,CPF,email,senha);

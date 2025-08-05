@@ -2,7 +2,7 @@ package model.Pessoas;
 
 public class Cliente extends Pessoa {
     private int quantidadeCompras;//vai ser por quantidade de pedidos feitos
-    private float gastoTotal;
+    private double gastoTotal;
     public Cliente(String nome, String CPF){
         super(nome, CPF);
         quantidadeCompras = 0;
@@ -11,13 +11,13 @@ public class Cliente extends Pessoa {
     public void setQuantidadeCompras() {
         this.quantidadeCompras++;
     }
-    public void setGastoTotal(float gasto) {
+    public void setGastoTotal(double gasto) {
         this.gastoTotal = gastoTotal + gasto;
     }
     public int getQuantidadeCompras() {
         return quantidadeCompras;
     }
-    public float getGastoTotal() {
+    public double getGastoTotal() {
         return gastoTotal;
     }
     @Override

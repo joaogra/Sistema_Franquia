@@ -48,7 +48,7 @@ public class TelaSolicitaAlteracao extends JDialog{
             int linha = tabelaPedidos.getSelectedRow();
             if(linha != -1) {
                 Pedido pedido = (Pedido) tabelaPedidos.getValueAt(linha, 6);
-                new TelaProdutoDoPedido(this, pedido).setVisible(true);
+                new TelaProdutoDoPedido(this, pedido,franquia).setVisible(true);
             }
             else {
                 JOptionPane.showMessageDialog(null, "Selecione um Pedido!");

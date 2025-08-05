@@ -3,6 +3,7 @@ package controller;
 import Exceptions.SenhaInvalidaException;
 import Exceptions.UsuarioNaoCadastradoException;
 import controller.gerente.VendedorController;
+import controller.gerente.VendedorTelaController;
 import model.Franquia;
 import model.Pessoas.Dono;
 import model.Pessoas.Funcionario;
@@ -13,10 +14,11 @@ import java.util.Map;
 
 public class LoginController {
 
-    Map<String, FuncionarioController> funcionariosControllers;
-    Map<String, Funcionario> funcionarios;
+    private Map<String, FuncionarioController> funcionariosControllers;
+    private Map<String, Funcionario> funcionarios;
     public LoginController(Dono dono){
-        funcionariosControllers = new LinkedHashMap<>();
+        this.funcionariosControllers = new LinkedHashMap<>();
+        this.funcionarios = new LinkedHashMap<>();
         criaListaFuncionarios(dono);
     }
 
@@ -25,12 +27,16 @@ public class LoginController {
         funcionariosControllers.put(dono.getCPF(), new DonoController(dono));
         funcionarios.put(dono.getCPF(), dono);
         for(Franquia franquia: dono.getListaFranquias()){
+            franquia.setDono(dono);
             if(franquia.getGerente() != null) {
+                franquia.getGerente().associaGerenteFranquia(franquia);
                 funcionariosControllers.put(franquia.getGerente().getCPF(), new GerenteController(dono,franquia.getGerente()));
                 funcionarios.put(franquia.getGerente().getCPF(), franquia.getGerente());
+
             }
             for(Vendedor vendedor: franquia.getVendedores()){
-                funcionariosControllers.put(vendedor.getCPF(), new VendedorController(vendedor));
+                vendedor.associaFranquia(franquia);
+                funcionariosControllers.put(vendedor.getCPF(), new VendedorTelaController(dono,vendedor));
                 funcionarios.put(vendedor.getCPF(), vendedor);
             }
         }
@@ -47,5 +53,7 @@ public class LoginController {
         }
         throw new UsuarioNaoCadastradoException("Usuario nao cadastrado!");
     }
-
+    public void logar(String CPF){
+        funcionariosControllers.get(CPF).abrirTela();
+    }
 }

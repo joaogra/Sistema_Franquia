@@ -13,6 +13,7 @@ public class GerenteController extends FuncionarioController {
     }
     @Override
     protected void abrirTela() {
-        new TelaMenuGerente(dono,gerente).setVisible(true);
+        new TelaMenuGerente(dono,gerente,dono.getListaFranquias().getFirst()).setVisible(true);
+
     }
 }

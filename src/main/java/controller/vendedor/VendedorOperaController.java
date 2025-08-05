@@ -13,11 +13,14 @@ public class VendedorOperaController {
         this.vendedor = v1;
     }
 
-    public void adicionarVenda(Pedido venda){
-        vendedor.adicionaPedido(venda);
+    public boolean adicionarVenda(Pedido venda){
+        return vendedor.adicionaPedido(venda);
     }
 
     public Franquia retornaFranquia(){
         return vendedor.getFranquia();
+    }
+    public Vendedor getVendedor() {
+        return vendedor;
     }
 }

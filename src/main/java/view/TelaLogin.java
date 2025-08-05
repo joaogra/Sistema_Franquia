@@ -11,7 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class TelaLogin extends JDialog {
+public class TelaLogin extends JFrame {
     private JLabel titulo;
     private JLabel email;
     private JPanel telaLogin;
@@ -22,12 +22,19 @@ public class TelaLogin extends JDialog {
     private JButton logarBtn;
 
     public TelaLogin(Dono dono){
-
+        setTitle("LOGIN");
+        setContentPane(telaLogin);
+        setMinimumSize(new Dimension(600,550));
+        setLocationRelativeTo(null);
+        setVisible(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         LoginController loginController = new LoginController(dono);
 
         sairBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Arquivo arquivo = new Arquivo();
+                arquivo.salvar(dono);
                 dispose();
             }
         });
@@ -38,12 +45,13 @@ public class TelaLogin extends JDialog {
                 String senha = String.valueOf(passwordField1.getPassword());
                 try {
                     if (loginController.verificaNoSitema(cpf, senha)) {
-
+                        loginController.logar(cpf);
                     }
                 }
                 catch (UsuarioNaoCadastradoException | SenhaInvalidaException ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage());
                 }
+
             }
         });
     }
@@ -53,12 +61,6 @@ public class TelaLogin extends JDialog {
         Dono dono = arquivo.inicializa();
 
         TelaLogin telaLogin = new TelaLogin(dono);
-        telaLogin.setTitle("LOGIN");
-        telaLogin.setContentPane(telaLogin.telaLogin);
-        telaLogin.setMinimumSize(new Dimension(600,550));
-        telaLogin.setModal(true);
-        telaLogin.setLocationRelativeTo(null);
-        telaLogin.setVisible(true);
     }
 
 

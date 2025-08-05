@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DonoController extends FuncionarioController {
-    Dono dono;
+    private Dono dono;
     public DonoController(Dono dono)  {
         this.dono = dono;
     }
@@ -41,6 +41,7 @@ public class DonoController extends FuncionarioController {
             throw new CPFJaCadastradoException("Esse gerente já está cadastrado no sistema!");
         }
             dono.getListaFranquias().add(franquia);
+            franquia.associarGerente(gerente);
             gerente.associaGerenteFranquia(franquia);
     }
     private boolean CPFJaCadastrado(Gerente gerente) {

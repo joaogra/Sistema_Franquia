@@ -1,6 +1,7 @@
 package view;
 
 import controller.gerente.PedidoController;
+import model.Franquia;
 import model.Pedido;
 
 import javax.swing.*;
@@ -15,14 +16,16 @@ public class TelaProdutoDoPedido extends JDialog {
     private JLabel titulo;
     private JButton fecharBtn;
     private PedidoController pedidoController;
-    public TelaProdutoDoPedido(JDialog parent, Pedido pedido){
+    private Franquia franquia;
+    public TelaProdutoDoPedido(JDialog parent, Pedido pedido, Franquia franquia){
         super(parent,"Produtos",true);
+        this.franquia = franquia;
         setContentPane(painelProdutoPedido);
         setSize(800,600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        pedidoController = new PedidoController();
+        pedidoController = new PedidoController(franquia);
 
         String[] colunas = {"Codigo","Nome","Quantidade","Preço"};
         DefaultTableModel tabela = new DefaultTableModel(colunas,0){

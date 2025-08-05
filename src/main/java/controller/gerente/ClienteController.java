@@ -30,11 +30,11 @@ public class ClienteController {
             lista.sort((c1, c2) -> Integer.compare(c2.getQuantidadeCompras(), c1.getQuantidadeCompras()));
         }
         else {
-            lista.sort((c1, c2) -> Float.compare(c2.getGastoTotal(), c1.getGastoTotal()));
+            lista.sort((c1, c2) -> Double.compare(c2.getGastoTotal(), c1.getGastoTotal()));
         }
         List<Object[]> listaOrdenada = new ArrayList<>();
         for (Cliente cliente : lista) {
-            float gastoMedio = cliente.getQuantidadeCompras() == 0 ? 0 : cliente.getGastoTotal()/cliente.getQuantidadeCompras();
+            double gastoMedio = cliente.getQuantidadeCompras() == 0 ? 0 : cliente.getGastoTotal()/cliente.getQuantidadeCompras();
             Object[] linha = {
                     cliente.getNome(),
                     cliente.getQuantidadeCompras(),

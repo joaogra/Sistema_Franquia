@@ -29,5 +29,6 @@ public class FranquiaController {
 
     public void adicionaSolitacaoPedido(Pedido pedido){
         vendedor.retornaFranquia().getPedidosParaAlterar().add(pedido);
+        vendedor.retornaFranquia().getVendedoresPedidosAlterados().add(vendedor.getVendedor());
     }
 }

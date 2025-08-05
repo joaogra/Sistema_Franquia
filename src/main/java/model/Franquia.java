@@ -1,10 +1,13 @@
 package model;
 
 import model.Pessoas.Cliente;
+import model.Pessoas.Dono;
 import model.Pessoas.Gerente;
 import model.Pessoas.Vendedor;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Franquia {
 
@@ -12,22 +15,26 @@ public class Franquia {
     private Endereco endereco;
     private Gerente gerente;
     private List<Vendedor> vendedores;
-    private List<Cliente> clientes;
+    private Set<Cliente> clientes;
     private Estoque estoque;
     private List<Vendedor> vendedoresPedidosAlterados;
     private List<Pedido> pedidosParaAlterar;
-
+    private transient Dono dono;
 
     //tirar lista de vendedores do construtor so esta servindo para fins de testes e o estoque tbm
-    public Franquia(String nome, Endereco endereco, Gerente gerente, List<Vendedor> vendedores, Estoque estoque) {
+    public Franquia(String nome, Endereco endereco, List<Vendedor> vendedores, Estoque estoque, Dono dono) {
         this.nome = nome.toUpperCase();
         this.endereco = endereco;
-        this.gerente = gerente;
         this.vendedores = new ArrayList<>(vendedores);
-        this.clientes = new ArrayList<>();
+        this.clientes = new HashSet<>();
         this.estoque = estoque;
         this.vendedoresPedidosAlterados = new ArrayList<>();
         this.pedidosParaAlterar = new ArrayList<>();
+        this.dono = dono;
+    }
+
+    public Set<Cliente> getClientes() {
+        return clientes;
     }
 
     public void adicionarCliente(Cliente cliente) {
@@ -37,6 +44,9 @@ public class Franquia {
     }
 
     //GETTERS
+    public Dono getDono() {
+        return dono;
+    }
     public String getNome() {
         return nome;
     }
@@ -67,6 +77,9 @@ public class Franquia {
     }
 
     //SETTERS
+    public void setDono(Dono dono) {
+        this.dono = dono;
+    }
     public void setNome(String nome) {
         this.nome = nome;
     }

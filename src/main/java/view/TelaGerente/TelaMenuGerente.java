@@ -14,7 +14,8 @@ import java.util.Map;
 
 public class TelaMenuGerente extends TelaMenu {
     private Gerente gerente;
-    public TelaMenuGerente(Dono dono,Gerente gerente) {
+    private Franquia franquia;
+    public TelaMenuGerente(Dono dono,Gerente gerente,Franquia franquia) {
         super(null,dono,gerente);
         setTitle("Menu Tela Gerente");
         this.gerente = gerente;
@@ -23,12 +24,12 @@ public class TelaMenuGerente extends TelaMenu {
         getButton2().setText("Pedidos");
         getButton3().setText("Estoque");
         getButton4().setText("Relatorio");
-
+        this.franquia = franquia;
 
     }
     @Override
     public void confirmaBtn1(){
-        new TelaListaVendedores(TelaMenuGerente.this,gerente.getFranquia()).setVisible(true);
+        new TelaListaVendedores(TelaMenuGerente.this,franquia).setVisible(true);
     }
     @Override
     public void confirmaBtn2(){
@@ -41,7 +42,7 @@ public class TelaMenuGerente extends TelaMenu {
 
 
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         Cliente c1 = new Cliente("adrian", "14518498690");
         c1.setGastoTotal(1341234);
 
@@ -59,7 +60,7 @@ public class TelaMenuGerente extends TelaMenu {
         Vendedor v3 = new Vendedor("João Pereira", "111.444.777-35", "joao@empresa.com", "senha789",null);
         Franquia franquia = new Franquia("nome",new Endereco(),gerente1, List.of(v1,v2,v3),estoque);
         gerente1.associaGerenteFranquia(franquia);
-        Pedido pedido1 = new Pedido("001",c1 ,new Date(),"din",0.05f, Map.of(p1,15,p2,5),1000d);
+        Pedido pedido1 = new Pedido("001",c1 ,new Date(),"din",0.05f, Map.of(p1.getCod(),15,p2.getCod(),5),1000d);
         v1.adicionaPedido(pedido1);
         pedido1.setMotivoSolicitacao("motibvo aleatorio");
         gerente1.adicionarSolicitaoPedido(v1,pedido1);
@@ -69,5 +70,5 @@ public class TelaMenuGerente extends TelaMenu {
 
         Dono dono1 = new Dono("Jorge", "14945740712", "jorge@empresa.com", "senha123", List.of(franquia));
         new TelaMenuGerente(dono1,gerente1).setVisible(true);
-    }
+    }*/
 }

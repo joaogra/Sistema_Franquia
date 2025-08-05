@@ -3,6 +3,7 @@ package controller.gerente;
 import Exceptions.CPFJaCadastradoException;
 import controller.FuncionarioController;
 import model.Franquia;
+import model.Pessoas.Dono;
 import model.Pessoas.Gerente;
 import model.Pessoas.Vendedor;
 import model.Produto;
@@ -11,16 +12,17 @@ import view.telasVendedor.TelaVendedor;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VendedorController extends FuncionarioController {
+public class VendedorController {
     private Franquia franquia;
     private Vendedor vendedor;
+    private Dono dono;
     public VendedorController(Franquia franquia) {
         this.franquia = franquia;
     }
-    public VendedorController(Vendedor vendedor) {
-        this.vendedor = vendedor;
-    }
     public List<Object[]> listarVendedorParaTabela() {
+        if(franquia == null){
+            return new ArrayList<>();
+        }
         List<Vendedor> vendedores = new ArrayList<>(franquia.getVendedores());
 
         vendedores.sort((v1, v2) -> Integer.compare(v2.getNumVendas(), v1.getNumVendas()));
@@ -70,9 +72,19 @@ public class VendedorController extends FuncionarioController {
         franquia.getGerente().adicionarVendedor(vendedor);
     }
     private boolean CPFJaCadastrado(Vendedor vendedor) {
-        for(Vendedor v : franquia.getVendedores())  {
-            if(v.getCPF().equals(vendedor.getCPF())) {
-                return true;
+        if(vendedor.getCPF().equals(franquia.getDono().getCPF())) {
+            return true;
+        }
+        for(Franquia f : franquia.getDono().getListaFranquias()) {
+            if(franquia.getGerente() != null) {
+                if (vendedor.getCPF().equals(f.getGerente().getCPF())) {
+                    return true;
+                }
+            }
+            for (Vendedor v : franquia.getVendedores()) {
+                if (v.getCPF().equals(vendedor.getCPF())) {
+                    return true;
+                }
             }
         }
         return false;
@@ -81,9 +93,5 @@ public class VendedorController extends FuncionarioController {
         vendedor.setNome(vendedorEditado.getNome());
         vendedor.setEmail(vendedorEditado.getEmail());
         vendedor.setSenha(vendedorEditado.getSenha());
-    }
-    @Override
-    protected void abrirTela() {
-        new TelaVendedor(vendedor).setVisible(true);
     }
 }

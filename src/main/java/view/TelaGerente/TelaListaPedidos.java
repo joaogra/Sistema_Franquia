@@ -19,8 +19,10 @@ public class TelaListaPedidos extends JDialog {
     private JButton fecharBtn;
     private JButton viewProdutos;
     private PedidoController pedidoController;
+    private Franquia franquia;
     public TelaListaPedidos(JFrame parent, Franquia franquia) {
         super(parent, "Lista de pedidos", true);
+        this.franquia = franquia;
         setContentPane(painelListaPedidos);
         setSize(1280,720);
         setLocationRelativeTo(null);
@@ -32,7 +34,7 @@ public class TelaListaPedidos extends JDialog {
             int linha = tabelaPedidos.getSelectedRow();
             if(linha != -1) {
                 Pedido pedido = (Pedido) tabelaPedidos.getValueAt(linha, 5);
-                new TelaProdutoDoPedido(TelaListaPedidos.this, pedido).setVisible(true);
+                new TelaProdutoDoPedido(TelaListaPedidos.this, pedido,franquia).setVisible(true);
             }
             else {
                 JOptionPane.showMessageDialog(null, "Selecione um Pedido!");

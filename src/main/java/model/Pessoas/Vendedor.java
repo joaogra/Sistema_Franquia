@@ -2,15 +2,16 @@ package model.Pessoas;
 
 import model.Franquia;
 import model.Pedido;
+import model.Produto;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Vendedor extends Funcionario {
     private transient Franquia franquia;
     private int numVendas;
     private Map<String, Pedido> historicoPedidos;
     private float valorTotalVendas;
+
     public Vendedor(String nome, String CPF, String email,String senha,Franquia franquia) {
         super(nome,CPF, email,senha);
         this.numVendas = 0;
@@ -25,12 +26,36 @@ public class Vendedor extends Funcionario {
 
     public float getValorTotalVendas(){return valorTotalVendas;}
     //SETTERS
+    public void associaFranquia(Franquia franquia) {
+        this.franquia = franquia;
+    }
     public void setNumVendas(int numVendas) { this.numVendas = numVendas;}
     public void setValorTotalVendas(float valPedidoAtual) { this.valorTotalVendas += valPedidoAtual;}
     //
     public boolean adicionaPedido(Pedido pedido) {
         if(!historicoPedidos.containsKey(pedido.getCod())) {
+            List<Produto> produtosPedido = new ArrayList<>();
+            Set<String> listaCodigos = pedido.getMapProdutos().keySet();
+            for(String codigo : listaCodigos){
+                produtosPedido.add(franquia.getEstoque().buscaProduto(codigo));
+            }
+            for(Produto produto : produtosPedido){
+                if(produto.getQuantidadeEstoque() < pedido.getMapProdutos().get(produto.getCod())){
+                    return false;
+                }
+            }
             historicoPedidos.put(pedido.getCod(), pedido);
+            if(!franquia.getClientes().contains(pedido.getCliente())) {
+                franquia.adicionarCliente(pedido.getCliente());
+            }
+            for(String codigo : listaCodigos){
+                produtosPedido.add(franquia.getEstoque().buscaProduto(codigo));
+            }
+            for(Produto produto : produtosPedido){
+                produto.setQuantidadeEstoque(pedido.getMapProdutos().get(produto.getCod()));
+            }
+            pedido.getCliente().setQuantidadeCompras();
+            pedido.getCliente().setGastoTotal( pedido.getValVenda());
             return true;
         }
         return false;

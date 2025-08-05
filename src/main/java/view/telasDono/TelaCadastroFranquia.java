@@ -73,6 +73,7 @@ public class TelaCadastroFranquia extends JDialog {
             if (!buscarEnderecoPorCep(cep)) {
                 return;
             }
+
             TelaCadastroGerente telaCadastroGerente = new TelaCadastroGerente(parent);
             telaCadastroGerente.setVisible(true);
             Gerente gerenteCadastrado = telaCadastroGerente.getGerenteCadastrado();
@@ -80,11 +81,9 @@ public class TelaCadastroFranquia extends JDialog {
                 JOptionPane.showMessageDialog(null, "Obrigátorio associar um gerente a franquia!");
                 return;
             }
-
             String[] informacoes = {cep,cidade,estado,rua,bairro,complemento,numero};
-
             Endereco CEP = donoController.cadastraCEP(informacoes);
-            Franquia franquia = new Franquia(nome,CEP,gerenteCadastrado, new ArrayList<>(), new Estoque());
+            Franquia franquia = new Franquia(nome,CEP, new ArrayList<>(), new Estoque(),dono);
             try {
                 donoController.cadastrarFranquia(franquia,gerenteCadastrado);
                 JOptionPane.showMessageDialog(null, "Franquia cadastrada com sucesso!");

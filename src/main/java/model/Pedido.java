@@ -10,14 +10,14 @@ import java.util.Map;
 public class Pedido {
 
     private String cod;
-    private Map<Produto,Integer> produtos;
+    private Map<String,Integer> produtos;
     private Double valVenda;
     private Cliente cliente;
     private Date horario;
     private  String formaPagamento;
     private float taxa;
     private String motivoSolicitacao;
-    public Pedido(String cod, Cliente cliente, Date horario, String formaPagamento, float taxa, Map<Produto,Integer> produtos, Double valVenda) {
+    public Pedido(String cod, Cliente cliente, Date horario, String formaPagamento, float taxa, Map<String,Integer> produtos, Double valVenda) {
         this.cod = cod;
         this.cliente = cliente;
         this.horario = horario;
@@ -27,7 +27,7 @@ public class Pedido {
         this.motivoSolicitacao = "";
         this.produtos = produtos;
     }
-    public List<Produto> getProdutos(){return new ArrayList<>(produtos.keySet());}
+
     public String getCod(){return cod;}
 
     public Cliente getCliente(){return cliente;}
@@ -40,16 +40,11 @@ public class Pedido {
     public  String getMotivoSolicitacao(){return motivoSolicitacao;}
 
     public float getTaxa(){return taxa;}
-    public Integer getQuantidade(Produto produto){return produtos.get(produto);}
-    public Map<Produto,Integer> getMapProdutos(){return produtos;}
+    public int getQuantidade(Produto produto){return produtos.get(produto.getCod());}
+    public Map<String,Integer> getMapProdutos(){return produtos;}
     public void setMotivoSolicitacao(String motivoSolicitacao){this.motivoSolicitacao = motivoSolicitacao;}
-    public void setCod(String cod){this.cod = cod;}
-
     public void setCliente(Cliente cliente){this.cliente = cliente;}
 
-    public void setHorario(Date horario){this.horario = horario;}
-
-    public void setTaxa(float taxa){this.taxa = taxa;}
 
     public void setPedido(Pedido pedido){
         this.valVenda = pedido.getValVenda();
@@ -58,20 +53,5 @@ public class Pedido {
         this.taxa = pedido.getTaxa();
         this.motivoSolicitacao = "";
     }
-
     public void setMotivo(String motivo){this.motivoSolicitacao=motivo;}
-
-
-    public Double getTotal(){
-        Double total = 0.0;
-        for(Produto produto : produtos.keySet()){
-            total+=produto.getPreco()* produtos.get(produto);
-        }
-        return total;
-    }
-
-    public Map<Produto, Integer> getMapaPedidos(){
-        return produtos;
-    }
-
 }

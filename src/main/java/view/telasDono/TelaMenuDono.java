@@ -2,6 +2,7 @@ package view.telasDono;
 
 import Exceptions.CPFJaCadastradoException;
 import Exceptions.FranquiaNaoPossuiGerenteException;
+import controller.Arquivo;
 import controller.DonoController;
 import model.*;
 import model.Pessoas.Cliente;
@@ -140,20 +141,22 @@ public class TelaMenuDono extends JFrame {
         });
 
         logoutBtn.addActionListener(e -> {
-           this.dispose();
+            Arquivo arquivo = new Arquivo();
+            arquivo.salvar(dono);
+            this.dispose();
         });
 
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e){
-                //Arquivo arquivo = new Arquivo();
-                //arquivo.salvar(dono);
+                Arquivo arquivo = new Arquivo();
+                arquivo.salvar(dono);
                 dispose();
             }
         });
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         Cliente c1 = new Cliente("adrian", "14518498690");
         Produto p1 = new Produto( 10.0f, 51,"001", "Produto A");
         Produto p2 = new Produto( 20.5f, 33,"002","Produto B");
@@ -161,7 +164,7 @@ public class TelaMenuDono extends JFrame {
         estoque.getEstoque().put(p1.getCod(), p1);
         estoque.getEstoque().put(p2.getCod(), p2);
         Vendedor v1 = new Vendedor("Carlos Silva","123.456.789-09", "carlos@empresa.com", "senha123",null);
-        Pedido pedido1 = new Pedido("001",c1 ,new Date(),"din",0.05f, Map.of(p1,15,p2,5),1000d);
+        Pedido pedido1 = new Pedido("001",c1 ,new Date(),"din",0.05f, Map.of(p1.getCod(),15,p2.getCod(),5),1000d);
         v1.adicionaPedido(pedido1);
         Vendedor v2 = new Vendedor("Marina Costa", "987.654.321-00", "marina@empresa.com", "senha456",null);
         Vendedor v3 = new Vendedor("João Pereira", "111.444.777-35", "joao@empresa.com", "senha789",null);
@@ -175,7 +178,7 @@ public class TelaMenuDono extends JFrame {
         gerente1.associaGerenteFranquia(franquia);
         Dono dono1 = new Dono("Pericles","14518498690","@blalbalba","1234567",List.of(franquia));
         new TelaMenuDono(dono1).setVisible(true);
-    }
+    }*/
     public void atualizarTabela() {
         String[] colunas = {"Franquia", "Endereço", "Gerente", "Lucro","Franquia"};
         DefaultTableModel tabela = new DefaultTableModel(colunas,0){

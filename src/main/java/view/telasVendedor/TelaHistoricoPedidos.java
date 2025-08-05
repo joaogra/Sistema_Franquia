@@ -1,5 +1,6 @@
 package view.telasVendedor;
 
+import model.Franquia;
 import model.Pedido;
 import model.Pessoas.Vendedor;
 import model.Produto;
@@ -20,7 +21,7 @@ public class TelaHistoricoPedidos extends JDialog {
     private DefaultTableModel modelo;
     private JScrollPane scroll;
 
-    public TelaHistoricoPedidos(Vendedor vendedor, Map<String, Pedido> historicoPedidos ) {
+    public TelaHistoricoPedidos(JFrame parent,Vendedor vendedor, Map<String, Pedido> historicoPedidos, Franquia franquia) {
         setContentPane(painel);
         setTitle("Historico de pedidos");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -47,7 +48,7 @@ public class TelaHistoricoPedidos extends JDialog {
                     pedido.getCliente().getNome(),
                     pedido.getHorario(),
                     pedido.getFormaPagamento(),
-                    pedido.getTotal(),
+                    pedido.getValVenda(),
                     pedido
             };
             modelo.addRow(linha);
@@ -63,7 +64,7 @@ public class TelaHistoricoPedidos extends JDialog {
             int linhaSelecionada =  tabela.getSelectedRow();
             if(linhaSelecionada != -1){
                 Pedido pedido = (Pedido) modelo.getValueAt(linhaSelecionada, 5);
-                new TelaProdutoDoPedido(TelaHistoricoPedidos.this, pedido).setVisible(true);
+                new TelaProdutoDoPedido(TelaHistoricoPedidos.this, pedido,franquia).setVisible(true);
             }else{
                 JOptionPane.showMessageDialog(null, "Nenhuma linha selecionada");
             }
@@ -73,7 +74,10 @@ public class TelaHistoricoPedidos extends JDialog {
             int linhaSelecionada =  tabela.getSelectedRow();
             if(linhaSelecionada != -1){
                 Pedido pedido = (Pedido) modelo.getValueAt(linhaSelecionada, 5);
-                new TelaNovaVenda(TelaHistoricoPedidos.this, vendedor, pedido).setVisible(true);
+                new TelaNovaVenda(parent, vendedor, pedido).setVisible(true);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Nenhuma linha selecionada");
             }
         });
 

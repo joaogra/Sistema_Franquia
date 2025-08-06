@@ -22,6 +22,7 @@ public class  TelaVendedor extends JFrame {
     private JButton btnHistorico;
     private JLabel boasVindasTxt;
     private Vendedor vendedor2;
+
     public TelaVendedor(Dono dono, Vendedor vendedor) {
         this.vendedor2 = vendedor;
         setTitle("Vendedor");
@@ -29,9 +30,6 @@ public class  TelaVendedor extends JFrame {
         setMinimumSize(new Dimension(650,500));
         setLocationRelativeTo(null);
         setVisible(true);
-        if(vendedor2 == null){
-            System.out.println("aaaaaaaaa");
-        }
         boasVindasTxt.setText("Boas vindas " + vendedor.getNome() );
 
         btnSair.addActionListener(new ActionListener() {
@@ -42,6 +40,7 @@ public class  TelaVendedor extends JFrame {
                 dispose();
             }
         });
+
         btnHistorico.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -49,6 +48,7 @@ public class  TelaVendedor extends JFrame {
                 new TelaHistoricoPedidos(TelaVendedor.this,vendedor, vendedor.getHistoricoPedidos(),vendedor.getFranquia()).setVisible(true);
             }
         });
+
         btnNovaVenda.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

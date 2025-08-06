@@ -31,11 +31,6 @@ public class TelaMotivo extends  JDialog {
         this.pedido=pedido;
         this.vendedorC=vendedor;
 
-
-        /*voltarBtn.addActionListener(e -> {
-            dispose();
-        });*/
-
         limparBtn.addActionListener(e -> {
             textArea.setText("");
         });
@@ -46,6 +41,7 @@ public class TelaMotivo extends  JDialog {
             f.adicionaSolitacaoPedido(pedido);
             dispose();
         });
+
         voltarBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

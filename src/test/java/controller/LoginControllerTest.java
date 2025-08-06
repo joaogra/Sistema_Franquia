@@ -36,7 +36,7 @@ class LoginControllerTest {
     }
 
     @Test
-    void loginSucessful() {
+    protected void loginSucessful() {
         LoginController loginController = new LoginController(dono);
         loginController.criaListaFuncionarios(dono);
         //Verifica o Dono
@@ -48,7 +48,7 @@ class LoginControllerTest {
     }
 
     @Test
-    void loginFailSenhaInvalida() {
+    protected void loginFailSenhaInvalida() {
         // Lança a exception de senha inválida
         LoginController loginController = new LoginController(dono);
         loginController.criaListaFuncionarios(dono);
@@ -58,7 +58,7 @@ class LoginControllerTest {
     }
 
     @Test
-    void loginFailUsuarioNaoCadastrado() {
+    protected void loginFailUsuarioNaoCadastrado() {
         LoginController loginController = new LoginController(dono);
         loginController.criaListaFuncionarios(dono);
         assertThrows(UsuarioNaoCadastradoException.class, ()->{

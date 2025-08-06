@@ -19,7 +19,7 @@
       },
       "vendedores": [
         {
-          "numVendas": 0,
+          "numVendas": 1,
           "historicoPedidos": {
             "0001": {
               "cod": "0001",
@@ -53,6 +53,24 @@
               "formaPagamento": "Dinheiro",
               "taxa": 0.0,
               "motivoSolicitacao": ""
+            },
+            "1754488555623": {
+              "cod": "1754488555623",
+              "produtos": {
+                "2": 70,
+                "0001": 40
+              },
+              "valVenda": 1824.0,
+              "cliente": {
+                "quantidadeCompras": 1,
+                "gastoTotal": 1824.0,
+                "nome": "JORGE AMADO",
+                "CPF": "05490808055"
+              },
+              "horario": "Aug 6, 2025, 10:55:55 AM",
+              "formaPagamento": "Cartão de Débito",
+              "taxa": 0.0,
+              "motivoSolicitacao": ""
             }
           },
           "valorTotalVendas": 0.0,
@@ -68,19 +86,25 @@
           "gastoTotal": 0.0,
           "nome": "ANILTON",
           "CPF": "69640796026"
+        },
+        {
+          "quantidadeCompras": 1,
+          "gastoTotal": 1824.0,
+          "nome": "JORGE AMADO",
+          "CPF": "05490808055"
         }
       ],
       "estoque": {
         "estoque": {
           "0001": {
             "preco": 15.5,
-            "quantidadeEstoque": 485,
+            "quantidadeEstoque": 405,
             "cod": "0001",
             "nome": "PRODUTO A"
           },
           "2": {
             "preco": 17.2,
-            "quantidadeEstoque": 1900,
+            "quantidadeEstoque": 1760,
             "cod": "2",
             "nome": "PRODUTO B"
           }

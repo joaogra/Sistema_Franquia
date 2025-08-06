@@ -38,6 +38,7 @@ public class TelaLogin extends JFrame {
                 dispose();
             }
         });
+
         logarBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

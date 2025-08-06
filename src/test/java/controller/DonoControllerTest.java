@@ -31,7 +31,7 @@ class DonoControllerTest {
 
 
     @BeforeEach
-    void setUp() {
+    protected void setUp() {
         dono = new Dono("adrian", "14518498690", "a@emial.com", "admin", new ArrayList<>());
         f1 = new Franquia("Franquia 1", new Endereco(), List.of(), new Estoque(), dono);
         f2 = new Franquia("Franquia 1", new Endereco(), List.of(), new Estoque(), dono);
@@ -51,7 +51,7 @@ class DonoControllerTest {
     }
 
     @Test
-    void CadastroFranquiaSucessful(){
+    protected void CadastroFranquiaSucessful(){
         assertDoesNotThrow(()->{
             DonoController donoController = new DonoController(dono);
             donoController.cadastrarFranquia(f3,gerente3);
@@ -60,7 +60,7 @@ class DonoControllerTest {
 
     @Test
     // F2 tem mesmo nome de F1
-    void CadastroFranquiaFailMesmoNome(){
+    protected void CadastroFranquiaFailMesmoNome(){
         assertThrows(FranquiaNomeIgualException.class, ()->{
            DonoController donoController = new DonoController(dono);
            donoController.cadastrarFranquia(f2,gerente3);
@@ -69,7 +69,7 @@ class DonoControllerTest {
 
     @Test
     //Tenta associar um gerente em f3 com o msm CPF que o gerente de f1
-    void CadastroFranquiaFailCPFJaCadastrado(){
+    protected void CadastroFranquiaFailCPFJaCadastrado(){
         assertThrows(CPFJaCadastradoException.class, ()->{
             DonoController donoController = new DonoController(dono);
             donoController.cadastrarFranquia(f3,gerente4);
@@ -78,7 +78,7 @@ class DonoControllerTest {
 
     @Test
 
-    void CadastraGerenteSucessful(){
+    protected void CadastraGerenteSucessful(){
         assertDoesNotThrow(()->{
             DonoController donoController = new DonoController(dono);
             donoController.cadastrarGerente(f3,gerente2);
@@ -89,7 +89,7 @@ class DonoControllerTest {
     @Test
 
     //Tenta cadastrar o gerente3, em f4, que ja possui gerente(gerente2)
-    void CadastraGerenteFailJaPossuiGerente(){
+    protected void CadastraGerenteFailJaPossuiGerente(){
         assertThrows(FranquiaJaPossuiGerenteException.class, ()->{
             DonoController donoController = new DonoController(dono);
             donoController.cadastrarGerente(f4,gerente3);
@@ -98,7 +98,7 @@ class DonoControllerTest {
 
     @Test
 
-    void PossuiGerenteCadastrado(){
+    protected void PossuiGerenteCadastrado(){
         assertDoesNotThrow(()->{
             DonoController donoController = new DonoController(dono);
             donoController.removeGerente(f4);
@@ -106,7 +106,7 @@ class DonoControllerTest {
     }
 
     @Test
-    void TentaRemoverGerenteQueNaoExiste(){
+    protected void TentaRemoverGerenteQueNaoExiste(){
         assertThrows(FranquiaNaoPossuiGerenteException.class, ()->{
             DonoController donoController = new DonoController(dono);
             donoController.removeGerente(f2);

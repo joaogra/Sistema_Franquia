@@ -43,16 +43,15 @@ class VendedorTest {
     @Test
     //Adiciona um pedido com um código único e novo
 
-    void adicionaNovoPedido(){
-        boolean resultado = vendedor.adicionaPedido(pedido3);
-        assertTrue(resultado);
+    protected void adicionaNovoPedido(){
+        assertTrue(vendedor.adicionaPedido(pedido3));
     }
 
 
     @Test
 
     //Lança execption se ja existe pedido com aquele codigo
-    void lancaExceptionMesmoCodigo() {
+    protected void lancaExceptionMesmoCodigo() {
         assertThrows(CodigoPedidoJaCadastradoException.class, ()->{
             vendedor.adicionaPedido(pedido2);
         });
@@ -60,7 +59,7 @@ class VendedorTest {
 
     //Tenta adicionar um pedido com 35 unidadades do prod2, sendo que só tem 33 no estoque
     @Test
-    void lancaExceptionQtdProdInsuficiente(){
+    protected void lancaExceptionQtdProdInsuficiente(){
         assertThrows(QuantidadeProdutoInsuficienteException.class, ()->{
             vendedor.adicionaPedido(pedido4);
         });

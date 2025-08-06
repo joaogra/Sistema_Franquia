@@ -70,4 +70,8 @@ public class Vendedor extends Funcionario {
     public boolean jaExistePedido(String cod) {
         return historicoPedidos.containsKey(cod);
     }
+
+    public void setValorTotalVendas(Double valorVenda) {
+        this.valorTotalVendas += valorVenda;
+    }
 }

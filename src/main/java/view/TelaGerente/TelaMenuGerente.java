@@ -1,16 +1,9 @@
 package view.TelaGerente;
 
-import model.*;
-import model.Pessoas.Cliente;
 import model.Pessoas.Dono;
 import model.Pessoas.Gerente;
-import model.Pessoas.Vendedor;
 import view.TelaMenu;
 
-import javax.swing.*;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
 public class TelaMenuGerente extends TelaMenu {
     private Gerente gerente;
@@ -39,35 +32,4 @@ public class TelaMenuGerente extends TelaMenu {
     @Override
     public void confirmaBtn4(){new TelaRelatorioFranquia(TelaMenuGerente.this,gerente.getFranquia()).setVisible(true);}
 
-
-
-    /*public static void main(String[] args) {
-        Cliente c1 = new Cliente("adrian", "14518498690");
-        c1.setGastoTotal(1341234);
-
-        c1.setQuantidadeCompras();c1.setQuantidadeCompras();c1.setQuantidadeCompras();c1.setQuantidadeCompras();c1.setQuantidadeCompras();c1.setQuantidadeCompras();c1.setQuantidadeCompras();c1.setQuantidadeCompras();c1.setQuantidadeCompras();
-
-
-        Produto p1 = new Produto( 10.0f, 51,"001", "Produto A");
-        Produto p2 = new Produto( 20.5f, 33,"002","Produto B");
-        Estoque estoque = new Estoque();
-        estoque.getEstoque().put(p1.getCod(), p1);
-        estoque.getEstoque().put(p2.getCod(), p2);
-        Gerente gerente1 =  new Gerente("Adrian","14518498690" ,"adra","adrian");
-        Vendedor v1 = new Vendedor("Carlos Silva","123.456.789-09", "carlos@empresa.com", "senha123",null);
-        Vendedor v2 = new Vendedor("Marina Costa", "987.654.321-00", "marina@empresa.com", "senha456",null);
-        Vendedor v3 = new Vendedor("João Pereira", "111.444.777-35", "joao@empresa.com", "senha789",null);
-        Franquia franquia = new Franquia("nome",new Endereco(),gerente1, List.of(v1,v2,v3),estoque);
-        gerente1.associaGerenteFranquia(franquia);
-        Pedido pedido1 = new Pedido("001",c1 ,new Date(),"din",0.05f, Map.of(p1.getCod(),15,p2.getCod(),5),1000d);
-        v1.adicionaPedido(pedido1);
-        pedido1.setMotivoSolicitacao("motibvo aleatorio");
-        gerente1.adicionarSolicitaoPedido(v1,pedido1);
-        v1.setNumVendas(25);
-        v2.setNumVendas(0);
-        v3.setNumVendas(40);
-
-        Dono dono1 = new Dono("Jorge", "14945740712", "jorge@empresa.com", "senha123", List.of(franquia));
-        new TelaMenuGerente(dono1,gerente1).setVisible(true);
-    }*/
 }

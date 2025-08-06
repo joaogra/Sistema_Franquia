@@ -75,6 +75,8 @@ public class PedidoController {
     }
     public void editaPedido(Vendedor vendedor,Pedido pedidoAlterado) {
         pedidoAlterado.setMotivoSolicitacao("");
+        vendedor.setValorTotalVendas(-vendedor.getHistoricoPedidos().get(pedidoAlterado.getCod()).getValVenda());
+        vendedor.setValorTotalVendas(pedidoAlterado.getValVenda());
         vendedor.getHistoricoPedidos().get(pedidoAlterado.getCod()).setPedido(pedidoAlterado);
         franquia.getGerente().removeSolicitacaoPedido(vendedor, pedidoAlterado);
     }

@@ -60,7 +60,7 @@ public class TelaLogin extends JFrame {
         Arquivo arquivo = new Arquivo();
         Dono dono = arquivo.inicializa();
 
-        TelaLogin telaLogin = new TelaLogin(dono);
+        //TelaLogin telaLogin = new TelaLogin(dono);
     }
 
 

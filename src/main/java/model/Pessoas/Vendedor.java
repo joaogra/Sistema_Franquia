@@ -34,7 +34,8 @@ public class Vendedor extends Funcionario {
     }
     public void setNumVendas(int numVendas) { this.numVendas = numVendas;}
     public void setValorTotalVendas(float valPedidoAtual) { this.valorTotalVendas += valPedidoAtual;}
-    //
+
+
     public boolean adicionaPedido(Pedido pedido) throws CodigoPedidoJaCadastradoException, QuantidadeProdutoInsuficienteException {
         if(!this.historicoPedidos.containsKey(pedido.getCod())) {
             List<Produto> produtosPedido = new ArrayList<>();
@@ -42,6 +43,9 @@ public class Vendedor extends Funcionario {
             for(String codigo : listaCodigos){
                 produtosPedido.add(franquia.getEstoque().buscaProduto(codigo));
             }
+
+
+
 
             for(Produto produto : produtosPedido){
                 if(produto.getQuantidadeEstoque() < pedido.getMapProdutos().get(produto.getCod())){
@@ -60,12 +64,14 @@ public class Vendedor extends Funcionario {
             }
             pedido.getCliente().setQuantidadeCompras();
             pedido.getCliente().setGastoTotal( pedido.getValVenda());
-            JOptionPane.showMessageDialog(null,"aaaa");
+            //JOptionPane.showMessageDialog(null,"aaaa");
             this.numVendas++;
             return true;
         }
         throw new CodigoPedidoJaCadastradoException("Codigo pedido ja esta cadastrado!");
     }
+
+    //
     public float valorTotalVendas() {
         float somaVendas = 0;
         for(Pedido pedido : historicoPedidos.values()) {

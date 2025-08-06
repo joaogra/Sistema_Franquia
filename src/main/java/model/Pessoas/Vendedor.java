@@ -27,13 +27,11 @@ public class Vendedor extends Funcionario {
     public Map <String, Pedido> getHistoricoPedidos() {return historicoPedidos;}
     public Franquia getFranquia(){ return franquia;}
 
-    public float getValorTotalVendas(){return valorTotalVendas;}
+    public float getValorTotalVendas(){ return valorTotalVendas;}
     //SETTERS
     public void associaFranquia(Franquia franquia) {
         this.franquia = franquia;
     }
-    public void setNumVendas(int numVendas) { this.numVendas = numVendas;}
-    public void setValorTotalVendas(float valPedidoAtual) { this.valorTotalVendas += valPedidoAtual;}
     //
     public boolean adicionaPedido(Pedido pedido) throws CodigoPedidoJaCadastradoException, QuantidadeProdutoInsuficienteException {
         if(!this.historicoPedidos.containsKey(pedido.getCod())) {
@@ -48,30 +46,26 @@ public class Vendedor extends Funcionario {
                     throw new QuantidadeProdutoInsuficienteException("Não tem quantidade suficiente do produto!");
                 }
             }
-            historicoPedidos.put(pedido.getCod(), pedido);
-            if(!franquia.getClientes().contains(pedido.getCliente())) {
-                franquia.adicionarCliente(pedido.getCliente());
-            }
-            for(String codigo : listaCodigos){
-                produtosPedido.add(franquia.getEstoque().buscaProduto(codigo));
-            }
             for(Produto produto : produtosPedido){
                 produto.setQuantidadeEstoque(pedido.getMapProdutos().get(produto.getCod()));
             }
-            pedido.getCliente().setQuantidadeCompras();
-            pedido.getCliente().setGastoTotal( pedido.getValVenda());
-            JOptionPane.showMessageDialog(null,"aaaa");
-            this.numVendas++;
+
+            historicoPedidos.put(pedido.getCod(), pedido);
+            Cliente cliente = franquia.getClienteDoSet(pedido.getCliente());
+            if (cliente != null) {
+                cliente.setQuantidadeCompras();
+                cliente.setGastoTotal(pedido.getValVenda());
+            } else {
+                franquia.adicionarCliente(pedido.getCliente());
+                pedido.getCliente().setQuantidadeCompras();
+                pedido.getCliente().setGastoTotal(pedido.getValVenda());
+            }
+            franquia.adicionarPedido(pedido);
+            numVendas++;
+            valorTotalVendas += pedido.getValVenda();
             return true;
         }
         throw new CodigoPedidoJaCadastradoException("Codigo pedido ja esta cadastrado!");
-    }
-    public float valorTotalVendas() {
-        float somaVendas = 0;
-        for(Pedido pedido : historicoPedidos.values()) {
-            somaVendas += pedido.getValVenda();
-        }
-        return somaVendas;
     }
     public boolean jaExistePedido(String cod) {
         return historicoPedidos.containsKey(cod);

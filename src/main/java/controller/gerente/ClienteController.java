@@ -15,17 +15,8 @@ public class ClienteController {
     public ClienteController(Franquia franquia) {
         this.franquia = franquia;
     }
-    public List<Cliente> listaClientes(){
-        HashSet<Cliente> lista = new HashSet<>();
-        for(Vendedor vendedor: franquia.getVendedores()){
-            for(Pedido pedido : vendedor.getHistoricoPedidos().values()){
-                lista.add(pedido.getCliente());
-            }
-        }
-        return new ArrayList<>(lista);
-    }
     public List<Object[]> listaOrdenadaClientesNumCompras(boolean modoOrdenar){
-        List<Cliente> lista = listaClientes();
+        List<Cliente> lista = new ArrayList<>(franquia.getClientes());
         if(modoOrdenar) {
             lista.sort((c1, c2) -> Integer.compare(c2.getQuantidadeCompras(), c1.getQuantidadeCompras()));
         }

@@ -45,7 +45,9 @@ public class TelaMenuDono extends JFrame {
         this.donoController = new DonoController(dono);
 
         atualizarTabela();
-
+        if(donoController.notificaGerenteFaltando()){
+            JOptionPane.showMessageDialog(null, "Existem franquias sem gerente associado!");
+        }
         cadastraFranquiaBtn.addActionListener(e -> {
             new TelaCadastroFranquia(this, dono).setVisible(true);
             atualizarTabela();

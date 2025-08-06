@@ -20,8 +20,7 @@ public class PedidoController {
     }
     public List<Object[]> listaPedidosParaTabela() {
         List<Object[]> listaPedidos = new ArrayList<>();
-        for(Vendedor vendedor : franquia.getVendedores()) {
-            for(Pedido pedido : vendedor.getHistoricoPedidos().values()){
+            for(Pedido pedido : franquia.getTodosPedidos()){
                 Object[] linha = {
                         pedido.getCod(),
                         pedido.getCliente().getNome(),
@@ -32,7 +31,7 @@ public class PedidoController {
                 };
                 listaPedidos.add(linha);
             }
-        }
+
         return listaPedidos;
     }
     public List<Object[]> listaSolicitacaoPedidosParaTabela() {

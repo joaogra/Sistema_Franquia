@@ -27,15 +27,12 @@ public class Vendedor extends Funcionario {
     public Map <String, Pedido> getHistoricoPedidos() {return historicoPedidos;}
     public Franquia getFranquia(){ return franquia;}
 
-    public float getValorTotalVendas(){return valorTotalVendas;}
+    public float getValorTotalVendas(){ return valorTotalVendas;}
     //SETTERS
     public void associaFranquia(Franquia franquia) {
         this.franquia = franquia;
     }
-    public void setNumVendas(int numVendas) { this.numVendas = numVendas;}
-    public void setValorTotalVendas(float valPedidoAtual) { this.valorTotalVendas += valPedidoAtual;}
-
-
+    //
     public boolean adicionaPedido(Pedido pedido) throws CodigoPedidoJaCadastradoException, QuantidadeProdutoInsuficienteException {
         if(!this.historicoPedidos.containsKey(pedido.getCod())) {
             List<Produto> produtosPedido = new ArrayList<>();
@@ -62,10 +59,20 @@ public class Vendedor extends Funcionario {
             for(Produto produto : produtosPedido){
                 produto.setQuantidadeEstoque(pedido.getMapProdutos().get(produto.getCod()));
             }
-            pedido.getCliente().setQuantidadeCompras();
-            pedido.getCliente().setGastoTotal( pedido.getValVenda());
-            //JOptionPane.showMessageDialog(null,"aaaa");
-            this.numVendas++;
+
+            historicoPedidos.put(pedido.getCod(), pedido);
+            Cliente cliente = franquia.getClienteDoSet(pedido.getCliente());
+            if (cliente != null) {
+                cliente.setQuantidadeCompras();
+                cliente.setGastoTotal(pedido.getValVenda());
+            } else {
+                franquia.adicionarCliente(pedido.getCliente());
+                pedido.getCliente().setQuantidadeCompras();
+                pedido.getCliente().setGastoTotal(pedido.getValVenda());
+            }
+            franquia.adicionarPedido(pedido);
+            numVendas++;
+            valorTotalVendas += pedido.getValVenda();
             return true;
         }
         throw new CodigoPedidoJaCadastradoException("Codigo pedido ja esta cadastrado!");
@@ -81,5 +88,9 @@ public class Vendedor extends Funcionario {
     }
     public boolean jaExistePedido(String cod) {
         return historicoPedidos.containsKey(cod);
+    }
+
+    public void setValorTotalVendas(Double valorVenda) {
+        this.valorTotalVendas += valorVenda;
     }
 }

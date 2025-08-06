@@ -14,6 +14,8 @@ public class TelaResumoFinanceiro extends JDialog{
     private JTextField gastoMedioClienteTxt;
     private JButton fechatBtn;
     private JLabel franquiaLabel;
+    private JTextField numTotalCleinteTxt;
+    private JLabel numClientesLabel;
 
 
     public TelaResumoFinanceiro(JFrame parent, Franquia franquia) {
@@ -35,6 +37,8 @@ public class TelaResumoFinanceiro extends JDialog{
         gastoMedioClienteTxt.setEditable(false);
         gastoMedioClienteTxt.setText("R$" + String.format("%.2f",franquia.getTicketMedioCliente()));
 
+        numTotalCleinteTxt.setEditable(false);
+        numTotalCleinteTxt.setText(String.valueOf(franquia.getNumTotalClientes()));
         fechatBtn.addActionListener(e -> {
            dispose();
         });

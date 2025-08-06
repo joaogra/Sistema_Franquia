@@ -17,6 +17,7 @@ public class DonoController extends FuncionarioController {
     private Dono dono;
     public DonoController(Dono dono)  {
         this.dono = dono;
+
     }
     public List<Object[]> listaFranquias() {
         List<Object[]> lista = new ArrayList<>();
@@ -26,7 +27,7 @@ public class DonoController extends FuncionarioController {
                     franquia.getNome(),
                     franquia.getEndereco().getCep(),
                     nomeGerente,
-                    "R$" + String.format("%.2f",0f),
+                    "R$" + String.format("%.2f",franquia.getFaturamentoBruto()),
                     franquia
             };
             lista.add(linha);
@@ -86,6 +87,14 @@ public class DonoController extends FuncionarioController {
     }
     public boolean removeFranquia(Franquia franquia) {
         return dono.getListaFranquias().remove(franquia);
+    }
+    public boolean notificaGerenteFaltando() {
+        for(Franquia f : dono.getListaFranquias()){
+            if(f.getGerente() == null) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

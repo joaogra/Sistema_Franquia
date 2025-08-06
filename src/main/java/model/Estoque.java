@@ -12,9 +12,6 @@ public class Estoque {
         estoque = new HashMap<String, Produto>();
     }
 
-    public Map<String, Produto> getEstoque() {
-        return estoque;
-    }
     public List<Produto> getProdutos(){
         return new ArrayList<Produto>(estoque.values());
     }

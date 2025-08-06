@@ -24,14 +24,12 @@ public class Produto {
     public String getNome() {return nome;}
     //SETTERS
     public void setPreco(float preco) {this.preco = preco;}
-    //tratar se nn tiver a quantidade desejada disponivel
     public void setQuantidadeEstoque(int quantidade) {
         this.quantidadeEstoque = quantidadeEstoque-quantidade;
     }
     public void setQuandidadeEditada(int quantidade) {
         this.quantidadeEstoque = quantidade;
     }
-    public void setCod(String cod) {this.cod = cod;}
     public void setNome(String nome) {this.nome = nome;}
 
 }

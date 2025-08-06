@@ -30,10 +30,6 @@ public class Gerente extends Funcionario{
     public void adicionarVendedor(Vendedor vendedor) {
         franquia.getVendedores().add(vendedor);
     }
-    public void adicionarSolicitaoPedido(Vendedor vendedor,Pedido pedido) {
-        franquia.getPedidosParaAlterar().add(pedido);
-        franquia.getVendedoresPedidosAlterados().add(vendedor);
-    }
     public void removeSolicitacaoPedido(Vendedor vendedor,Pedido pedido) {
         franquia.getVendedoresPedidosAlterados().remove(vendedor);
         franquia.getPedidosParaAlterar().remove(pedido);

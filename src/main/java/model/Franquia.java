@@ -20,7 +20,7 @@ public class Franquia {
     private List<Vendedor> vendedoresPedidosAlterados;
     private List<Pedido> pedidosParaAlterar;
     private transient Dono dono;
-
+    private List<Pedido> todosPedidos;
     //tirar lista de vendedores do construtor so esta servindo para fins de testes e o estoque tbm
     public Franquia(String nome, Endereco endereco, List<Vendedor> vendedores, Estoque estoque, Dono dono) {
         this.nome = nome.toUpperCase();
@@ -31,10 +31,18 @@ public class Franquia {
         this.vendedoresPedidosAlterados = new ArrayList<>();
         this.pedidosParaAlterar = new ArrayList<>();
         this.dono = dono;
+        this.todosPedidos = new ArrayList<>();
     }
 
     public Set<Cliente> getClientes() {
         return clientes;
+    }
+    public void adicionarPedido(Pedido pedido) {
+        todosPedidos.add(pedido);
+    }
+
+    public List<Pedido> getTodosPedidos() {
+        return todosPedidos;
     }
 
     public void adicionarCliente(Cliente cliente) {
@@ -42,7 +50,14 @@ public class Franquia {
             this.clientes.add(cliente);
         }
     }
-
+    public Cliente getClienteDoSet(Cliente cliente ){
+        for (Cliente c : clientes) {
+            if (c.equals(cliente)) {
+                return c;
+            }
+        }
+        return null;
+    }
     //GETTERS
     public Dono getDono() {
         return dono;
@@ -50,31 +65,18 @@ public class Franquia {
     public String getNome() {
         return nome;
     }
-
     public Endereco getEndereco() {
         return endereco;
     }
-
     public List<Pedido> getPedidosParaAlterar() {
         return pedidosParaAlterar;
     }
-
     public List<Vendedor> getVendedoresPedidosAlterados() {
         return vendedoresPedidosAlterados;
     }
-
-    //public float getLucro() {return lucro;}
-    public List<Vendedor> getVendedores() {
-        return vendedores;
-    }
-
-    public Estoque getEstoque() {
-        return estoque;
-    }
-
-    public Gerente getGerente() {
-        return gerente;
-    }
+    public List<Vendedor> getVendedores() { return vendedores;}
+    public Estoque getEstoque() { return estoque;}
+    public Gerente getGerente() { return gerente;}
 
     //SETTERS
     public void setDono(Dono dono) {
@@ -83,16 +85,6 @@ public class Franquia {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
-
-    //public void setLucro(float lucro) {this.lucro = lucro;}
-    public void setEstoque(Estoque estoque) {
-        this.estoque = estoque;
-    }
-
     public void associarGerente(Gerente gerente) {
         this.gerente = gerente;
     }
@@ -103,17 +95,13 @@ public class Franquia {
     }
 
     public int getTotalPedidos() {
-        int totalVendas = 0;
-        for (Vendedor vendedor : vendedores) {
-            totalVendas += vendedor.getNumVendas();
-        }
-        return totalVendas;
+        return todosPedidos.size();
     }
 
     public float getFaturamentoBruto() {
         float somaVendas = 0;
-        for (Vendedor vendedor : vendedores) {
-            somaVendas += vendedor.getValorTotalVendas();
+        for(Pedido pedido : todosPedidos) {
+            somaVendas += pedido.getValVenda();
         }
         return somaVendas;
     }
@@ -123,5 +111,8 @@ public class Franquia {
     }
     public float getTicketMedioCliente(){
         return clientes.isEmpty() ? 0 : getFaturamentoBruto() / clientes.size();
+    }
+    public int getNumTotalClientes(){
+        return clientes.size();
     }
 }

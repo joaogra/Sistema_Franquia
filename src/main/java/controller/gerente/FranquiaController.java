@@ -12,19 +12,12 @@ public class FranquiaController {
         this.gerente = gerente;
     }
     public FranquiaController(VendedorOperaController vendedor){this.vendedor=vendedor;}
-    public int numTotalVendas(){
+    public int numTotalVendas() {
         int totalVendas = 0;
-        for(Vendedor vendedor : gerente.getFranquia().getVendedores()) {
+        for (Vendedor vendedor : gerente.getFranquia().getVendedores()) {
             totalVendas += vendedor.getNumVendas();
         }
         return totalVendas;
-    }
-    public float somaVendas(){
-        float somaVendas = 0;
-        for(Vendedor vendedor : gerente.getFranquia().getVendedores()) {
-            somaVendas += vendedor.valorTotalVendas();
-        }
-        return somaVendas;
     }
 
     public void adicionaSolitacaoPedido(Pedido pedido){

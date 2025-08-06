@@ -53,7 +53,7 @@ public class VendedorController {
                     v.getNome(),
                     numVendas,
                     "R$" + String.format("%.2f",v.getValorTotalVendas()),
-                    numVendas == 0 ? "R%0,00" : "R$" + String.format("%.2f",v.getValorTotalVendas()/numVendas),
+                    numVendas == 0 ? "R$0,00" : "R$" + String.format("%.2f",v.getValorTotalVendas()/numVendas),
                     v
             };
             dados.add(linha);

@@ -16,6 +16,8 @@ public class Estoque {
         return new ArrayList<Produto>(estoque.values());
     }
 
+    public Map<String, Produto> getEstoque(){return estoque;}
+
     public boolean adicionaProduto(Produto produto){
         if(!estoque.containsKey(produto.getCod())) {
             estoque.put(produto.getCod(), produto);

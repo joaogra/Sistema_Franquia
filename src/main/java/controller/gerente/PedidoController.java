@@ -2,6 +2,7 @@ package controller.gerente;
 
 import model.Franquia;
 import model.Pedido;
+import model.Pessoas.Cliente;
 import model.Pessoas.Gerente;
 import model.Pessoas.Vendedor;
 import model.Produto;
@@ -76,8 +77,43 @@ public class PedidoController {
     public void editaPedido(Vendedor vendedor,Pedido pedidoAlterado) {
         pedidoAlterado.setMotivoSolicitacao("");
         vendedor.setValorTotalVendas(-vendedor.getHistoricoPedidos().get(pedidoAlterado.getCod()).getValVenda());
-        vendedor.setValorTotalVendas(pedidoAlterado.getValVenda());
-        vendedor.getHistoricoPedidos().get(pedidoAlterado.getCod()).setPedido(pedidoAlterado);
+       vendedor.setValorTotalVendas(pedidoAlterado.getValVenda());
+       //pega lista de codigos dos produtos do pedido anterior
+        List<Produto> produtosPedido = new ArrayList<>();
+
+        //pega lista de codigos dos produtos do pedido anterior
+        Set<String> listaCodigos = vendedor.getHistoricoPedidos().get(pedidoAlterado.getCod()).getMapProdutos().keySet();
+        for(String codigo : listaCodigos){
+            produtosPedido.add(franquia.getEstoque().buscaProduto(codigo));
+        }
+        for(Produto p : produtosPedido){
+            int qtd1 = vendedor.getHistoricoPedidos().get(pedidoAlterado.getCod()).getMapProdutos().get(p.getCod());
+            p.setQuantidadeEstoque(-qtd1);
+        }
+        produtosPedido.clear();
+        listaCodigos = pedidoAlterado.getMapProdutos().keySet();
+        for(String codigo : listaCodigos){
+            produtosPedido.add(franquia.getEstoque().buscaProduto(codigo));
+        }
+        for(Produto p : produtosPedido) {
+            int qtd2 = pedidoAlterado.getMapProdutos().get(p.getCod());
+            p.setQuantidadeEstoque(qtd2);
+        }
+
+        for(Cliente c : franquia.getClientes()){
+            if(c.equals(pedidoAlterado.getCliente())){
+                c.setGastoTotal(-vendedor.getHistoricoPedidos().get(pedidoAlterado.getCod()).getValVenda() + pedidoAlterado.getValVenda());
+            }
+        }
+        vendedor.getHistoricoPedidos().put(pedidoAlterado.getCod(), pedidoAlterado);
+        for(Pedido p : franquia.getTodosPedidos()){
+            if(p.getCod().equals(pedidoAlterado.getCod())){
+                franquia.getTodosPedidos().remove(p);
+                franquia.getTodosPedidos().add(pedidoAlterado);
+                break;
+            }
+        }
+
         franquia.getGerente().removeSolicitacaoPedido(vendedor, pedidoAlterado);
     }
     public void rejeitaAlteracao(Vendedor vendedor, Pedido pedido) {

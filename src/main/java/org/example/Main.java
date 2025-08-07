@@ -5,6 +5,12 @@ import model.Pessoas.Dono;
 import view.TelaLogin;
 
 import java.util.ArrayList;
+/*
+Autores do Trabalho:
+    Aluno: João Victor Granatto de Carvalho - 202465045A
+    Aluno: Adrian Maciel Rocha - 202465001A
+
+*/
 
 public class Main {
     public static void main(String[] args) {

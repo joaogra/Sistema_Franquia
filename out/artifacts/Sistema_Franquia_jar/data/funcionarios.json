@@ -1,236 +1,325 @@
 {
   "listaFranquias": [
     {
-      "nome": "FRANQUIA1",
-      "endereco": {
-        "cep": "36037120",
-        "logradouro": "Rua Orestes Fabiano Alves",
-        "numero": "09",
-        "complemento": "ca",
-        "bairro": "São Pedro",
-        "localidade": "Juiz de Fora",
-        "estado": "Minas Gerais"
-      },
-      "gerente": {
-        "email": "a@e.com",
-        "senha": "1234",
-        "nome": "RONALDO",
-        "CPF": "12345678909"
-      },
-      "vendedores": [
-        {
-          "numVendas": 0,
-          "historicoPedidos": {
-            "0001": {
-              "cod": "0001",
-              "produtos": {},
-              "valVenda": 0.0,
-              "cliente": {
-                "quantidadeCompras": 1,
-                "gastoTotal": 0.0,
-                "nome": "ANILTON",
-                "CPF": "69640796026"
-              },
-              "horario": "Aug 5, 2025, 2:37:46 AM",
-              "formaPagamento": "Dinheiro",
-              "taxa": 0.0,
-              "motivoSolicitacao": ""
-            },
-            "0003": {
-              "cod": "0003",
-              "produtos": {
-                "2": 100,
-                "0001": 15
-              },
-              "valVenda": 1952.500244140625,
-              "cliente": {
-                "quantidadeCompras": 1,
-                "gastoTotal": 1952.500244140625,
-                "nome": "CARA",
-                "CPF": "69640796026"
-              },
-              "horario": "Aug 5, 2025, 2:58:50 AM",
-              "formaPagamento": "Dinheiro",
-              "taxa": 0.0,
-              "motivoSolicitacao": ""
-            }
-          },
-          "valorTotalVendas": 0.0,
-          "email": "a@g.com",
-          "senha": "1234",
-          "nome": "BENILTON",
-          "CPF": "06075117024"
-        }
-      ],
-      "clientes": [
-        {
-          "quantidadeCompras": 1,
-          "gastoTotal": 0.0,
-          "nome": "ANILTON",
-          "CPF": "69640796026"
-        }
-      ],
-      "estoque": {
-        "estoque": {
-          "0001": {
-            "preco": 15.5,
-            "quantidadeEstoque": 485,
-            "cod": "0001",
-            "nome": "PRODUTO A"
-          },
-          "2": {
-            "preco": 17.2,
-            "quantidadeEstoque": 1900,
-            "cod": "2",
-            "nome": "PRODUTO B"
-          }
-        }
-      },
-      "vendedoresPedidosAlterados": [],
-      "pedidosParaAlterar": []
-    },
-    {
-      "nome": "FRANQUIA2",
-      "endereco": {
-        "cep": "37445000",
-        "logradouro": "aaaaa",
-        "numero": "09",
-        "complemento": "casa",
-        "bairro": "aaaaaa",
-        "localidade": "Cruzília",
-        "estado": "Minas Gerais"
-      },
-      "gerente": {
-        "email": "a@e.com",
-        "senha": "1234",
-        "nome": "NALDO",
-        "CPF": "14945740712"
-      },
-      "vendedores": [
-        {
-          "numVendas": 2,
-          "historicoPedidos": {
-            "0000123": {
-              "cod": "0000123",
-              "produtos": {
-                "003": 15
-              },
-              "valVenda": 150.0,
-              "cliente": {
-                "quantidadeCompras": 1,
-                "gastoTotal": 150.0,
-                "nome": "ALVIN",
-                "CPF": "20352613092"
-              },
-              "horario": "Aug 5, 2025, 3:27:23 PM",
-              "formaPagamento": "PIX",
-              "taxa": 0.0,
-              "motivoSolicitacao": ""
-            },
-            "0000142": {
-              "cod": "0000142",
-              "produtos": {
-                "003": 17
-              },
-              "valVenda": 170.0,
-              "cliente": {
-                "quantidadeCompras": 1,
-                "gastoTotal": 170.0,
-                "nome": "ALVIN",
-                "CPF": "20352613092"
-              },
-              "horario": "Aug 5, 2025, 3:32:48 PM",
-              "formaPagamento": "Cartão de Débito",
-              "taxa": 0.0,
-              "motivoSolicitacao": ""
-            },
-            "012345": {
-              "cod": "012345",
-              "produtos": {
-                "003": 20
-              },
-              "valVenda": 200.0,
-              "cliente": {
-                "quantidadeCompras": 1,
-                "gastoTotal": 200.0,
-                "nome": "ALVIN",
-                "CPF": "20352613092"
-              },
-              "horario": "Aug 5, 2025, 3:38:01 PM",
-              "formaPagamento": "Dinheiro",
-              "taxa": 0.0,
-              "motivoSolicitacao": ""
-            },
-            "1754430411673": {
-              "cod": "1754430411673",
-              "produtos": {
-                "003": 5
-              },
-              "valVenda": 50.0,
-              "cliente": {
-                "quantidadeCompras": 1,
-                "gastoTotal": 50.0,
-                "nome": "ALVIN",
-                "CPF": "20352613092"
-              },
-              "horario": "Aug 5, 2025, 6:46:51 PM",
-              "formaPagamento": "Dinheiro",
-              "taxa": 0.0,
-              "motivoSolicitacao": ""
-            }
-          },
-          "valorTotalVendas": 0.0,
-          "email": "a@g.com",
-          "senha": "1234",
-          "nome": "JOTA",
-          "CPF": "85046174081"
-        }
-      ],
-      "clientes": [
-        {
-          "quantidadeCompras": 1,
-          "gastoTotal": 150.0,
-          "nome": "ALVIN",
-          "CPF": "20352613092"
-        }
-      ],
-      "estoque": {
-        "estoque": {
-          "003": {
-            "preco": 10.0,
-            "quantidadeEstoque": 9990,
-            "cod": "003",
-            "nome": "PRODUTO 6"
-          }
-        }
-      },
-      "vendedoresPedidosAlterados": [],
-      "pedidosParaAlterar": []
-    },
-    {
-      "nome": "FRANQUIA 3",
+      "nome": "FRANQUIA 01",
       "endereco": {
         "cep": "25710285",
         "logradouro": "Rua Luvercy Fiorini",
-        "numero": "35",
-        "complemento": "casa",
+        "numero": "40",
+        "complemento": "dawd",
         "bairro": "Samambaia",
         "localidade": "Petrópolis",
         "estado": "Rio de Janeiro"
       },
       "gerente": {
-        "email": "e@a.com",
+        "email": "a@e.com",
         "senha": "1234",
-        "nome": "GGG",
-        "CPF": "11629026638"
+        "nome": "JOAO VICTOR",
+        "CPF": "14945740712"
       },
-      "vendedores": [],
-      "clientes": [],
+      "vendedores": [
+        {
+          "numVendas": 3,
+          "historicoPedidos": {
+            "1754522535440": {
+              "cod": "1754522535440",
+              "produtos": {
+                "1564684": 43,
+                "1123": 70
+              },
+              "valVenda": 4060.0,
+              "cliente": {
+                "quantidadeCompras": 1,
+                "gastoTotal": 4060.0,
+                "nome": "CLIENTE 1",
+                "CPF": "03280895081"
+              },
+              "horario": "Aug 6, 2025, 8:22:15 PM",
+              "formaPagamento": "Dinheiro",
+              "taxa": 0.0,
+              "motivoSolicitacao": ""
+            },
+            "1754526516499": {
+              "cod": "1754526516499",
+              "produtos": {
+                "1564684": 72,
+                "1123": 15
+              },
+              "valVenda": 5265.0,
+              "cliente": {
+                "quantidadeCompras": 0,
+                "gastoTotal": 0.0,
+                "nome": "CLIENTE 1",
+                "CPF": "03280895081"
+              },
+              "horario": "Aug 6, 2025, 9:28:36 PM",
+              "formaPagamento": "Dinheiro",
+              "taxa": 0.0,
+              "motivoSolicitacao": ""
+            },
+            "1754527202675": {
+              "cod": "1754527202675",
+              "produtos": {
+                "1564684": 40,
+                "1123": 15
+              },
+              "valVenda": 3025.0,
+              "cliente": {
+                "quantidadeCompras": 0,
+                "gastoTotal": 0.0,
+                "nome": "CLIENTE 1",
+                "CPF": "03280895081"
+              },
+              "horario": "Aug 6, 2025, 9:40:02 PM",
+              "formaPagamento": "Dinheiro",
+              "taxa": 0.0,
+              "motivoSolicitacao": ""
+            }
+          },
+          "valorTotalVendas": 12350.0,
+          "email": "a@e.com",
+          "senha": "1234",
+          "nome": "VENDEDOR 01",
+          "CPF": "36059775020"
+        },
+        {
+          "numVendas": 2,
+          "historicoPedidos": {
+            "1754527523273": {
+              "cod": "1754527523273",
+              "produtos": {
+                "1564684": 30,
+                "1123": 15
+              },
+              "valVenda": 2325.0,
+              "cliente": {
+                "quantidadeCompras": 1,
+                "gastoTotal": 2325.0,
+                "nome": "JORGE",
+                "CPF": "27672932098"
+              },
+              "horario": "Aug 6, 2025, 9:45:23 PM",
+              "formaPagamento": "PIX",
+              "taxa": 0.0,
+              "motivoSolicitacao": ""
+            },
+            "1754527556934": {
+              "cod": "1754527556934",
+              "produtos": {
+                "1564684": 30,
+                "1123": 500
+              },
+              "valVenda": 9600.0,
+              "cliente": {
+                "quantidadeCompras": 1,
+                "gastoTotal": 9600.0,
+                "nome": "JUBILEU",
+                "CPF": "18462971098"
+              },
+              "horario": "Aug 6, 2025, 9:45:56 PM",
+              "formaPagamento": "Cartão de Crédito",
+              "taxa": 0.0,
+              "motivoSolicitacao": ""
+            }
+          },
+          "valorTotalVendas": 11925.0,
+          "email": "m@e.com",
+          "senha": "maria",
+          "nome": "MARIAZINHA",
+          "CPF": "57745641004"
+        },
+        {
+          "numVendas": 0,
+          "historicoPedidos": {},
+          "valorTotalVendas": 0.0,
+          "email": "c@e.com",
+          "senha": "cleiton",
+          "nome": "CLEITON",
+          "CPF": "50701196050"
+        }
+      ],
+      "clientes": [
+        {
+          "quantidadeCompras": 3,
+          "gastoTotal": 5185.0,
+          "nome": "CLIENTE 1",
+          "CPF": "03280895081"
+        },
+        {
+          "quantidadeCompras": 1,
+          "gastoTotal": 2325.0,
+          "nome": "JORGE",
+          "CPF": "27672932098"
+        },
+        {
+          "quantidadeCompras": 1,
+          "gastoTotal": 9600.0,
+          "nome": "JUBILEU",
+          "CPF": "18462971098"
+        }
+      ],
       "estoque": {
-        "estoque": {}
+        "estoque": {
+          "1123": {
+            "preco": 15.0,
+            "quantidadeEstoque": 28795,
+            "cod": "1123",
+            "nome": "PRODUTO 01"
+          },
+          "1564684": {
+            "preco": 70.0,
+            "quantidadeEstoque": 49652,
+            "cod": "1564684",
+            "nome": "PRODUTO 02"
+          }
+        }
       },
       "vendedoresPedidosAlterados": [],
-      "pedidosParaAlterar": []
+      "pedidosParaAlterar": [],
+      "todosPedidos": [
+        {
+          "cod": "1754522535440",
+          "produtos": {
+            "1564684": 43
+          },
+          "valVenda": 3010.0,
+          "cliente": {
+            "quantidadeCompras": 0,
+            "gastoTotal": 0.0,
+            "nome": "CLIENTE 1",
+            "CPF": "03280895081"
+          },
+          "horario": "Aug 6, 2025, 8:22:48 PM",
+          "formaPagamento": "Dinheiro",
+          "taxa": 0.0,
+          "motivoSolicitacao": ""
+        },
+        {
+          "cod": "1754526516499",
+          "produtos": {
+            "1123": 5
+          },
+          "valVenda": 75.0,
+          "cliente": {
+            "quantidadeCompras": 0,
+            "gastoTotal": 0.0,
+            "nome": "CLIENTE 1",
+            "CPF": "03280895081"
+          },
+          "horario": "Aug 6, 2025, 9:28:56 PM",
+          "formaPagamento": "Dinheiro",
+          "taxa": 0.0,
+          "motivoSolicitacao": ""
+        },
+        {
+          "cod": "1754527202675",
+          "produtos": {
+            "1564684": 30
+          },
+          "valVenda": 2100.0,
+          "cliente": {
+            "quantidadeCompras": 0,
+            "gastoTotal": 0.0,
+            "nome": "CLIENTE 1",
+            "CPF": "03280895081"
+          },
+          "horario": "Aug 6, 2025, 9:40:42 PM",
+          "formaPagamento": "Dinheiro",
+          "taxa": 0.0,
+          "motivoSolicitacao": ""
+        },
+        {
+          "cod": "1754527523273",
+          "produtos": {
+            "1564684": 30,
+            "1123": 15
+          },
+          "valVenda": 2325.0,
+          "cliente": {
+            "quantidadeCompras": 1,
+            "gastoTotal": 2325.0,
+            "nome": "JORGE",
+            "CPF": "27672932098"
+          },
+          "horario": "Aug 6, 2025, 9:45:23 PM",
+          "formaPagamento": "PIX",
+          "taxa": 0.0,
+          "motivoSolicitacao": ""
+        },
+        {
+          "cod": "1754527556934",
+          "produtos": {
+            "1564684": 30,
+            "1123": 500
+          },
+          "valVenda": 9600.0,
+          "cliente": {
+            "quantidadeCompras": 1,
+            "gastoTotal": 9600.0,
+            "nome": "JUBILEU",
+            "CPF": "18462971098"
+          },
+          "horario": "Aug 6, 2025, 9:45:56 PM",
+          "formaPagamento": "Cartão de Crédito",
+          "taxa": 0.0,
+          "motivoSolicitacao": ""
+        }
+      ]
+    },
+    {
+      "nome": "FRANQUIA ORIENTADA OBJETO",
+      "endereco": {
+        "cep": "25710285",
+        "logradouro": "Rua Luvercy Fiorini",
+        "numero": "94",
+        "complemento": "C",
+        "bairro": "Samambaia",
+        "localidade": "Petrópolis",
+        "estado": "Rio de Janeiro"
+      },
+      "gerente": {
+        "email": "j@e.com",
+        "senha": "jota",
+        "nome": "JOELINGTON",
+        "CPF": "45819700082"
+      },
+      "vendedores": [
+        {
+          "numVendas": 0,
+          "historicoPedidos": {},
+          "valorTotalVendas": 0.0,
+          "email": "m@e.com",
+          "senha": "1234",
+          "nome": "MARINELSON",
+          "CPF": "54265438016"
+        }
+      ],
+      "clientes": [],
+      "estoque": {
+        "estoque": {
+          "112": {
+            "preco": 4.0,
+            "quantidadeEstoque": 600,
+            "cod": "112",
+            "nome": "BANANA"
+          },
+          "3131": {
+            "preco": 7.0,
+            "quantidadeEstoque": 5000,
+            "cod": "3131",
+            "nome": "UVA"
+          },
+          "897": {
+            "preco": 10.0,
+            "quantidadeEstoque": 9000,
+            "cod": "897",
+            "nome": "MAÇÃ"
+          }
+        }
+      },
+      "vendedoresPedidosAlterados": [],
+      "pedidosParaAlterar": [],
+      "todosPedidos": []
     }
   ],
   "email": "a@emial.com",

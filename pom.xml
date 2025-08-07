@@ -46,7 +46,6 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <!-- 👇 ALTERE essa linha para o nome COMPLETO da sua classe com método main -->
                             <mainClass>org.example.Main</mainClass>
                         </manifest>
                     </archive>

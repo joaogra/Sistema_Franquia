@@ -60,6 +60,7 @@ public class TelaNovaVenda extends JDialog {
         adicionaItensProd();
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         this.totalAtual = 0.0;
+        removerBtn.setVisible(false);
         this.vendedorOperaController = new VendedorOperaController(vendedor);
         totalTxt.setText("0.00");
         listProd = new HashMap<>();
@@ -108,6 +109,7 @@ public class TelaNovaVenda extends JDialog {
         this.vendedor = vendedor;
         setContentPane(telaNovaVenda);
         setTitle("Alteração de Pedido");
+        removerBtn.setVisible(false);
         titulo.setText("Alteração de Pedido");
         setMinimumSize(new Dimension(650,500));
         setModal(true);
@@ -123,7 +125,7 @@ public class TelaNovaVenda extends JDialog {
         cpfTxt.setEditable(false);
         codVendaTxt.setText(pedido.getCod());
         codVendaTxt.setEditable(false);
-        cancelarButton.setVisible(false);
+        cancelarButton.setVisible(true);
         totalTxt.setText(totalAtual.toString());
         listProd = new HashMap<>(pedido.getMapProdutos());
         String [] colunas = {
@@ -149,7 +151,7 @@ public class TelaNovaVenda extends JDialog {
         cancelarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                clean();
+                clean2();
             }
         });
 
@@ -230,6 +232,7 @@ public class TelaNovaVenda extends JDialog {
 
     public void clean(){
         this.totalAtual = 0.0;
+        this.listProd = new HashMap<>();
         totalTxt.setText("R$: 0.00");
         clienteTxt.setText("");
         qtdTxt.setText("");
@@ -237,6 +240,15 @@ public class TelaNovaVenda extends JDialog {
         codVendaTxt.setText("");
         tabela.setRowCount(0);
     }
+
+    public void clean2(){
+        this.totalAtual = 0.0;
+        this.listProd = new HashMap<>();
+        totalTxt.setText("R$: 0.00");
+        qtdTxt.setText("");
+        tabela.setRowCount(0);
+    }
+
 
     public void preencheTabela(Pedido pedido){
 
